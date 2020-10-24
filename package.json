@@ -13,7 +13,7 @@
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.0",
+    "react-scripts": "^4.0.0",
     "request": "^2.88.2",
     "socket.io": "^2.3.0",
     "web-vitals": "^0.2.4"
@@ -54,5 +54,5 @@
   "bugs": {
     "url": "https://github.com/sefirosweb/minecraftLegionWebClient/issues"
   },
-  "homepage": "http:///"
+  "homepage": "/"
 }
