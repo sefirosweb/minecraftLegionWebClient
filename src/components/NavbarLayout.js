@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import confLogo from '../images/sefiros.png'
+import { NavLink } from 'react-router-dom'
+// import confLogo from '../images/sefiros.png'
 import '../css/NavbarLayout.css'
 
 class NavbarLayout extends React.Component {

@@ -7,12 +7,16 @@ import NotFound from './pages/NotFound'
 import Dashboard from './pages/Dashboard'
 
 
+import GetLogs from './components/GetLogs'
+
+
 function App() {
   return (
     <BrowserRouter>
       <Layout>
         <Switch>
           <Route path='/dashboard' component={Dashboard} />
+          <Route path='/GetLogs' component={GetLogs} />
           <Route path='/dashboard/:socketId' component={Dashboard} />
           <Route path='/notfound' component={NotFound} />
           <Redirect exact from='/' to='/dashboard' />

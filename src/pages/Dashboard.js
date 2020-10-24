@@ -1,18 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
-import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://127.0.0.1:4001";
-
+import GetLogs from '../components/GetLogs'
 
 function Dashboard() {
-    const [response, setResponse] = useState("");
-
-    useEffect(() => {
-        const socket = socketIOClient(ENDPOINT);
-        socket.on("FromAPI", data => {
-            setResponse(data);
-        });
-    }, []);
-
     return (
         <Fragment>
             <div className="row">
@@ -22,7 +11,9 @@ function Dashboard() {
 
                 <div className="col-10">
                     <div className="form-group">
-                        <div id="textAreaLogs" className="textAreaStyle form-control"></div>
+                        <div id="textAreaLogs" className="textAreaStyle form-control">
+                            <GetLogs />
+                        </div>
                     </div>
                     <div className="form-group">
                         <input type="text" className="form-control" id="inputCommandText" />
