@@ -1,9 +1,9 @@
 body {
-    margin: 0;
+    background-color: darkgrey;
 }
 
 .container{
-    margin: 50px
+    margin-top: 15px;
 }
 
 .fleft {
@@ -12,4 +12,13 @@ body {
 
 .fright{
     float: right;
+}
+
+.textAreaStyle {
+    border: 1px inset #ccc;
+    background-color: white;
+    font: small courier, monospace black;
+    width: 100%;
+    height: 400px;
+    overflow: auto;
 }

@@ -1,8 +1,5 @@
 import React from 'react'
-
 import Navbar from './NavbarLayout'
-
-
 
 function Layout(props) {
     return (

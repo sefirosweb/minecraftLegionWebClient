@@ -10,6 +10,6 @@
 }
 
 .is-selected{
-    font-weight: 600;
-    color: yellow;
+    font-weight: 700;
+    color: darkseagreen !important;
 }
