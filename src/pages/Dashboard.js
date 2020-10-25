@@ -1,19 +1,12 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
+import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 
 class Dashboard extends React.Component {
     renderLogs = () => {
         return this.props.logs.map((log) => {
             return (
-                <div>{log}</div>
-            )
-        })
-    }
-
-    renderBotsOnlineList = () => {
-        return this.props.botsOnline.map((bot) => {
-            return (
-                <li className='list-group-item'>{bot.name}</li>
+                <div>{log.time} {log.botName} {log.message}</div>
             )
         })
     }
@@ -56,7 +49,7 @@ class Dashboard extends React.Component {
                     <div className='col-2'>
                         <ul className='list-group'>
                             <li className='list-group-item active'>Bots Online ({this.renderCountBotsOnline()})</li>
-                            {this.renderBotsOnlineList()}
+                            <RenderBotsOnlineList botsOnline={this.props.botsOnline} />
                         </ul>
                     </div>
                 </div>

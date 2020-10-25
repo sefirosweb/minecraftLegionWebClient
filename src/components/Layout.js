@@ -40,7 +40,7 @@ class Layout extends React.Component {
     }
 
     addLog = (message) => {
-        let newLogs = [...this.props.logs, message]
+        let newLogs = [...this.props.logs, JSON.parse(message)]
         if (newLogs.length > 1000) {
             newLogs.shift()
         }
