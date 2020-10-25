@@ -9,15 +9,7 @@ class Dashboard extends React.Component {
     addLog = (message) => {
         let newLogs = [...this.state.logs, message]
 
-        newLogs = [...newLogs, message]
-        newLogs = [...newLogs, message]
-        newLogs = [...newLogs, message]
-        newLogs = [...newLogs, message]
-        newLogs = [...newLogs, message]
-        newLogs = [...newLogs, message]
-
-
-        if (newLogs.length > 1000) {
+        if (newLogs.length > 30) {
             newLogs.shift()
         }
 
@@ -28,25 +20,28 @@ class Dashboard extends React.Component {
 
     renderLogs = () => {
         return this.state.logs.map((log) => {
-            console.log("log", log)
             return (
-                <span>{log}<br /></span>
+                <div>{log}</div>
             )
         })
     }
 
-
-    scrollToBottom = () => {
-        this.el.scrollIntoView();
-    }
-
-    componentDidMount() {
-        this.scrollToBottom();
-    }
-
     componentDidUpdate() {
-        this.scrollToBottom();
+        this.el.scrollTop = this.el.scrollHeight
     }
+
+
+    // componentDidMount() {
+    //     this.el.addEventListener('scroll', this.handleScroll);
+    // }
+
+    // componentWillUnmount() {
+    //     this.el.removeEventListener('scroll', this.handleScroll);
+    // }
+
+    // handleScroll = (e) => {
+    //     console.log('scrolled')
+    // }
 
     render() {
 
@@ -59,8 +54,8 @@ class Dashboard extends React.Component {
 
                     <div className="col-10">
                         <div className="form-group">
-                            <GetLogs addLog={this.addLog} />
                             <div ref={el => { this.el = el; }} className="textAreaStyle form-control">
+                                <GetLogs addLog={this.addLog} />
                                 {this.renderLogs()}
                             </div>
                         </div>
@@ -75,7 +70,6 @@ class Dashboard extends React.Component {
                             <li className='list-group-item active'>Bots Online (X)</li>
                         </ul>
                     </div>
-
                 </div>
             </Fragment >
         )
