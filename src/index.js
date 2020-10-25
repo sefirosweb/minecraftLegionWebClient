@@ -3,9 +3,24 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
+// Para conectar todos los reducers
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import reduxThunk from 'redux-thunk'
+
+import reducers from './reducers/reducers_index'
+
+const store = createStore(
+  reducers, // Todos los reducers
+  {}, // Estado inicial
+  applyMiddleware(reduxThunk)
+)
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
