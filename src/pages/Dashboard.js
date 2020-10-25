@@ -1,8 +1,9 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { Fragment } from "react";
 import GetLogs from '../components/GetLogs'
 
 class Dashboard extends React.Component {
     render() {
+
         return (
             <Fragment>
                 <div className="row">

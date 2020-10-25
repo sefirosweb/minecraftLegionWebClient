@@ -1,29 +1,34 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
 const ENDPOINT = "http://127.0.0.1:4001";
 
-function GetLogs() {
-    const [logs, setLogs] = useState([]);
+function GetLogs(props) {
+    const [logs, setLogs] = useState([])
 
     useEffect(() => {
         const socket = socketIOClient(ENDPOINT);
         socket.on("FromAPI", message => {
             logs.push(message)
-            console.log(logs)
-            setLogs(logs);
+            if (logs.length > 10) {
+                logs.shift()
+            }
+            setLogs(logs)
         });
-    }, [logs]);
+    });
 
-    /*
-    gett = () => {
+
+    const gett = () => {
         return logs.map((log) => {
-            <span>{log}<br /></span>
+            console.log(log)
+            return (
+                <div>{log}</div>
+            )
         })
     }
-    */
+
 
     return (
-        <div>Hola mundo</div>
+        <div>{gett}</div>
     )
 }
 
