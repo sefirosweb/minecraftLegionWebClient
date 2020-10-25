@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from './NavbarLayout'
+import NavbarLayout from './NavbarLayout'
 
 function Layout(props) {
     return (
         <React.Fragment>
-            <Navbar />
+            <NavbarLayout />
             <div className='container'>
                 {props.children}
             </div>
