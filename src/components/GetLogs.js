@@ -12,20 +12,18 @@ function GetLogs() {
             console.log(logs)
             setLogs(logs);
         });
-    }, []);
+    }, [logs]);
+
+    /*
+    gett = () => {
+        return logs.map((log) => {
+            <span>{log}<br /></span>
+        })
+    }
+    */
 
     return (
-
-        <p>
-            {
-                logs.map(function (log) {
-                    return (
-                        <span>{log}<br /></span>
-                    )
-                })
-            }
-        </p>
-
+        <div>Hola mundo</div>
     )
 }
 
