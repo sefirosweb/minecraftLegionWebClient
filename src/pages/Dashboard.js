@@ -4,7 +4,17 @@ import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 
 class Dashboard extends React.Component {
     renderLogs = () => {
-        return this.props.logs.map((log) => {
+        let logs = this.props.logs
+
+        const socketId = this.props.match.params.socketId
+
+        if (socketId) {
+            logs = logs.filter((log) => {
+                return log.socketId === socketId
+            })
+        }
+
+        return logs.map((log) => {
             return (
                 <div>{log.time} {log.botName} {log.message}</div>
             )

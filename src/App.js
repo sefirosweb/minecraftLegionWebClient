@@ -11,10 +11,9 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route path='/dashboard' component={Dashboard} />
-
-          <Route path='/dashboard/:socketId' component={Dashboard} />
-          <Route path='/notfound' component={NotFound} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/dashboard/:socketId' component={Dashboard} />
+          <Route exact path='/notfound' component={NotFound} />
           <Redirect exact from='/' to='/dashboard' />
           <Redirect to='/notfound' />
         </Switch>
