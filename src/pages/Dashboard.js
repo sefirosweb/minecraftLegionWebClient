@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
+import BotActionsButtons from '../components/BotActionsButtons'
 
 class Dashboard extends React.Component {
     renderLogs = () => {
@@ -44,17 +45,20 @@ class Dashboard extends React.Component {
                     <div className='col-10'><h1>Dashboard - {this.renderServerConection()}</h1></div>
                 </div>
                 <div className='row'>
-
                     <div className='col-10'>
-                        <div className='form-group'>
-                            <div ref={el => { this.el = el }} className='textAreaStyle form-control'>
-                                {this.renderLogs()}
+
+                        <div className='row'>
+                            <div className='col-12'>
+                                <div className='form-group'>
+                                    <div ref={el => { this.el = el }} className='textAreaStyle form-control'>
+                                        {this.renderLogs()}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className='form-group'>
-                            <input type='text' className='form-control' />
-                        </div>
-                        <button type='button' className='btn btn-primary'>Send</button>
+
+                        {(this.props.match.params.socketId) ? <BotActionsButtons /> : <div className='pendingSelectBot'>Select any bot for do actions</div>}
+
                     </div>
                     <div className='col-2'>
                         <ul className='list-group'>

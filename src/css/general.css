@@ -30,3 +30,10 @@ body {
 .color-red{
     color:red
 }
+
+.pendingSelectBot{
+    background-color: rosybrown;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
