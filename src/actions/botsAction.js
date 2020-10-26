@@ -27,3 +27,15 @@ export const setError = (error) => async (dispatch) => {
         payload: error
     })
 }
+
+export const updateBotStatus = (botDataStatus) => async (dispatch, getState) => {
+    const botsOnline = getState().botsReducer.botsOnline
+    const botIndex = botsOnline.findIndex((e) => { return e.socketId === botDataStatus.socketId })
+
+    botsOnline[botIndex][botDataStatus.type] = botDataStatus.value
+
+    dispatch({
+        type: SET_BOTS,
+        payload: botsOnline
+    })
+}

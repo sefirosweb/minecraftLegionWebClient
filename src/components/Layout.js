@@ -13,17 +13,23 @@ class Layout extends React.Component {
     componentDidMount() {
         // When finish render, start stocket listening
         this.socket = socketIOClient(ENDPOINT)
-        this.socket.on('connect', botsOnline => {
+        this.socket.on('connect', () => {
             this.props.setOnlineServer(true)
         })
 
-        this.socket.on('disconnect', botsOnline => {
+        this.socket.on('disconnect', () => {
             this.props.setOnlineServer(false)
         })
 
         this.socket.on('logs', message => {
             this.addLog(message)
         })
+
+        this.socket.on('botStatus', message => {
+            const messageData = JSON.parse(message)
+            this.props.updateBotStatus(messageData)
+        })
+
 
         this.socket.emit('getBotsOnline')
         this.socket.on('botsOnline', botsOnline => {
