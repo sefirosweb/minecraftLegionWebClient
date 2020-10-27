@@ -1,10 +1,11 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET } from '../types/botsType'
 
 const INITIAL_STATE = {
     logs: [],
     botsOnline: [],
     connected: false,
-    error: null
+    error: null,
+    socket: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -31,6 +32,11 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 connected: action.payload
+            }
+        case SET_SOCKET:
+            return {
+                ...state,
+                socket: action.payload
             }
 
         default: return state

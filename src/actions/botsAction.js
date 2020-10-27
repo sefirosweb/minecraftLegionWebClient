@@ -1,4 +1,4 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET } from '../types/botsType'
 
 export const setBots = (bots) => async (dispatch) => {
     dispatch({
@@ -25,6 +25,13 @@ export const setError = (error) => async (dispatch) => {
     dispatch({
         type: ERROR,
         payload: error
+    })
+}
+
+export const setSocket = (socket) => async (dispatch) => {
+    dispatch({
+        type: SET_SOCKET,
+        payload: socket
     })
 }
 

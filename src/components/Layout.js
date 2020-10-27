@@ -13,6 +13,8 @@ class Layout extends React.Component {
     componentDidMount() {
         // When finish render, start stocket listening
         this.socket = socketIOClient(ENDPOINT)
+        this.props.setSocket(this.socket)
+
         this.socket.on('connect', () => {
             this.props.setOnlineServer(true)
         })
@@ -60,7 +62,7 @@ class Layout extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <NavbarLayout socket={this.socket} />
+                <NavbarLayout />
                 <div className='container'>
                     {this.props.children}
                 </div>

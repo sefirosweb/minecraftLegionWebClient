@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux'
 import { NavLink, Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Modal from './Modal'
@@ -20,6 +21,7 @@ const NavbarLayout = (props) => {
             botPassword
         }
 
+        console.log(props)
         props.socket.emit('botConnect', message)
         setShow(false)
     }
@@ -69,5 +71,8 @@ const NavbarLayout = (props) => {
     )
 }
 
+const mapStateToProps = (reducers) => {
+    return reducers.botsReducer
+}
 
-export default NavbarLayout
+export default connect(mapStateToProps)(NavbarLayout);
