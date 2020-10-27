@@ -57,7 +57,7 @@ class Dashboard extends React.Component {
                             </div>
                         </div>
 
-                        {(this.props.match.params.socketId) ? <BotActionsButtons /> : <div className='pendingSelectBot'>Select any bot for do actions</div>}
+                        {(this.props.match.params.socketId) ? <BotActionsButtons socketId={this.props.match.params.socketId} /> : <div className='pendingSelectBot'>Select any bot for do actions</div>}
 
                     </div>
                     <div className='col-2'>

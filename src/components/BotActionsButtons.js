@@ -1,25 +1,44 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
-const Spinner = (props) => (
-    <React.Fragment>
-        <div className='row'>
-            <div className='col-12'>
-                <div className='form-group'>
-                    <input type='text' placeholder='Send chat message' className='form-control' />
+const BotActionButtons = (props) => {
+    const history = useHistory();
+
+    const handleDisconnectButton = () => {
+        const socketId = props.socketId
+        console.log(socketId)
+        props.socket.emit('botDisconnect', socketId)
+        history.push('/');
+    }
+
+
+    return (
+        <React.Fragment>
+            <div className='row'>
+                <div className='col-12'>
+                    <div className='form-group'>
+                        <input type='text' placeholder='Send chat message' className='form-control' />
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div className='row'>
-            <div className='col-12'>
-                <button type='button' className='btn btn-primary mr-3'>Send</button>
-                <button type='button' className='btn btn-primary mr-3'>Send</button>
-                <button type='button' className='btn btn-primary mr-3'>Send</button>
-                <button type='button' className='btn btn-primary mr-3'>Send</button>
-                <button type='button' className='btn btn-primary mr-3'>Send</button>
+            <div className='row'>
+                <div className='col-12'>
+                    <button type='button' className='btn btn-primary mr-3'>Send</button>
+                    <button type='button' className='btn btn-primary mr-3'>Send</button>
+                    <button type='button' className='btn btn-primary mr-3'>Send</button>
+                    <button type='button' className='btn btn-primary mr-3'>Send</button>
+                    <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
+                </div>
             </div>
-        </div>
-    </React.Fragment>
-)
+        </React.Fragment>
+    )
+}
 
-export default Spinner
+
+const mapStateToProps = (reducers) => {
+    return reducers.botsReducer
+}
+
+export default connect(mapStateToProps)(BotActionButtons);
