@@ -60,7 +60,7 @@ class Layout extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <NavbarLayout />
+                <NavbarLayout socket={this.socket} />
                 <div className='container'>
                     {this.props.children}
                 </div>
