@@ -16,7 +16,7 @@ export const addLog = (newLog) => async (dispatch, getState) => {
 
     dispatch({
         type: SET_LOGS,
-        payload: logs
+        payload: newLogs
     })
 }
 
