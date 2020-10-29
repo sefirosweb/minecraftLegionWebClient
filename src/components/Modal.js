@@ -5,6 +5,7 @@ const ModalDialog = (props) => {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
 
+
             {props.title ? (
                 <Modal.Header>
                     <Modal.Title>{props.title}</Modal.Title>
@@ -13,6 +14,7 @@ const ModalDialog = (props) => {
 
             <Modal.Body>
                 {props.body}
+
             </Modal.Body>
 
             <Modal.Footer>

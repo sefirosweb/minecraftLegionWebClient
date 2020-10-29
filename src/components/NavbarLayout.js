@@ -12,8 +12,14 @@ const NavbarLayout = (props) => {
     const [botName, setBotName] = useState('');
     const [botPassword, setBotPassword] = useState('');
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setShow(false)
+        setBotName('')
+        setBotPassword('')
+    }
+    const handleShow = () => {
+        setShow(true)
+    }
 
     const handleAccept = () => {
         const message = {
@@ -21,9 +27,14 @@ const NavbarLayout = (props) => {
             botPassword
         }
 
-        console.log(props)
         props.socket.emit('botConnect', message)
-        setShow(false)
+        handleClose()
+    }
+
+    const handleKeyPress = (target) => {
+        if (target.charCode == 13) {
+            handleAccept()
+        }
     }
 
     const changeBotName = (event) => {
@@ -39,7 +50,7 @@ const NavbarLayout = (props) => {
         <div className='row'>
             <div className='col-12'>
                 <div className="form-group">
-                    <Form>
+                    <Form onKeyPress={handleKeyPress} >
                         <Form.Group>
                             <Form.Label>Bot Name</Form.Label>
                             <Form.Control type="text" placeholder="Guard1" onChange={changeBotName} value={botName} />
