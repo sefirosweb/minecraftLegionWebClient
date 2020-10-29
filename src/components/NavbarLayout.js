@@ -62,7 +62,7 @@ const NavbarLayout = (props) => {
         <div className='navBar'>
             <NavLink to="/dashboard" activeClassName="is-selected">Dashboard</NavLink>
             <NavLink to="/configuration" activeClassName="is-selected">Configuration</NavLink>
-            <Link onClick={handleShow}>Load New Bot</Link>
+            <a className='' href='#' onClick={handleShow}>Load New Bot</a>
             <a className='' href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel="noreferrer">Git</a>
 
             {/* Load Modal */}

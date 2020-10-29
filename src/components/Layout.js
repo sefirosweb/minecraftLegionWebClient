@@ -24,14 +24,12 @@ class Layout extends React.Component {
         })
 
         this.socket.on('logs', message => {
-            this.addLog(message)
+            this.props.addLog(message)
         })
 
-        this.socket.on('botStatus', message => {
-            const messageData = JSON.parse(message)
-            this.props.updateBotStatus(messageData)
+        this.socket.on('botStatus', data => {
+            this.props.updateBotStatus(data)
         })
-
 
         this.socket.emit('getBotsOnline')
         this.socket.on('botsOnline', botsOnline => {
@@ -45,14 +43,6 @@ class Layout extends React.Component {
 
             this.props.setBots(botsConnected)
         })
-    }
-
-    addLog = (message) => {
-        let newLogs = [...this.props.logs, JSON.parse(message)]
-        if (newLogs.length > 1000) {
-            newLogs.shift()
-        }
-        this.props.setLogs(newLogs)
     }
 
     componentWillUnmount() {

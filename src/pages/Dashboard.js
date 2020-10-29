@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
                     <div className='col-2'>
                         <ul className='list-group'>
                             <li className='list-group-item active'>Bots Online ({this.renderCountBotsOnline()})</li>
-                            <RenderBotsOnlineList botsOnline={this.props.botsOnline} />
+                            <RenderBotsOnlineList />
                         </ul>
                     </div>
                 </div>

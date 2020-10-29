@@ -7,7 +7,13 @@ export const setBots = (bots) => async (dispatch) => {
     })
 }
 
-export const setLogs = (logs) => async (dispatch) => {
+export const addLog = (newLog) => async (dispatch, getState) => {
+    const { logs } = getState().botsReducer
+    let newLogs = [...logs, newLog]
+    if (newLogs.length > 1000) {
+        newLogs.shift()
+    }
+
     dispatch({
         type: SET_LOGS,
         payload: logs
@@ -36,13 +42,17 @@ export const setSocket = (socket) => async (dispatch) => {
 }
 
 export const updateBotStatus = (botDataStatus) => async (dispatch, getState) => {
-    const botsOnline = getState().botsReducer.botsOnline
+    const { botsOnline } = getState().botsReducer
     const botIndex = botsOnline.findIndex((e) => { return e.socketId === botDataStatus.socketId })
 
-    botsOnline[botIndex][botDataStatus.type] = botDataStatus.value
+    // Caution inmutabilidad is requeried!
+    const botsOnlineUpdate = [
+        ...botsOnline,
+    ]
+    botsOnlineUpdate[botIndex][botDataStatus.type] = botDataStatus.value
 
     dispatch({
         type: SET_BOTS,
-        payload: botsOnline
+        payload: botsOnlineUpdate
     })
 }
