@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import Form from 'react-bootstrap/Form'
 
 const BotActionButtons = (props) => {
     const history = useHistory();

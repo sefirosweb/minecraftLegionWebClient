@@ -9,7 +9,7 @@ import '../css/NavbarLayout.css'
 
 const NavbarLayout = (props) => {
     const [show, setShow] = useState(false);
-    const [botName, setBotName] = useState('');
+    const [botName, setBotName] = useState('Guard1');
     const [botPassword, setBotPassword] = useState('');
 
     const handleClose = () => {
