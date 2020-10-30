@@ -1,4 +1,4 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER } from '../types/botsType'
 
 export const setBots = (bots) => async (dispatch) => {
     dispatch({
@@ -56,3 +56,11 @@ export const updateBotStatus = (botDataStatus) => async (dispatch, getState) => 
         payload: botsOnlineUpdate
     })
 }
+
+export const updateMaster = (newMaster) => async (dispatch) => {
+    dispatch({
+        type: SET_MASTER,
+        payload: newMaster
+    })
+}
+
