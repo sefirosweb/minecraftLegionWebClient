@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Modal from './Modal'
 
@@ -32,7 +32,7 @@ const NavbarLayout = (props) => {
     }
 
     const handleKeyPress = (target) => {
-        if (target.charCode == 13) {
+        if (target.charCode === 13) {
             handleAccept()
         }
     }
@@ -73,8 +73,8 @@ const NavbarLayout = (props) => {
         <div className='navBar'>
             <NavLink to="/dashboard" activeClassName="is-selected">Dashboard</NavLink>
             <NavLink to="/configuration" activeClassName="is-selected">Configuration</NavLink>
-            <a className='' href='#' onClick={handleShow}>Load New Bot</a>
-            <a className='' href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel="noreferrer">Git</a>
+            <span className='linkSpan' onClick={handleShow}>Load New Bot</span>
+            <a href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel="noreferrer">Git</a>
 
             {/* Load Modal */}
             <Modal show={show} handleAccept={handleAccept} handleClose={handleClose} title='Fill the data' body={fields} />
