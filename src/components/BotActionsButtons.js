@@ -18,10 +18,9 @@ const BotActionButtons = (props) => {
     }
 
     const handleSendMessageButton = () => {
-        const socketId = props.socketId
         const action = {
             action: 'sendMessage',
-            socketId,
+            socketId: props.socketId,
             value: chat
         }
         props.socket.emit('sendAction', action)
@@ -29,16 +28,19 @@ const BotActionButtons = (props) => {
     }
 
     const handleDisconnectButton = () => {
-        const socketId = props.socketId
-        props.socket.emit('botDisconnect', socketId)
+        const action = {
+            action: 'sendDisconnect',
+            socketId: props.socketId,
+            value: 'Disconnect Bot'
+        }
+        props.socket.emit('sendAction', action)
         history.push('/');
     }
 
     const handleStartStateMachineButton = () => {
-        const socketId = props.socketId
         const action = {
             action: 'startStateMachine',
-            socketId,
+            socketId: props.socketId,
             value: {
                 port: Math.floor((Math.random() * 1000) + 1) + 4000
             }
@@ -47,10 +49,9 @@ const BotActionButtons = (props) => {
     }
 
     const handleStartInventoryButton = () => {
-        const socketId = props.socketId
         const action = {
             action: 'startInventory',
-            socketId,
+            socketId: props.socketId,
             value: {
                 port: Math.floor((Math.random() * 1000) + 1) + 4000
             }
@@ -59,13 +60,21 @@ const BotActionButtons = (props) => {
     }
 
     const handleStartViewerButton = () => {
-        const socketId = props.socketId
         const action = {
             action: 'startViewer',
-            socketId,
+            socketId: props.socketId,
             value: {
                 port: Math.floor((Math.random() * 1000) + 1) + 4000
             }
+        }
+        props.socket.emit('sendAction', action)
+    }
+
+    const handleSendStayButton = () => {
+        const action = {
+            action: 'sendStay',
+            socketId: props.socketId,
+            value: 'sendStay'
         }
         props.socket.emit('sendAction', action)
     }
@@ -87,6 +96,17 @@ const BotActionButtons = (props) => {
                     <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Start Item Inventory</button>
                     <button type='button' className='btn btn-success mr-3' onClick={handleStartViewerButton}>Start Viewer</button>
                     <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
+                </div>
+            </div>
+            <div className='row mt-2'>
+                <div className='col-12'>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStayButton} >Stay</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleStartStateMachineButton}>Follow Master</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleStartInventoryButton}>Set Patrol</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleStartViewerButton}>End Patrol</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleStartViewerButton}>Set Go Chest</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleStartViewerButton}>End Chest</button>
+                    <button type='button' className='btn btn-warning mr-3' onClick={handleDisconnectButton}>End commands</button>
                 </div>
             </div>
         </React.Fragment>
