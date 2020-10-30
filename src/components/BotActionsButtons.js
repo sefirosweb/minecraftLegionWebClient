@@ -58,6 +58,17 @@ const BotActionButtons = (props) => {
         props.socket.emit('sendAction', action)
     }
 
+    const handleStartViewerButton = () => {
+        const socketId = props.socketId
+        const action = {
+            action: 'startViewer',
+            socketId,
+            value: {
+                port: Math.floor((Math.random() * 1000) + 1) + 4000
+            }
+        }
+        props.socket.emit('sendAction', action)
+    }
 
     return (
         <React.Fragment>
@@ -74,7 +85,7 @@ const BotActionButtons = (props) => {
                     <button type='button' className='btn btn-primary mr-3' onClick={handleSendMessageButton} >Send Message</button>
                     <button type='button' className='btn btn-success mr-3' onClick={handleStartStateMachineButton}>Start State Machine</button>
                     <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Start Item Inventory</button>
-                    <button type='button' className='btn btn-success mr-3'>Start Viewer</button>
+                    <button type='button' className='btn btn-success mr-3' onClick={handleStartViewerButton}>Start Viewer</button>
                     <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
                 </div>
             </div>
