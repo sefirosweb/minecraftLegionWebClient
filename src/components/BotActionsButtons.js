@@ -37,14 +37,25 @@ const BotActionButtons = (props) => {
     const handleStartStateMachineButton = () => {
         const socketId = props.socketId
         const action = {
-            action: 'setStateMachine',
+            action: 'startStateMachine',
             socketId,
             value: {
                 port: Math.floor((Math.random() * 1000) + 1) + 4000
             }
         }
         props.socket.emit('sendAction', action)
-        console.log(action)
+    }
+
+    const handleStartInventoryButton = () => {
+        const socketId = props.socketId
+        const action = {
+            action: 'startInventory',
+            socketId,
+            value: {
+                port: Math.floor((Math.random() * 1000) + 1) + 4000
+            }
+        }
+        props.socket.emit('sendAction', action)
     }
 
 
@@ -62,7 +73,7 @@ const BotActionButtons = (props) => {
                 <div className='col-12'>
                     <button type='button' className='btn btn-primary mr-3' onClick={handleSendMessageButton} >Send Message</button>
                     <button type='button' className='btn btn-success mr-3' onClick={handleStartStateMachineButton}>Start State Machine</button>
-                    <button type='button' className='btn btn-success mr-3'>Start Item Inventory</button>
+                    <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Start Item Inventory</button>
                     <button type='button' className='btn btn-success mr-3'>Start Viewer</button>
                     <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
                 </div>
