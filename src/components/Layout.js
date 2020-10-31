@@ -33,9 +33,8 @@ class Layout extends React.Component {
 
         this.socket.emit('getBotsOnline')
         this.socket.on('botsOnline', botsOnline => {
-            let botsConnected = JSON.parse(botsOnline)
 
-            botsConnected = botsConnected.sort(function (a, b) {
+            const botsConnected = botsOnline.sort(function (a, b) {
                 if (a.name < b.name) { return -1 }
                 if (a.name > b.firsnametname) { return 1 }
                 return 0

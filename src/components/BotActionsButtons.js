@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import * as botsAction from '../actions/botsAction'
 
 const BotActionButtons = (props) => {
     const history = useHistory();
@@ -38,39 +39,57 @@ const BotActionButtons = (props) => {
     }
 
     const handleStartStateMachineButton = () => {
-        const action = {
-            action: 'startStateMachine',
-            socketId: props.socketId,
-            value: {
-                port: Math.floor((Math.random() * 1000) + 1) + 4000
+        const bot = props.getBotById(props.socketId)
+        if (bot.stateMachinePort === null) {
+            const port = Math.floor((Math.random() * 1000) + 1) + 4000
+            const action = {
+                action: 'startStateMachine',
+                socketId: props.socketId,
+                value: {
+                    port
+                }
             }
+            props.socket.emit('sendAction', action)
+            bot.stateMachinePort = port
+            props.updateBotStatus(bot)
         }
-        props.socket.emit('sendAction', action)
-        window.open(`http://localhost:${action.value.port}`, "_blank")
+        window.open(`http://localhost:${bot.stateMachinePort}`, "_blank")
     }
 
     const handleStartInventoryButton = () => {
-        const action = {
-            action: 'startInventory',
-            socketId: props.socketId,
-            value: {
-                port: Math.floor((Math.random() * 1000) + 1) + 4000
+        const bot = props.getBotById(props.socketId)
+        if (bot.inventoryPort === null) {
+            const port = Math.floor((Math.random() * 1000) + 1) + 4000
+            const action = {
+                action: 'startInventory',
+                socketId: props.socketId,
+                value: {
+                    port
+                }
             }
+            props.socket.emit('sendAction', action)
+            bot.inventoryPort = port
+            props.updateBotStatus(bot)
         }
-        props.socket.emit('sendAction', action)
-        window.open(`http://localhost:${action.value.port}`, "_blank")
+        window.open(`http://localhost:${bot.inventoryPort}`, "_blank")
     }
 
     const handleStartViewerButton = () => {
-        const action = {
-            action: 'startViewer',
-            socketId: props.socketId,
-            value: {
-                port: Math.floor((Math.random() * 1000) + 1) + 4000
+        const bot = props.getBotById(props.socketId)
+        if (bot.viewerPort === null) {
+            const port = Math.floor((Math.random() * 1000) + 1) + 4000
+            const action = {
+                action: 'startViewer',
+                socketId: props.socketId,
+                value: {
+                    port
+                }
             }
+            props.socket.emit('sendAction', action)
+            bot.viewerPort = port
+            props.updateBotStatus(bot)
         }
-        props.socket.emit('sendAction', action)
-        window.open(`http://localhost:${action.value.port}`, "_blank")
+        window.open(`http://localhost:${bot.viewerPort}`, "_blank")
     }
 
     const handleSendStayButton = () => {
@@ -149,9 +168,9 @@ const BotActionButtons = (props) => {
             <div className='row'>
                 <div className='col-12'>
                     <button type='button' className='btn btn-primary mr-3' onClick={handleSendMessageButton} >Send Message</button>
-                    <button type='button' className='btn btn-success mr-3' onClick={handleStartStateMachineButton}>Start State Machine</button>
-                    <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Start Item Inventory</button>
-                    <button type='button' className='btn btn-success mr-3' onClick={handleStartViewerButton}>Start Viewer</button>
+                    <button type='button' className='btn btn-success mr-3' onClick={handleStartStateMachineButton}>Show State Machine</button>
+                    <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Show Item Inventory</button>
+                    <button type='button' className='btn btn-success mr-3' onClick={handleStartViewerButton}>Show Viewer</button>
                     <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
                 </div>
             </div>
@@ -175,4 +194,4 @@ const mapStateToProps = (reducers) => {
     return reducers.botsReducer
 }
 
-export default connect(mapStateToProps)(BotActionButtons);
+export default connect(mapStateToProps, botsAction)(BotActionButtons);
