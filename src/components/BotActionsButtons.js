@@ -39,7 +39,7 @@ const BotActionButtons = (props) => {
     }
 
     const handleStartStateMachineButton = () => {
-        const bot = props.getBotById(props.socketId)
+        const bot = props.getBotBySocketId(props.socketId)
         if (bot.stateMachinePort === null) {
             const port = Math.floor((Math.random() * 1000) + 1) + 4000
             const action = {
@@ -57,7 +57,7 @@ const BotActionButtons = (props) => {
     }
 
     const handleStartInventoryButton = () => {
-        const bot = props.getBotById(props.socketId)
+        const bot = props.getBotBySocketId(props.socketId)
         if (bot.inventoryPort === null) {
             const port = Math.floor((Math.random() * 1000) + 1) + 4000
             const action = {
@@ -75,7 +75,7 @@ const BotActionButtons = (props) => {
     }
 
     const handleStartViewerButton = () => {
-        const bot = props.getBotById(props.socketId)
+        const bot = props.getBotBySocketId(props.socketId)
         if (bot.viewerPort === null) {
             const port = Math.floor((Math.random() * 1000) + 1) + 4000
             const action = {

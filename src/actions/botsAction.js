@@ -1,4 +1,4 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_BOT_SERVER, SET_SOCKET_SERVER_PORT } from '../types/botsType'
 
 export const setBots = (bots) => (dispatch) => {
     dispatch({
@@ -63,6 +63,29 @@ export const updateMaster = (newMaster) => (dispatch) => {
         payload: newMaster
     })
 }
+
+export const updateServer = (newServer) => (dispatch) => {
+    dispatch({
+        type: SET_SOCKET_SERVER,
+        payload: newServer
+    })
+}
+
+export const updateServerPort = (newPort) => (dispatch) => {
+    dispatch({
+        type: SET_SOCKET_SERVER_PORT,
+        payload: newPort
+    })
+}
+
+
+export const updateBotServer = (newBotServer) => (dispatch) => {
+    dispatch({
+        type: SET_BOT_SERVER,
+        payload: newBotServer
+    })
+}
+
 
 export const getBotBySocketId = (socketId) => (dispatch, getState) => {
     const { botsOnline } = getState().botsReducer
