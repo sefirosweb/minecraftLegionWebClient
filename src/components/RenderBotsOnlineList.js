@@ -8,11 +8,13 @@ class RenderBotsOnlineList extends React.Component {
     render() {
         return this.props.botsOnline.map((bot) => {
             return (
-                <li key={bot.socketId} className='list-group-item botlist'>
-                    <NavLink activeClassName="is-selected" to={`/dashboard/${bot.socketId}`}>{bot.name}</NavLink>
-                    <div>
-                        <ProgressBar className='mt-1' variant="danger" now={bot.health / 20 * 100} />
-                        <ProgressBar className='mt-1' variant="warning" now={bot.food / 20 * 100} />
+                <li key={bot.socketId} className={`list-group-item ${(bot.combat) ? 'botlistCombat' : 'botlist'}`}>
+                    <div className={` ${(bot.combat) ? 'botCombat' : ''}`}>
+                        <NavLink activeClassName="is-selected" to={`/dashboard/${bot.socketId}`}>{bot.name}</NavLink>
+                        <div>
+                            <ProgressBar className='mt-1' variant="danger" now={bot.health / 20 * 100} />
+                            <ProgressBar className='mt-1' variant="warning" now={bot.food / 20 * 100} />
+                        </div>
                     </div>
                 </li >
             )
