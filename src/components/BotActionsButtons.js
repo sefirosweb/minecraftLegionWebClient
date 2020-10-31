@@ -119,42 +119,41 @@ const BotActionButtons = (props) => {
         props.socket.emit('sendAction', action)
     }
 
-    const handleSendStartPatrolButton = () => {
+    const handleSendStartWayButton = () => {
         const action = {
-            action: 'sendStartPatrol',
+            action: 'sendStartWay',
             socketId: props.socketId,
             value: props.master
         }
         props.socket.emit('sendAction', action)
     }
 
-    const handleSendEndPatrolButton = () => {
+    const handleSendSavePatrolButton = () => {
         const action = {
-            action: 'sendEndPatrol',
+            action: 'sendSavePatrol',
             socketId: props.socketId,
             value: props.master
         }
         props.socket.emit('sendAction', action)
     }
 
-    const handleSendStartChestButton = () => {
+    const handleSendSaveChestButton = () => {
         const action = {
-            action: 'sendStartChest',
+            action: 'sendSaveChest',
             socketId: props.socketId,
             value: props.master
         }
         props.socket.emit('sendAction', action)
     }
 
-    const handleSendEndChestButton = () => {
+    const handleSendSaveFoodChestButton = () => {
         const action = {
-            action: 'sendEndChest',
+            action: 'sendSaveFoodChest',
             socketId: props.socketId,
             value: props.master
         }
         props.socket.emit('sendAction', action)
     }
-
     return (
         <React.Fragment>
             <div className='row'>
@@ -178,10 +177,10 @@ const BotActionButtons = (props) => {
                 <div className='col-12'>
                     <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStayButton} >Stay</button>
                     <button type='button' className='btn btn-secondary mr-3' onClick={handleSendFollowButton}>Follow Master</button>
-                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStartPatrolButton}>Set Patrol</button>
-                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendEndPatrolButton}>End Patrol</button>
-                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStartChestButton}>Set Go Chest</button>
-                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendEndChestButton}>End Chest</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStartWayButton}>Start Way</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSavePatrolButton}>Save Patrol</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveChestButton}>Save Chest</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveFoodChestButton}>Save Food Chest</button>
                     <button type='button' className='btn btn-warning mr-3' onClick={handleSendEndCommandsButton}>End commands</button>
                 </div>
             </div>
