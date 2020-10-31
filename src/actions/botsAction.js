@@ -64,8 +64,13 @@ export const updateMaster = (newMaster) => (dispatch) => {
     })
 }
 
-export const getBotById = (socketId) => (dispatch, getState) => {
+export const getBotBySocketId = (socketId) => (dispatch, getState) => {
     const { botsOnline } = getState().botsReducer
     return botsOnline.find((e) => { return e.socketId === socketId })
+}
+
+export const getBotIndexBySocketId = (socketId) => (dispatch, getState) => {
+    const { botsOnline } = getState().botsReducer
+    return botsOnline.findIndex((e) => { return e.socketId === socketId })
 }
 
