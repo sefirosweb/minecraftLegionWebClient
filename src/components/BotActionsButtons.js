@@ -53,7 +53,7 @@ const BotActionButtons = (props) => {
             bot.stateMachinePort = port
             props.updateBotStatus(bot)
         }
-        window.open(`http://localhost:${bot.stateMachinePort}`, "_blank")
+        window.open(`http://${props.serverBots}:${bot.stateMachinePort}`, "_blank")
     }
 
     const handleStartInventoryButton = () => {
@@ -71,7 +71,7 @@ const BotActionButtons = (props) => {
             bot.inventoryPort = port
             props.updateBotStatus(bot)
         }
-        window.open(`http://localhost:${bot.inventoryPort}`, "_blank")
+        window.open(`http://${props.serverBots}:${bot.inventoryPort}`, "_blank")
     }
 
     const handleStartViewerButton = () => {
@@ -89,7 +89,7 @@ const BotActionButtons = (props) => {
             bot.viewerPort = port
             props.updateBotStatus(bot)
         }
-        window.open(`http://localhost:${bot.viewerPort}`, "_blank")
+        window.open(`http://${props.serverBots}:${bot.viewerPort}`, "_blank")
     }
 
     const handleSendStayButton = () => {

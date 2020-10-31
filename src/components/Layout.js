@@ -5,14 +5,13 @@ import * as botsAction from '../actions/botsAction'
 
 import NavbarLayout from './NavbarLayout'
 import socketIOClient from 'socket.io-client'
-const ENDPOINT = 'http://127.0.0.1:4001'
 
 class Layout extends React.Component {
     socket = null
 
     componentDidMount() {
         // When finish render, start stocket listening
-        this.socket = socketIOClient(ENDPOINT)
+        this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`) // Pendint to fix when is changed
         this.props.setSocket(this.socket)
 
         this.socket.on('connect', () => {
