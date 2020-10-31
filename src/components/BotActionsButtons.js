@@ -46,6 +46,7 @@ const BotActionButtons = (props) => {
             }
         }
         props.socket.emit('sendAction', action)
+        window.open(`http://localhost:${action.value.port}`, "_blank")
     }
 
     const handleStartInventoryButton = () => {
@@ -57,6 +58,7 @@ const BotActionButtons = (props) => {
             }
         }
         props.socket.emit('sendAction', action)
+        window.open(`http://localhost:${action.value.port}`, "_blank")
     }
 
     const handleStartViewerButton = () => {
@@ -68,6 +70,7 @@ const BotActionButtons = (props) => {
             }
         }
         props.socket.emit('sendAction', action)
+        window.open(`http://localhost:${action.value.port}`, "_blank")
     }
 
     const handleSendStayButton = () => {
