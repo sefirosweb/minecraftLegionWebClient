@@ -137,23 +137,33 @@ const BotActionButtons = (props) => {
         props.socket.emit('sendAction', action)
     }
 
-    const handleSendSaveChestButton = () => {
+    const handleSendSaveEquipmentChestButton = () => {
         const action = {
             action: 'sendSaveChest',
             socketId: props.socketId,
-            value: props.master
+            value: 'equipment'
         }
         props.socket.emit('sendAction', action)
     }
 
     const handleSendSaveFoodChestButton = () => {
         const action = {
-            action: 'sendSaveFoodChest',
+            action: 'sendSaveChest',
             socketId: props.socketId,
-            value: props.master
+            value: 'food'
         }
         props.socket.emit('sendAction', action)
     }
+
+    const handleSendSaveDepositChestButton = () => {
+        const action = {
+            action: 'sendSaveChest',
+            socketId: props.socketId,
+            value: 'deposit'
+        }
+        props.socket.emit('sendAction', action)
+    }
+
     return (
         <React.Fragment>
             <div className='row'>
@@ -179,9 +189,14 @@ const BotActionButtons = (props) => {
                     <button type='button' className='btn btn-secondary mr-3' onClick={handleSendFollowButton}>Follow Master</button>
                     <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStartWayButton}>Start Way</button>
                     <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSavePatrolButton}>Save Patrol</button>
-                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveChestButton}>Save Chest</button>
-                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveFoodChestButton}>Save Food Chest</button>
                     <button type='button' className='btn btn-warning mr-3' onClick={handleSendEndCommandsButton}>End commands</button>
+                </div>
+            </div>
+            <div className='row mt-2'>
+                <div className='col-12'>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveEquipmentChestButton}>Save Equipment Chest</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveFoodChestButton}>Save Food Chest</button>
+                    <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveDepositChestButton}>Save Deposit Chest</button>
                 </div>
             </div>
         </React.Fragment>
