@@ -5,25 +5,25 @@ import '../css/botlist.css'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 
 class RenderBotsOnlineList extends React.Component {
-    render() {
-        return this.props.botsOnline.map((bot) => {
-            return (
-                <li key={bot.socketId} className={`list-group-item ${(bot.combat) ? 'botlistCombat' : 'botlist'}`}>
-                    <div className={` ${(bot.combat) ? 'botCombat' : ''}`}>
-                        <NavLink activeClassName="is-selected" to={`/dashboard/${bot.socketId}`}>{bot.name}</NavLink>
-                        <div>
-                            <ProgressBar className='mt-1' variant="danger" now={bot.health / 20 * 100} />
-                            <ProgressBar className='mt-1' variant="warning" now={bot.food / 20 * 100} />
-                        </div>
-                    </div>
-                </li >
-            )
-        })
-    }
+  render () {
+    return this.props.botsOnline.map((bot) => {
+      return (
+        <li key={bot.socketId} className={`list-group-item ${(bot.combat) ? 'botlistCombat' : 'botlist'}`}>
+          <div className={` ${(bot.combat) ? 'botCombat' : ''}`}>
+            <NavLink activeClassName='is-selected' to={`/dashboard/${bot.socketId}`}>{bot.name}</NavLink>
+            <div>
+              <ProgressBar className='mt-1' variant='danger' now={bot.health / 20 * 100} />
+              <ProgressBar className='mt-1' variant='warning' now={bot.food / 20 * 100} />
+            </div>
+          </div>
+        </li>
+      )
+    })
+  }
 }
 
 const mapStateToProps = (reducers) => {
-    return reducers.botsReducer
+  return reducers.botsReducer
 }
 
-export default connect(mapStateToProps)(RenderBotsOnlineList);
+export default connect(mapStateToProps)(RenderBotsOnlineList)
