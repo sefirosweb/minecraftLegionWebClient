@@ -7,60 +7,57 @@ import NavbarLayout from './NavbarLayout'
 import socketIOClient from 'socket.io-client'
 
 class Layout extends React.Component {
-    socket = null
+  componentDidMount () {
+    // When finish render, start stocket listening
+    this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`) // Pendint to fix when is changed
+    this.props.setSocket(this.socket)
 
-    componentDidMount() {
-        // When finish render, start stocket listening
-        this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`) // Pendint to fix when is changed
-        this.props.setSocket(this.socket)
+    this.socket.on('connect', () => {
+      this.props.setOnlineServer(true)
+    })
 
-        this.socket.on('connect', () => {
-            this.props.setOnlineServer(true)
-        })
+    this.socket.on('disconnect', () => {
+      this.props.setOnlineServer(false)
+    })
 
-        this.socket.on('disconnect', () => {
-            this.props.setOnlineServer(false)
-        })
+    this.socket.on('logs', message => {
+      this.props.addLog(message)
+    })
 
-        this.socket.on('logs', message => {
-            this.props.addLog(message)
-        })
+    this.socket.on('botStatus', data => {
+      this.props.updateBotStatus(data)
+    })
 
-        this.socket.on('botStatus', data => {
-            this.props.updateBotStatus(data)
-        })
+    this.socket.emit('getBotsOnline')
+    this.socket.on('botsOnline', botsOnline => {
+      const botsConnected = botsOnline.sort(function (a, b) {
+        if (a.name < b.name) { return -1 }
+        if (a.name > b.firsnametname) { return 1 }
+        return 0
+      })
 
-        this.socket.emit('getBotsOnline')
-        this.socket.on('botsOnline', botsOnline => {
+      this.props.setBots(botsConnected)
+    })
+  }
 
-            const botsConnected = botsOnline.sort(function (a, b) {
-                if (a.name < b.name) { return -1 }
-                if (a.name > b.firsnametname) { return 1 }
-                return 0
-            })
+  componentWillUnmount () {
+    this.socket.disconnect()
+  }
 
-            this.props.setBots(botsConnected)
-        })
-    }
-
-    componentWillUnmount() {
-        this.socket.disconnect()
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <NavbarLayout />
-                <div className='container'>
-                    {this.props.children}
-                </div>
-            </React.Fragment >
-        )
-    }
+  render () {
+    return (
+      <>
+        <NavbarLayout />
+        <div className='container'>
+          {this.props.children}
+        </div>
+      </>
+    )
+  }
 }
 
 const mapStateToProps = (reducers) => {
-    return reducers.botsReducer
+  return reducers.botsReducer
 }
 
-export default connect(mapStateToProps, botsAction)(Layout);
+export default connect(mapStateToProps, botsAction)(Layout)

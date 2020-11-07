@@ -2,14 +2,18 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 const ModalDialog = (props) => {
+  const renderTitle = (title) => {
+    return (
+      <Modal.Header>
+        <Modal.Title>{title}</Modal.Title>
+      </Modal.Header>
+    )
+  }
+
   return (
     <Modal show={props.show} onHide={props.handleClose}>
 
-      {props.title ? (
-        <Modal.Header>
-          <Modal.Title>{props.title}</Modal.Title>
-        </Modal.Header>
-      ) : ''}
+      {props.title ? renderTitle(props.title) : ''}
 
       <Modal.Body>
         {props.body}
