@@ -9,7 +9,9 @@ import '../css/NavbarLayout.css'
 
 const NavbarLayout = (props) => {
   const [show, setShow] = useState(false)
+  const [modalFields, setModalFields] = useState(false)
   const [botName, setBotName] = useState('Guard1')
+  const [masterName, setMasterName] = useState('')
   const [botPassword, setBotPassword] = useState('')
 
   const handleClose = () => {
@@ -17,17 +19,41 @@ const NavbarLayout = (props) => {
     setBotName('')
     setBotPassword('')
   }
+
   const handleShow = () => {
+    setModalFields(1)
+    setShow(true)
+  }
+
+  const handleMasterShow = () => {
+    setModalFields(2)
     setShow(true)
   }
 
   const handleAccept = () => {
+    if (modalFields === 1) {
+      connectBot()
+    } else {
+      addMaster()
+    }
+  }
+
+  const connectBot = () => {
     const message = {
       botName,
       botPassword
     }
 
     props.socket.emit('botConnect', message)
+    handleClose()
+  }
+
+  const addMaster = () => {
+    const message = {
+      name: masterName
+    }
+
+    props.socket.emit('addMaster', message)
     handleClose()
   }
 
@@ -45,8 +71,11 @@ const NavbarLayout = (props) => {
     setBotPassword(event.target.value)
   }
 
-  // Modal fields
-  const fields = (
+  const changeMasterName = (event) => {
+    setMasterName(event.target.value)
+  }
+
+  const botLoadFields = (
     <div className='row'>
       <div className='col-12'>
         <div className='form-group'>
@@ -68,15 +97,40 @@ const NavbarLayout = (props) => {
     </div>
   )
 
+  const addNewMasterFields = (
+    <div className='row'>
+      <div className='col-12'>
+        <div className='form-group'>
+          <Form onKeyPress={handleKeyPress}>
+            <Form.Group>
+              <Form.Label>Master Name</Form.Label>
+              <Form.Control type='text' onChange={changeMasterName} value={masterName} />
+            </Form.Group>
+          </Form>
+        </div>
+      </div>
+    </div>
+  )
+
+  const getModalFields = () => {
+    if (modalFields === 1) {
+      return botLoadFields
+    } else {
+      return addNewMasterFields
+    }
+  }
+
   return (
     <div className='navBar'>
-      <NavLink to='/dashboard' activeClassName='is-selected'>Dashboard</NavLink>
-      <NavLink to='/configuration' activeClassName='is-selected'>Configuration</NavLink>
-      <span className='linkSpan' onClick={handleShow}>Load New Bot</span>
-      <a href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel='noreferrer'>Git</a>
+      <NavLink className='ml-3' to='/dashboard' activeClassName='is-selected'>Dashboard</NavLink>
+      <NavLink className='ml-3' to='/configuration' activeClassName='is-selected'>Configuration</NavLink>
+      <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span>
+      <span className='linkSpan ml-3' onClick={handleMasterShow}>Master List</span>
+
+      <a className='ml-5' href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel='noreferrer'>Git</a>
 
       {/* Load Modal */}
-      <Modal show={show} handleAccept={handleAccept} handleClose={handleClose} title='Fill the data' body={fields} />
+      <Modal show={show} handleAccept={handleAccept} handleClose={handleClose} title='Fill the data' body={getModalFields()} />
     </div>
   )
 }
