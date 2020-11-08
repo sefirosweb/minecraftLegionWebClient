@@ -28,6 +28,10 @@ class Layout extends React.Component {
       this.props.updateBotStatus(data)
     })
 
+    this.socket.on('mastersOnline', data => {
+      this.props.updateMasters(data)
+    })
+
     this.socket.emit('getBotsOnline')
     this.socket.on('botsOnline', botsOnline => {
       const botsConnected = botsOnline.sort(function (a, b) {

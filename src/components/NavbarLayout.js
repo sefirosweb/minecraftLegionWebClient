@@ -97,16 +97,31 @@ const NavbarLayout = (props) => {
     </div>
   )
 
+  const renderMasterList = () => {
+    return props.masters.map((e, index) => {
+      return (
+        <div key={index}>{e.name}</div>
+      )
+    })
+  }
+
   const addNewMasterFields = (
-    <div className='row'>
-      <div className='col-12'>
-        <div className='form-group'>
-          <Form onKeyPress={handleKeyPress}>
-            <Form.Group>
-              <Form.Label>Master Name</Form.Label>
-              <Form.Control type='text' onChange={changeMasterName} value={masterName} />
-            </Form.Group>
-          </Form>
+    <div>
+      <div className='row'>
+        <div className='col-12'>
+          <div className='form-group'>
+            <Form onKeyPress={handleKeyPress}>
+              <Form.Group>
+                <Form.Label>Master Name</Form.Label>
+                <Form.Control type='text' onChange={changeMasterName} value={masterName} />
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+      </div>
+      <div className='row'>
+        <div className='col-12'>
+          {renderMasterList()}
         </div>
       </div>
     </div>

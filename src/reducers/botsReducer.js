@@ -1,8 +1,9 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_BOT_SERVER } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_BOT_SERVER, SET_MASTERS } from '../types/botsType'
 
 const INITIAL_STATE = {
   logs: [],
   botsOnline: [],
+  masters: [],
   connected: false,
   error: null,
   webServerSocketURL: 'localhost',
@@ -37,15 +38,23 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         connected: action.payload
       }
+
     case SET_SOCKET:
       return {
         ...state,
         socket: action.payload
       }
+
     case SET_MASTER:
       return {
         ...state,
         master: action.payload
+      }
+
+    case SET_MASTERS:
+      return {
+        ...state,
+        masters: action.payload
       }
 
     case SET_SOCKET_SERVER:

@@ -1,4 +1,4 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_BOT_SERVER, SET_SOCKET_SERVER_PORT } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_BOT_SERVER, SET_SOCKET_SERVER_PORT, SET_MASTERS } from '../types/botsType'
 
 export const setBots = (bots) => (dispatch) => {
   dispatch({
@@ -61,6 +61,13 @@ export const updateMaster = (newMaster) => (dispatch) => {
   dispatch({
     type: SET_MASTER,
     payload: newMaster
+  })
+}
+
+export const updateMasters = (newMasters) => (dispatch) => {
+  dispatch({
+    type: SET_MASTERS,
+    payload: newMasters
   })
 }
 
