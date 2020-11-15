@@ -6,7 +6,7 @@ This is a frontend for manage the bot, this frontend need to connect to the back
 
 ## Install: 
 - Install Novde version 10+
-- npm i minecraftlegion
+- npm i minecraftLegionWebClient
 
 
 ## Usage:
