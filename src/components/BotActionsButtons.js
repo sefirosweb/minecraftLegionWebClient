@@ -164,6 +164,21 @@ const BotActionButtons = (props) => {
     props.socket.emit('sendAction', action)
   }
 
+  const handleConfigureButton = () => {
+    const action = {
+      action: 'getConfig',
+      socketId: props.socketId,
+      value: ''
+    }
+
+    console.log('getConfig', action)
+    props.socket.emit('sendAction', action)
+
+    props.socket.on('sendConfig', data => {
+      console.log('sendConfig', data)
+    })
+  }
+
   return (
     <>
       <div className='row'>
@@ -180,6 +195,7 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-success mr-3' onClick={handleStartStateMachineButton}>Show State Machine</button>
           <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Show Item Inventory</button>
           <button type='button' className='btn btn-success mr-3' onClick={handleStartViewerButton}>Show Viewer</button>
+          <button type='button' className='btn btn-warning mr-3' onClick={handleConfigureButton}>Configure</button>
           <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
         </div>
       </div>
