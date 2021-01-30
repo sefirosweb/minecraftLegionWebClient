@@ -178,6 +178,56 @@ const BotActionButtons = (props) => {
       console.log('sendConfig', data)
     })
   }
+  const handleXup = () => {
+    const action = {
+      action: 'move',
+      socketId: props.socketId,
+      value: 'x+'
+    }
+    props.socket.emit('sendAction', action)
+  }
+  const handleXdown = () => {
+    const action = {
+      action: 'move',
+      socketId: props.socketId,
+      value: 'x-'
+    }
+    props.socket.emit('sendAction', action)
+  }
+
+  const handleZup = () => {
+    const action = {
+      action: 'move',
+      socketId: props.socketId,
+      value: 'z+'
+    }
+    props.socket.emit('sendAction', action)
+  }
+  const handleZdown = () => {
+    const action = {
+      action: 'move',
+      socketId: props.socketId,
+      value: 'z-'
+    }
+    props.socket.emit('sendAction', action)
+  }
+  const handleInteract = () => {
+    const action = {
+      action: 'interact',
+      socketId: props.socketId,
+      value: props.master
+    }
+    props.socket.emit('sendAction', action)
+  }
+
+  const handleDrop = () => {
+    const action = {
+      action: 'drop',
+      socketId: props.socketId,
+      value: props.master
+    }
+    props.socket.emit('sendAction', action)
+  }
 
   return (
     <>
@@ -213,6 +263,30 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveEquipmentChestButton}>Save Equipment Chest</button>
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveFoodChestButton}>Save Food Chest</button>
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveDepositChestButton}>Save Deposit Chest</button>
+        </div>
+      </div>
+      <div className='row mt-2'>
+        <div className='col-1 offset-1'>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleXup}>X+</button>
+        </div>
+
+        <div className='col-2 offset-2'>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleInteract}>Interact</button>
+        </div>
+        <div className='col-1'>
+          <button type='button' className='btn btn-danger mr-3' onClick={handleDrop}>Drop</button>
+        </div>
+      </div>
+
+      <div className='row mt-2'>
+        <div className='col-1'>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleZdown}>Z-</button>
+        </div>
+        <div className='col-1'>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleXdown}>X-</button>
+        </div>
+        <div className='col-1'>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleZup}>Z+</button>
         </div>
       </div>
     </>
