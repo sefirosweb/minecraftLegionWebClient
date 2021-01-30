@@ -5,7 +5,7 @@ This project was part of [minecraftLegion](https://github.com/sefirosweb/minecra
 This is a frontend for manage the bot, this frontend need to connect to the backend: [minecraftLegionWebServer](https://github.com/sefirosweb/minecraftLegionWebServer).
 
 ## Install: 
-- Install Novde version 10+
+- Install Novde version 14+
 - npm i minecraftLegionWebClient
 
 
@@ -20,5 +20,6 @@ The page will reload if you make edits.
 
 
 # TODO
+- Refactorize front end
 - Make a Configuration to connect to backend
-- Explain better this program
+- Make a robuts documentation
