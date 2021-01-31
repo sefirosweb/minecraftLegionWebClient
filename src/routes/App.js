@@ -6,6 +6,7 @@ import Layout from '../components/Layout'
 import NotFound from '../pages/NotFound'
 import Dashboard from '../pages/Dashboard'
 import Configuration from '../pages/Configuration'
+import Login from '../pages/Login'
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/dashboard/:socketId' component={Dashboard} />
           <Route exact path='/configuration' component={Configuration} />
+          <Route exact path='/login' component={Login} />
           <Route exact path='/notfound' component={NotFound} />
           <Redirect exact from='/' to='/dashboard' />
           <Redirect to='/notfound' />
