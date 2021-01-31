@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import App from './routes/App'
 import reportWebVitals from './reportWebVitals'
 
 // Para conectar todos los reducers

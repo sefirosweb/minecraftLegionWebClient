@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './css/general.css'
-import Layout from './components/Layout'
-import NotFound from './pages/NotFound'
-import Dashboard from './pages/Dashboard'
-import Configuration from './pages/Configuration'
+import '../css/general.css'
+import Layout from '../components/Layout'
+import NotFound from '../pages/NotFound'
+import Dashboard from '../pages/Dashboard'
+import Configuration from '../pages/Configuration'
 
 function App () {
   return (
