@@ -18,7 +18,7 @@ function App () {
           <Route exact path='/configuration' component={Configuration} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/notfound' component={NotFound} />
-          <Redirect exact from='/' to='/dashboard' />
+          <Redirect exact from='/' to='/dashboard' /> {/* TODO redirect en caso logeado */}
           <Redirect to='/notfound' />
         </Switch>
       </Layout>
