@@ -1,18 +1,14 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_BOT_SERVER, SET_MASTERS, SET_SOCKET_SERVER_PASSWORD } from '../types/botsType'
-import Cookies from 'js-cookie'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_BOT_SERVER, SET_MASTERS } from '../types/botsType'
 
 const INITIAL_STATE = {
   logs: [],
-  botsOnline: [],
-  masters: [],
-  connected: false,
+
   error: null,
-  webServerSocketPassword: '',
-  webServerSocketURL: Cookies.get('webServerSocketURL') ? Cookies.get('webServerSocketURL') : 'localhost',
-  webServerSocketPort: Cookies.get('webServerSocketPort') ? Cookies.get('webServerSocketPort') : 4001,
-  serverBots: Cookies.get('serverBots') ? Cookies.get('serverBots') : 'localhost',
+  webServerSocketURL: 'localhost', // TODO archivo de config.js
+  webServerSocketPort: '4001', // TODO archivo de config.js
+  serverBots: 'localhost', // TODO archivo de config.js + revisar que es
   socket: null,
-  master: Cookies.get('master') ? Cookies.get('master') : 'PlayerName'
+  master: 'Lordvivi' // Archivo de config por defecto
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -48,7 +44,6 @@ export default (state = INITIAL_STATE, action) => {
       }
 
     case SET_MASTER:
-      Cookies.set('master', action.payload)
       return {
         ...state,
         master: action.payload
@@ -61,28 +56,18 @@ export default (state = INITIAL_STATE, action) => {
       }
 
     case SET_SOCKET_SERVER:
-      Cookies.set('webServerSocketURL', action.payload)
       return {
         ...state,
         webServerSocketURL: action.payload
       }
 
     case SET_SOCKET_SERVER_PORT:
-      Cookies.set('webServerSocketPort', action.payload)
       return {
         ...state,
         webServerSocketPort: action.payload
       }
 
-
-    case SET_SOCKET_SERVER_PASSWORD:
-      return {
-        ...state,
-        webServerSocketPassword: action.payload
-      }
-
     case SET_BOT_SERVER:
-      Cookies.set('serverBots', action.payload)
       return {
         ...state,
         serverBots: action.payload
