@@ -139,11 +139,9 @@ const NavbarLayout = (props) => {
     <div className='navBar'>
       <NavLink className='ml-3' to='/dashboard' activeClassName='is-selected'>Dashboard</NavLink>
       <NavLink className='ml-3' to='/configuration' activeClassName='is-selected'>Configuration</NavLink>
-      <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span>
-      <span className='linkSpan ml-3' onClick={handleMasterShow}>Master List</span>
-
+      { props.connected ? <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span> : ''}
+      { props.connected ? <span className='linkSpan ml-3' onClsick={handleMasterShow}>Master List</span> : ''}
       <a className='ml-5' href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel='noreferrer'>Git</a>
-
       {/* Load Modal */}
       <Modal show={show} handleAccept={handleAccept} handleClose={handleClose} title='Fill the data' body={getModalFields()} />
     </div>
