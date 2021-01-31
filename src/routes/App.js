@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/general.css'
@@ -15,11 +14,11 @@ function App () {
         <Switch>
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/dashboard/:socketId' component={Dashboard} />
+          <Route exact path='/configuration/:socketId' component={Dashboard} />
           <Route exact path='/configuration' component={Configuration} />
           <Route exact path='/login' component={Login} />
-          <Route exact path='/notfound' component={NotFound} />
           <Redirect exact from='/' to='/dashboard' /> {/* TODO redirect en caso logeado */}
-          <Redirect to='/notfound' />
+          <Route component={NotFound} />
         </Switch>
       </Layout>
     </BrowserRouter>
