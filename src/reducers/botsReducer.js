@@ -6,11 +6,11 @@ const INITIAL_STATE = {
   masters: [],
   connected: false,
   error: null,
-  webServerSocketURL: 'localhost',
-  webServerSocketPort: '4001',
-  serverBots: 'localhost',
+  webServerSocketURL: 'localhost', // TODO archivo de config.js
+  webServerSocketPort: '4001', // TODO archivo de config.js
+  serverBots: 'localhost', // TODO archivo de config.js + revisar que es
   socket: null,
-  master: 'Lordvivi'
+  master: 'Lordvivi' // Archivo de config por defecto
 }
 
 export default (state = INITIAL_STATE, action) => {
