@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import * as botsAction from '../actions/botsAction'
-
+import { Redirect } from 'react-router-dom'
 class Dashboard extends React.Component {
     renderLogs = () => {
         let logs = this.props.logs
@@ -28,7 +28,9 @@ class Dashboard extends React.Component {
     }
 
     componentDidUpdate() {
-        this.el.scrollTop = this.el.scrollHeight
+        if (this.props.connected) {
+            this.el.scrollTop = this.el.scrollHeight
+        }
     }
 
     componentDidMount() {
@@ -48,6 +50,10 @@ class Dashboard extends React.Component {
     }
 
     render() {
+        if (!this.props.connected) {
+            return <Redirect to="/configuration" />
+        }
+        
         return (
             <Fragment>
                 <div className='row'>
