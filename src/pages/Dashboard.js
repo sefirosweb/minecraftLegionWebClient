@@ -27,18 +27,30 @@ class Dashboard extends React.Component {
         return this.props.botsOnline.length
     }
 
-    componentDidUpdate() {
-        if (this.props.connected) {
-            this.el.scrollTop = this.el.scrollHeight
+    checkCurrentBotIsConnected = () => {
+        if (!this.props.loged) {
+            this.props.history.push('/configuration')
         }
-    }
 
-    componentDidMount() {
         const { socketId } = this.props.match.params
         if (this.props.getBotIndexBySocketId(socketId) < 0 && socketId !== undefined) {
             console.log('Bot not found')
-            this.props.history.push('/')
+            this.props.history.push('/dashboard')
         }
+    }
+    componentDidUpdate(prevProps) {
+        if (this.props.loged) {
+            this.el.scrollTop = this.el.scrollHeight
+        }
+
+        if (this.props.botsOnline !== prevProps.botsOnline) {
+            this.checkCurrentBotIsConnected()
+        }
+    }
+
+
+    componentDidMount() {
+        this.checkCurrentBotIsConnected()
     }
 
     renderServerConection() {
@@ -51,9 +63,9 @@ class Dashboard extends React.Component {
 
     render() {
         if (!this.props.loged) {
-            return <Redirect to="/configuration" />
+            this.props.history.push('/configuration')
         }
-        
+
         return (
             <Fragment>
                 <div className='row'>
