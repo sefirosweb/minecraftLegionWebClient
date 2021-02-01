@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   masters: [],
   connected: false,
   error: null,
-  webServerSocketPassword: '',
+  webServerSocketPassword: localStorage.getItem('webServerSocketPassword') ? localStorage.getItem('webServerSocketPassword') : '',
   webServerSocketURL: Cookies.get('webServerSocketURL') ? Cookies.get('webServerSocketURL') : 'localhost',
   webServerSocketPort: Cookies.get('webServerSocketPort') ? Cookies.get('webServerSocketPort') : 4001,
   serverBots: Cookies.get('serverBots') ? Cookies.get('serverBots') : 'localhost',
@@ -77,6 +77,7 @@ export default (state = INITIAL_STATE, action) => {
       }
 
     case SET_SOCKET_SERVER_PASSWORD:
+      localStorage.setItem('webServerSocketPassword', action.payload);
       return {
         ...state,
         webServerSocketPassword: action.payload
