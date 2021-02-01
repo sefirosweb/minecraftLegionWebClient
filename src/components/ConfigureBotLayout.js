@@ -8,6 +8,10 @@ import { getBotIndexBySocketId } from '../actions/botsAction'
 import NotFound from '../pages/NotFound'
 import GeneralConfig from '../components/configurebot/GeneralConfig'
 import ItemsToBeReady from '../components/configurebot/ItemsToBeReady'
+import Chests from '../components/configurebot/Chests'
+import Combat from '../components/configurebot/Combat'
+import GuardJob from '../components/configurebot/GuardJob'
+import MinerJob from '../components/configurebot/MinerJob'
 
 class ConfigureBotLayout extends React.Component {
     componentDidUpdate(prevProps) {
