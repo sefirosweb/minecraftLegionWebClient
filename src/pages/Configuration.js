@@ -24,6 +24,23 @@ class Configuration extends React.Component {
         this.props.updateBotServer(event.target.value)
     }
 
+
+    renderServerConection() {
+        if (this.props.connected) {
+            return <span className='color-green'>Online</span>
+        } else {
+            return <span className='color-red'>Offline</span>
+        }
+    }
+
+    renderLogedStatus() {
+        if (this.props.loged) {
+            return <span className='color-green'>Loged!</span>
+        } else {
+            return <span className='color-red'>Not loged</span>
+        }
+    }
+
     render() {
         return (
             <Fragment>
@@ -52,6 +69,10 @@ class Configuration extends React.Component {
                             <div className="form-group">
                                 <label>Server Bots (Used for connect to Bots Viewers)</label>
                                 <input type="text" className="form-control" onChange={this.handleChangeBotServer} value={this.props.serverBots} />
+                            </div>
+                            <div className="form-group">
+                                <label>Server status: {this.renderServerConection()}</label><br />
+                                <label>Login status: {this.renderLogedStatus()}</label>
                             </div>
                         </Form>
                     </div>
