@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        if (!this.props.connected) {
+        if (!this.props.loged) {
             return <Redirect to="/configuration" />
         }
         

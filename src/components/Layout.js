@@ -33,11 +33,14 @@ class Layout extends React.Component {
         this.props.setLoged(true)
       } else {
         this.props.setLoged(false)
+        this.props.setToken(null)
       }
     })
 
     this.socket.on('disconnect', () => {
       this.props.setOnlineServer(false)
+      this.props.setLoged(false)
+      this.props.setToken(null)
     })
 
     this.socket.on('logs', message => {

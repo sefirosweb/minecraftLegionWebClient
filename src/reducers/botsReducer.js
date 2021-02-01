@@ -77,7 +77,6 @@ export default (state = INITIAL_STATE, action) => {
         webServerSocketPort: action.payload
       }
 
-
     case SET_SOCKET_SERVER_PASSWORD:
       return {
         ...state,
