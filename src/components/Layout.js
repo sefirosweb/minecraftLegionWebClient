@@ -16,7 +16,7 @@ class Layout extends React.Component {
       this.socket.close()
     }
 
-    this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`) // Pendint to fix when is changed
+    this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`)
     this.props.setSocket(this.socket)
 
     this.socket.on('connect', () => {
