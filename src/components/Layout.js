@@ -7,13 +7,21 @@ import NavbarLayout from './NavbarLayout'
 import socketIOClient from 'socket.io-client'
 
 class Layout extends React.Component {
-  componentDidMount () {
-    // When finish render, start stocket listening
+
+  loadWebSocket = () => {
+    console.log('Conecting to server...')
+    
+    if (this.socket !== undefined) {
+      this.socket.disconnect()
+      this.socket.close()
+    }
+
     this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`) // Pendint to fix when is changed
     this.props.setSocket(this.socket)
 
     this.socket.on('connect', () => {
       this.props.setOnlineServer(true)
+      console.log(`Connected to: ${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`)
     })
 
     this.socket.on('disconnect', () => {
@@ -44,11 +52,27 @@ class Layout extends React.Component {
     })
   }
 
-  componentWillUnmount () {
+
+  componentDidUpdate(prevProps) {
+    // Detect if have any changes on IP / PORT / PASSWORD
+    if (
+      this.props.webServerSocketURL !== prevProps.webServerSocketURL ||
+      this.props.webServerSocketPort !== prevProps.webServerSocketPort ||
+      this.props.webServerSocketPassword !== prevProps.webServerSocketPassword
+    ) {
+      this.loadWebSocket()
+    }
+  }
+
+  componentDidMount() {
+    this.loadWebSocket()
+  }
+
+  componentWillUnmount() {
     this.socket.disconnect()
   }
 
-  render () {
+  render() {
     return (
       <>
         <NavbarLayout />

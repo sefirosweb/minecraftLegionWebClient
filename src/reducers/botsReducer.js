@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_BOT_SERVER, SET_MASTERS, SET_SOCKET_SERVER_PASSWORD } from '../types/botsType'
 import Cookies from 'js-cookie'
 
