@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import * as botsAction from '../actions/botsAction'
+import { updateMasters, setBots, addLog, updateBotStatus } from '../actions/botsAction'
+import { setSocket, setOnlineServer, setLoged } from '../actions/configurationAction'
 
 import NavbarLayout from './NavbarLayout'
 import socketIOClient from 'socket.io-client'
@@ -98,7 +99,17 @@ class Layout extends React.Component {
 }
 
 const mapStateToProps = (reducers) => {
-  return reducers.botsReducer
+  return reducers.configurationReducer
 }
 
-export default connect(mapStateToProps, botsAction)(Layout)
+const mapDispatchToProps = {
+  setLoged,
+  setSocket,
+  setOnlineServer,
+  updateMasters,
+  setBots,
+  addLog,
+  updateBotStatus
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)

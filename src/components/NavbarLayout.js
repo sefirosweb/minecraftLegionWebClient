@@ -151,7 +151,11 @@ const NavbarLayout = (props) => {
 }
 
 const mapStateToProps = (reducers) => {
-  return reducers.botsReducer
+  const { botsReducer, configurationReducer } = reducers
+  const { masters } = botsReducer
+  const { loged, socket } = configurationReducer
+
+  return { masters, loged, socket }
 }
 
 export default connect(mapStateToProps)(NavbarLayout)

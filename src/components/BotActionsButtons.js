@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import * as botsAction from '../actions/botsAction'
+import { updateBotStatus, getBotBySocketId } from '../actions/botsAction'
 
 const BotActionButtons = (props) => {
   const history = useHistory()
@@ -293,8 +293,18 @@ const BotActionButtons = (props) => {
   )
 }
 
+
 const mapStateToProps = (reducers) => {
-  return reducers.botsReducer
+  const { configurationReducer } = reducers
+  const { socket, serverBots, master } = configurationReducer
+
+  return { socket, serverBots, master }
 }
 
-export default connect(mapStateToProps, botsAction)(BotActionButtons)
+const mapDispatchToProps = {
+  updateBotStatus,
+  getBotBySocketId
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(BotActionButtons)

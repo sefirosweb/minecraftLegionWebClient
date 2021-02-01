@@ -1,4 +1,4 @@
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_BOT_SERVER, SET_SOCKET_SERVER_PORT, SET_SOCKET_SERVER_PASSWORD, SET_MASTERS, SET_LOGED } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, SET_MASTERS } from '../types/botsType'
 
 export const setBots = (bots) => (dispatch) => {
   dispatch({
@@ -20,27 +20,6 @@ export const addLog = (newLog) => (dispatch, getState) => {
   })
 }
 
-export const setOnlineServer = (onlineServer) => (dispatch) => {
-  dispatch({
-    type: ONLINE_SERVER,
-    payload: onlineServer
-  })
-}
-
-export const setError = (error) => (dispatch) => {
-  dispatch({
-    type: ERROR,
-    payload: error
-  })
-}
-
-export const setSocket = (socket) => (dispatch) => {
-  dispatch({
-    type: SET_SOCKET,
-    payload: socket
-  })
-}
-
 export const updateBotStatus = (botDataStatus) => (dispatch, getState) => {
   const { botsOnline } = getState().botsReducer
   const botIndex = botsOnline.findIndex((e) => { return e.socketId === botDataStatus.socketId })
@@ -57,52 +36,10 @@ export const updateBotStatus = (botDataStatus) => (dispatch, getState) => {
   })
 }
 
-export const updateMaster = (newMaster) => (dispatch) => {
-  dispatch({
-    type: SET_MASTER,
-    payload: newMaster
-  })
-}
-
 export const updateMasters = (newMasters) => (dispatch) => {
   dispatch({
     type: SET_MASTERS,
     payload: newMasters
-  })
-}
-
-export const updateServer = (newServer) => (dispatch) => {
-  dispatch({
-    type: SET_SOCKET_SERVER,
-    payload: newServer
-  })
-}
-
-export const updateServerPort = (newPort) => (dispatch) => {
-  dispatch({
-    type: SET_SOCKET_SERVER_PORT,
-    payload: newPort
-  })
-}
-
-export const updateServerPassword = (password) => (dispatch) => {
-  dispatch({
-    type: SET_SOCKET_SERVER_PASSWORD,
-    payload: password
-  })
-}
-
-export const updateBotServer = (newBotServer) => (dispatch) => {
-  dispatch({
-    type: SET_BOT_SERVER,
-    payload: newBotServer
-  })
-}
-
-export const setLoged = (loged) => (dispatch) => {
-  dispatch({
-    type: SET_LOGED,
-    payload: loged
   })
 }
 

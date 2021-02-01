@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import Form from 'react-bootstrap/Form'
-import * as botsAction from '../actions/botsAction'
+import { updateMaster, updateServer, updateServerPort, updateServerPassword, updateBotServer } from '../actions/configurationAction'
 
 class Configuration extends React.Component {
     handleChangeMaster = (event) => {
@@ -83,7 +83,15 @@ class Configuration extends React.Component {
 }
 
 const mapStateToProps = (reducers) => {
-    return reducers.botsReducer
+    return reducers.configurationReducer
 }
 
-export default connect(mapStateToProps, botsAction)(Configuration);
+const mapDispatchToProps = {
+    updateMaster,
+    updateServer,
+    updateServerPort,
+    updateServerPassword,
+    updateBotServer
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Configuration);

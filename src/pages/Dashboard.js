@@ -54,14 +54,6 @@ class Dashboard extends React.Component {
         this.checkCurrentBotIsConnected()
     }
 
-    renderServerConection() {
-        if (this.props.connected) {
-            return <span className='color-green'>Online</span>
-        } else {
-            return <span className='color-red'>Offline</span>
-        }
-    }
-
     render() {
         if (!this.props.loged) {
             this.props.history.push('/configuration')
@@ -71,7 +63,7 @@ class Dashboard extends React.Component {
         return (
             <Fragment>
                 <div className='row'>
-                    <div className='col-10'><h1>Dashboard - {this.renderServerConection()}</h1></div>
+                    <div className='col-10'><h1>Dashboard</h1></div>
                 </div>
                 <div className='row'>
                     <div className='col-10'>
@@ -102,7 +94,11 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = (reducers) => {
-    return reducers.botsReducer
+    const { botsReducer, configurationReducer } = reducers
+    const { botsOnline, logs } = botsReducer
+    const { loged } = configurationReducer
+
+    return { botsOnline, logs, loged }
 }
 
 export default connect(mapStateToProps, botsAction)(Dashboard);
