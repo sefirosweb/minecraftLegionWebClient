@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
-import * as botsAction from '../actions/botsAction'
+import { getBotIndexBySocketId } from '../actions/botsAction'
 class Dashboard extends React.Component {
     renderLogs = () => {
         let logs = this.props.logs
@@ -39,12 +39,16 @@ class Dashboard extends React.Component {
             return
         }
     }
+
     componentDidUpdate(prevProps) {
         if (this.props.loged) {
             this.el.scrollTop = this.el.scrollHeight
         }
 
-        if (this.props.botsOnline !== prevProps.botsOnline) {
+        if (
+            this.props.botsOnline !== prevProps.botsOnline ||
+            this.props.loged !== prevProps.loged
+        ) {
             this.checkCurrentBotIsConnected()
         }
     }
@@ -101,4 +105,10 @@ const mapStateToProps = (reducers) => {
     return { botsOnline, logs, loged }
 }
 
-export default connect(mapStateToProps, botsAction)(Dashboard);
+
+const mapDispatchToProps = {
+    getBotIndexBySocketId
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

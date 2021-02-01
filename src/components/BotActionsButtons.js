@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { updateBotStatus, getBotBySocketId } from '../actions/botsAction'
+import { Link } from 'react-router-dom'
 
 const BotActionButtons = (props) => {
   const history = useHistory()
@@ -245,6 +246,8 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-success mr-3' onClick={handleStartStateMachineButton}>Show State Machine</button>
           <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Show Item Inventory</button>
           <button type='button' className='btn btn-success mr-3' onClick={handleStartViewerButton}>Show Viewer</button>
+          <button type='button' className='btn btn-warning mr-3' onClick={handleConfigureButton}>Configure</button>
+          <Link className='btn btn-warning mr-3' to={`/configurebot/${props.socketId}/generalConfig`}>Configure Bot</Link>
           <button type='button' className='btn btn-warning mr-3' onClick={handleConfigureButton}>Configure</button>
           <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
         </div>
