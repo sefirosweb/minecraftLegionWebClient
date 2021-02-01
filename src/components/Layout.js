@@ -10,7 +10,7 @@ class Layout extends React.Component {
 
   loadWebSocket = () => {
     console.log('Conecting to server...')
-    
+
     if (this.socket !== undefined) {
       this.socket.disconnect()
       this.socket.close()
@@ -22,6 +22,18 @@ class Layout extends React.Component {
     this.socket.on('connect', () => {
       this.props.setOnlineServer(true)
       console.log(`Connected to: ${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`)
+
+      this.socket.emit('login', this.props.webServerSocketPassword)
+    })
+
+    this.socket.on('login', (authenticate) => {
+      console.log(authenticate)
+      if (authenticate.auth) {
+        this.props.setToken(authenticate.token)
+        this.props.setLoged(true)
+      } else {
+        this.props.setLoged(false)
+      }
     })
 
     this.socket.on('disconnect', () => {
