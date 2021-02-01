@@ -11,12 +11,12 @@ class ConfigureBotLayout extends React.Component {
                 <div className='row'>
                     <div className='col-12'>
                         <ul className="nav nav-tabs bg-dark">
-                            <li className="nav-item"><NavLink className="nav-link" activeClassName='active' to={`/${this.props.socketId}/generalconfig`}>General Configuration</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link" activeClassName='active' to={`/${this.props.socketId}/itemstobeready`}>Items To Be Ready</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link" activeClassName='active' to={`/${this.props.socketId}/chests`}>Chests</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link" activeClassName='active' to={`/${this.props.socketId}/combat`}>Combat</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link" activeClassName='active' to={`/${this.props.socketId}/guardjob`}>Guard Job</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link" activeClassName='active' to={`/${this.props.socketId}/minerjob`}>Miner Job</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link linkSpan " activeClassName='active' to={`/${this.props.socketId}/generalconfig`}>General Configuration</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link linkSpan " activeClassName='active' to={`/${this.props.socketId}/itemstobeready`}>Items To Be Ready</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link linkSpan " activeClassName='active' to={`/${this.props.socketId}/chests`}>Chests</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link linkSpan " activeClassName='active' to={`/${this.props.socketId}/combat`}>Combat</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link linkSpan " activeClassName='active' to={`/${this.props.socketId}/guardjob`}>Guard Job</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link linkSpan " activeClassName='active' to={`/${this.props.socketId}/minerjob`}>Miner Job</NavLink></li>
                         </ul>
                     </div>
                 </div>
