@@ -30,12 +30,14 @@ class Dashboard extends React.Component {
     checkCurrentBotIsConnected = () => {
         if (!this.props.loged) {
             this.props.history.push('/configuration')
+            return
         }
 
         const { socketId } = this.props.match.params
         if (this.props.getBotIndexBySocketId(socketId) < 0 && socketId !== undefined) {
             console.log('Bot not found')
             this.props.history.push('/dashboard')
+            return
         }
     }
     componentDidUpdate(prevProps) {
@@ -64,6 +66,7 @@ class Dashboard extends React.Component {
     render() {
         if (!this.props.loged) {
             this.props.history.push('/configuration')
+            return null
         }
 
         return (
