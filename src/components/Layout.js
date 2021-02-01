@@ -31,6 +31,7 @@ class Layout extends React.Component {
       if (authenticate.auth) {
         this.props.setToken(authenticate.token)
         this.props.setLoged(true)
+        this.socket.emit('getBotsOnline')
       } else {
         this.props.setLoged(false)
         this.props.setToken(null)
@@ -41,6 +42,7 @@ class Layout extends React.Component {
       this.props.setOnlineServer(false)
       this.props.setLoged(false)
       this.props.setToken(null)
+      this.props.setBots([])
     })
 
     this.socket.on('logs', message => {
@@ -55,7 +57,6 @@ class Layout extends React.Component {
       this.props.updateMasters(data)
     })
 
-    this.socket.emit('getBotsOnline')
     this.socket.on('botsOnline', botsOnline => {
       const botsConnected = botsOnline.sort(function (a, b) {
         if (a.name < b.name) { return -1 }
