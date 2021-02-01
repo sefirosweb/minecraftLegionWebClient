@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import * as botsAction from '../actions/botsAction'
-import { Redirect } from 'react-router-dom'
 class Dashboard extends React.Component {
     renderLogs = () => {
         let logs = this.props.logs
