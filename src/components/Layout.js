@@ -29,19 +29,16 @@ class Layout extends React.Component {
     this.socket.on('login', (authenticate) => {
       console.log(authenticate)
       if (authenticate.auth) {
-        this.props.setToken(authenticate.token)
         this.props.setLoged(true)
         this.socket.emit('getBotsOnline')
       } else {
         this.props.setLoged(false)
-        this.props.setToken(null)
       }
     })
 
     this.socket.on('disconnect', () => {
       this.props.setOnlineServer(false)
       this.props.setLoged(false)
-      this.props.setToken(null)
       this.props.setBots([])
     })
 

@@ -138,9 +138,9 @@ const NavbarLayout = (props) => {
   return (
     <div className='navBar'>
       <NavLink className='ml-3' to='/configuration' activeClassName='is-selected'>Configuration</NavLink>
-      {props.connected ? <NavLink className='ml-3' to='/dashboard' activeClassName='is-selected'>Dashboard</NavLink> : ''}
-      {props.connected ? <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span> : ''}
-      {props.connected ? <span className='linkSpan ml-3' onClick={handleMasterShow}>Master List</span> : ''}
+      {props.loged ? <NavLink className='ml-3' to='/dashboard' activeClassName='is-selected'>Dashboard</NavLink> : ''}
+      {props.loged ? <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span> : ''}
+      {props.loged ? <span className='linkSpan ml-3' onClick={handleMasterShow}>Master List</span> : ''}
 
       <a className='ml-5' href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel='noreferrer'>Git</a>
 

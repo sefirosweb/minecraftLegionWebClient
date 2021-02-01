@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_BOT_SERVER, SET_MASTERS, SET_SOCKET_SERVER_PASSWORD, SET_LOGED, SET_TOKEN } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, ONLINE_SERVER, ERROR, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_BOT_SERVER, SET_MASTERS, SET_SOCKET_SERVER_PASSWORD, SET_LOGED } from '../types/botsType'
 import Cookies from 'js-cookie'
 
 const INITIAL_STATE = {
@@ -14,7 +14,6 @@ const INITIAL_STATE = {
   serverBots: Cookies.get('serverBots') ? Cookies.get('serverBots') : 'localhost',
   socket: null,
   master: Cookies.get('master') ? Cookies.get('master') : 'PlayerName',
-  token: null,
   loged: false
 }
 
@@ -81,12 +80,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         webServerSocketPassword: action.payload
-      }
-
-    case SET_TOKEN:
-      return {
-        ...state,
-        token: action.payload
       }
 
     case SET_LOGED:
