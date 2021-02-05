@@ -31,6 +31,11 @@ class Layout extends React.Component {
       console.log(authenticate)
       if (authenticate.auth) {
         this.props.setLoged(true)
+
+        this.socket.emit('sendAction', {
+          action: 'addMaster',
+          value: this.props.master
+        })
         this.socket.emit('getBotsOnline')
       } else {
         this.props.setLoged(false)

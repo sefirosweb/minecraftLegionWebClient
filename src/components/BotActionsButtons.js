@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { updateBotStatus, getBotBySocketId } from '../actions/botsAction'
-import { Link } from 'react-router-dom'
 
 const BotActionButtons = (props) => {
   const history = useHistory()
@@ -246,12 +245,16 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-success mr-3' onClick={handleStartStateMachineButton}>Show State Machine</button>
           <button type='button' className='btn btn-success mr-3' onClick={handleStartInventoryButton}>Show Item Inventory</button>
           <button type='button' className='btn btn-success mr-3' onClick={handleStartViewerButton}>Show Viewer</button>
-          <button type='button' className='btn btn-warning mr-3' onClick={handleConfigureButton}>Configure</button>
-          <Link className='btn btn-warning mr-3' to={`/configurebot/${props.socketId}/generalConfig`}>Configure Bot</Link>
-          <button type='button' className='btn btn-warning mr-3' onClick={handleConfigureButton}>Configure</button>
           <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
         </div>
       </div>
+      <div className='row mt-2'>
+        <div className='col-12'>
+          <button type='button' className='btn btn-warning mr-3' onClick={handleConfigureButton}>Configure</button>
+          <Link className='btn btn-warning mr-3' to={`/configurebot/${props.socketId}/generalConfig`}>Configure Bot</Link>
+        </div>
+      </div>
+
       <div className='row mt-2'>
         <div className='col-12'>
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStayButton}>Stay</button>
@@ -296,7 +299,6 @@ const BotActionButtons = (props) => {
   )
 }
 
-
 const mapStateToProps = (reducers) => {
   const { configurationReducer } = reducers
   const { socket, serverBots, master } = configurationReducer
@@ -308,6 +310,5 @@ const mapDispatchToProps = {
   updateBotStatus,
   getBotBySocketId
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(BotActionButtons)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { getBotIndexBySocketId } from '../../actions/botsAction'
 import NotFound from '../../pages/NotFound'
 
