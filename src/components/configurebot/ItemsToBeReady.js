@@ -24,13 +24,13 @@ class ItemsToBeReady extends React.Component {
                 <div className='col-6'>
                   <div class="form-group">
                     <label for="inputItem">Select Item</label>
-                    <select class="form-control" id="inputItem">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                    <input className='form-control' type="text" list="itemsList" />
+                    <datalist id="itemsList">
+                      <option>Volvo</option>
+                      <option>Saab</option>
+                      <option>Mercedes</option>
+                      <option>Audi</option>
+                    </datalist>
                   </div>
                 </div>
 
