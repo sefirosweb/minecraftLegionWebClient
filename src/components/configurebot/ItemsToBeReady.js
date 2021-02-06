@@ -1,9 +1,6 @@
-import { useState } from 'react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
-
-const MC_VERSION = '1.15.1'
-const mcData = require("minecraft-data")(MC_VERSION)
+import ItemsAviable from './ItemsAviable'
 
 const ItemsToBeReady = (props) => {
 
@@ -21,25 +18,9 @@ const ItemsToBeReady = (props) => {
     setItem(event.target.value)
   }
 
-  const renderBlocks = () => {
-    const matchRegularExpression = new RegExp(item, 'gi');
-    const items = mcData.itemsArray.filter(itemIndex => {
-      return itemIndex.displayName.match(matchRegularExpression)
-    })
-
-    if (items.length > 10) {
-      items.splice(0, items.length - 10)
-    }
-
-    return items.map(item => {
-      return <option value={item.name}>{item.displayName}</option>
-    })
-  }
-
-
   return (
     <Fragment>
-          <div className='row'>
+      <div className='row'>
         <div className='col-12'>
           <label>
             This is a minimun requeried for start bot to work,<br />
@@ -54,21 +35,21 @@ const ItemsToBeReady = (props) => {
             <label for="inputItem">Select Item</label>
             <input className='form-control' type="text" list="itemsList" value={item} onChange={handleItemChange} />
             <datalist id="itemsList">
-              {renderBlocks()}
+              <ItemsAviable item={item} />
             </datalist>
           </div>
         </div>
 
         <div className='col-2'>
           <div class="form-group">
-            <label for="inputQuantity">Quantity</label>
-            <input type="text" class="form-control" id="inputQuantity" value={quantity} onChange={handleQuantityChange} />
+            <label>Quantity</label>
+            <input type="text" class="form-control" value={quantity} onChange={handleQuantityChange} />
           </div>
         </div>
 
         <div className='col-2'>
           <div class="form-group">
-            <label for="inputQuantity">.</label>
+            <label>.</label>
             <button className='form-control btn btn-primary'>Insert</button>
           </div>
         </div>
