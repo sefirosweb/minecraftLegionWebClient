@@ -4,7 +4,6 @@ class GeneralConfig extends React.Component {
   render() {
     return (
       <Fragment>
-        <div className='card px-5 pt-4'>
           <div className='row'>
             <div className='col-12'>
               <form>
@@ -44,7 +43,6 @@ class GeneralConfig extends React.Component {
               </form>
             </div>
           </div>
-        </div>
       </Fragment >
     )
   }

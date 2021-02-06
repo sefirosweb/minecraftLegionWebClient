@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 
 class ConfigureBotLayout extends React.Component {
-  render () {
+  render() {
     return (
       <>
         <div className='row'>
@@ -22,7 +22,9 @@ class ConfigureBotLayout extends React.Component {
         </div>
         <div className='row'>
           <div className='col-12'>
-            {this.props.children}
+            <div className='card px-5 pt-4'>
+              {this.props.children}
+            </div>
           </div>
         </div>
       </>
