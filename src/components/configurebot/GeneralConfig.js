@@ -13,7 +13,7 @@ class GeneralConfig extends React.Component {
                   <legend className="col-form-label col-sm-2 float-sm-left pt-0">Job</legend>
                   <div className="col-sm-10">
                     <div className="form-check">
-                      <input className="form-check-input" type="radio" name="gridJob" id="jobNone" value="none" checked />
+                      <input className="form-check-input" type="radio" name="gridJob" id="jobNone" value="none" />
                       <label className="form-check-label" for="jobNone">None</label>
                     </div>
                     <div className="form-check">
