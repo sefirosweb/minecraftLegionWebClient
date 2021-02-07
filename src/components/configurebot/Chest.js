@@ -6,6 +6,9 @@ import _uniqueId from 'lodash/uniqueId';
 const Chest = (props) => {
     const [item, setItem] = useState('')
     const [quantity, setQuantity] = useState(1)
+    const [x, setX] = useState('')
+    const [y, seyY] = useState('')
+    const [z, setZ] = useState('')
     const uniqueId = _uniqueId()
     const chestId = `chest-${uniqueId}`
     const radioId = `radio-${uniqueId}`
@@ -75,15 +78,15 @@ const Chest = (props) => {
             <div className='row'>
                 <div className='col-12'>
                     <form className="form-inline">
-                        <label for="staticEmail2" >Position XYZ:</label>
+                        <label>Position XYZ:</label>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" placeholder="X" />
+                            <input type="text" className="form-control" placeholder="X" value={x} />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" placeholder="Y" />
+                            <input type="text" className="form-control" placeholder="Y" value={y} />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" placeholder="Z" />
+                            <input type="text" className="form-control" placeholder="Z" value={z} />
                         </div>
                     </form>
                 </div>
