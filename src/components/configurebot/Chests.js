@@ -1,7 +1,46 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
+import { connect } from 'react-redux'
+import { getBotBySocketId } from '../../actions/botsAction'
 import Chest from './Chest'
 
 const Chests = (props) => {
+
+  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
+  if (botConfig === undefined) {
+    props.history.push('/dashboard')
+    return null
+  }
+
+  const handleInsertNewChest = (event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'insertNewChest'
+      }
+    })
+  }
+
+  const handleDeleteChest = (index, event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'deleteChest',
+        value: index
+      }
+    })
+  }
+
+  const renderChests = () => {
+    return botConfig.config.chests.map((chest, index) => {
+      return (
+        <Chest id={index} chest={chest} handleDeleteChest={handleDeleteChest} />
+      )
+    })
+  }
+
+
   return (
     <Fragment>
       <div className='row'>
@@ -14,17 +53,27 @@ const Chests = (props) => {
         </div>
       </div>
 
-      <Chest />
-      <Chest />
-      <Chest />
+      {renderChests()}
 
       <div className='row mb-5'>
         <div className='col-12'>
-          <button type='button' className='btn btn-success'>Insert New Chest</button>
+          <button type='button' className='btn btn-success' onClick={handleInsertNewChest}>Insert New Chest</button>
         </div>
       </div>
     </Fragment>
   )
 }
 
-export default Chests
+const mapStateToProps = (reducers) => {
+  const { botsReducer, configurationReducer } = reducers
+  const { botsOnline } = botsReducer
+  const { socket } = configurationReducer
+
+  return { socket, botsOnline }
+}
+
+const mapDispatchToProps = {
+  getBotBySocketId
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chests);

@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ItemsAviable from './ItemsAviable'
-import _uniqueId from 'lodash/uniqueId';
 
 const Chest = (props) => {
     const [item, setItem] = useState('')
@@ -9,9 +8,9 @@ const Chest = (props) => {
     const [x, setX] = useState('')
     const [y, seyY] = useState('')
     const [z, setZ] = useState('')
-    const uniqueId = _uniqueId()
-    const chestId = `chest-${uniqueId}`
-    const radioId = `radio-${uniqueId}`
+
+    const chestId = `chest-${props.id}`
+    const radioId = `radio-${props.id}`
 
     const handleQuantityChange = (event) => {
         const value = Number(event.target.value);
@@ -29,7 +28,12 @@ const Chest = (props) => {
 
             <div className='row'>
                 <div className='col-6'>
-                    <h4>Chest Nº: {uniqueId}</h4>
+                    <div className="form-group row">
+                        <label className="col-sm-3 col-form-label font-weight-bold">Chest Nº{props.id}</label>
+                        <div className="col-sm-9">
+                            <input type="text" className="form-control-plaintext font-weight-bold" value="Input chest name" />
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -130,7 +134,7 @@ const Chest = (props) => {
 
             <div className='row'>
                 <div className='col-3 ml-auto'>
-                    <button type='button' className='btn btn-danger float-right'>Delete chest Nº {uniqueId}</button>
+                    <button type='button' className='btn btn-danger float-right' onClick={props.handleDeleteChest.bind(this, props.id)}>Delete chest "{props.chest.name}"</button>
                 </div>
             </div>
             <hr className='mb-5' />
