@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getBotBySocketId } from '../../actions/botsAction'
 
 class ConfigureBotLayout extends React.Component {
   render() {
+    const botName = this.props.getBotBySocketId(this.props.socketId).name
     return (
-      <>
+      <Fragment>
         <div className='row'>
-          <div className='col-4'><h1>Bot Configuration</h1></div>
+          <div className='col-12'><h1>Bot Configuration - {botName}</h1></div>
         </div>
         <div className='row'>
           <div className='col-12'>
@@ -27,9 +30,21 @@ class ConfigureBotLayout extends React.Component {
             </div>
           </div>
         </div>
-      </>
+      </Fragment>
     )
   }
 }
 
-export default ConfigureBotLayout
+const mapStateToProps = (reducers) => {
+  const { botsReducer, configurationReducer } = reducers
+  const { botsOnline } = botsReducer
+  const { socket } = configurationReducer
+
+  return { socket, botsOnline }
+}
+
+const mapDispatchToProps = {
+  getBotBySocketId
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfigureBotLayout);
