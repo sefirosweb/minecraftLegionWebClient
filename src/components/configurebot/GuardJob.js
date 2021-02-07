@@ -34,8 +34,8 @@ const GuardJob = (props) => {
       <div className='row'>
         <div className='col-12'>
 
-          <table class="table">
-            <thead class="thead-dark">
+          <table className="table">
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">POS</th>

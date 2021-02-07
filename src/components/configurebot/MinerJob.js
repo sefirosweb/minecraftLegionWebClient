@@ -64,24 +64,24 @@ const MinerJob = (props) => {
             <legend className="col-form-label col-sm-3 float-sm-left pt-0">Start Coords</legend>
             <div className="col-sm-9">
 
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">X</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" />
+              <div className="form-group row">
+                <label className="col-sm-1 col-form-label">X</label>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control" />
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">Y</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" />
+              <div className="form-group row">
+                <label className="col-sm-1 col-form-label">Y</label>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control" />
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">Z</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" />
+              <div className="form-group row">
+                <label className="col-sm-1 col-form-label">Z</label>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control" />
                 </div>
               </div>
 
@@ -93,24 +93,24 @@ const MinerJob = (props) => {
             <legend className="col-form-label col-sm-3 float-sm-left pt-0">End Coords</legend>
             <div className="col-sm-9">
 
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">X</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" />
+              <div className="form-group row">
+                <label className="col-sm-1 col-form-label">X</label>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control" />
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">Y</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" />
+              <div className="form-group row">
+                <label className="col-sm-1 col-form-label">Y</label>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control" />
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">Z</label>
-                <div class="col-sm-3">
-                  <input type="text" class="form-control" />
+              <div className="form-group row">
+                <label className="col-sm-1 col-form-label">Z</label>
+                <div className="col-sm-3">
+                  <input type="text" className="form-control" />
                 </div>
               </div>
 

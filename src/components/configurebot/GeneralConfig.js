@@ -11,16 +11,16 @@ const GeneralConfig = (props) => {
               <legend className="col-form-label col-sm-2 float-sm-left pt-0">Job</legend>
               <div className="col-sm-10">
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridJob" id="jobNone" value="none" />
-                  <label className="form-check-label" for="jobNone">None</label>
+                  <input className="form-check-input" type="radio" name="gridJob" value="none" />
+                  <label className="form-check-label">None</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridJob" id="jobMiner" value="miner" />
-                  <label className="form-check-label" for="jobMiner">Miner</label>
+                  <input className="form-check-input" type="radio" name="gridJob" value="miner" />
+                  <label className="form-check-label">Miner</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridJob" id="jobGuard" value="guard" />
-                  <label className="form-check-label" for="jobGuard">Guard</label>
+                  <input className="form-check-input" type="radio" name="gridJob" value="guard" />
+                  <label className="form-check-label">Guard</label>
                 </div>
 
               </div>
@@ -30,12 +30,12 @@ const GeneralConfig = (props) => {
               <legend className="col-form-label col-sm-2 float-sm-left pt-0">Pick up items?</legend>
               <div className="col-sm-10">
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsTrue" value="yes" />
-                  <label className="form-check-label" for="pickUpItemsTrue">Yes</label>
+                  <input className="form-check-input" type="radio" name="gridPickupItems" value="yes" />
+                  <label className="form-check-label">Yes</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsFalse" value="no" />
-                  <label className="form-check-label" for="pickUpItemsFalse">no</label>
+                  <input className="form-check-input" type="radio" name="gridPickupItems" value="no" />
+                  <label className="form-check-label">no</label>
                 </div>
               </div>
             </fieldset>

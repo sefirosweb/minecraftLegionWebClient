@@ -24,7 +24,6 @@ export const updateBotStatus = (botDataStatus) => (dispatch, getState) => {
   const { botsOnline } = getState().botsReducer
   const botIndex = botsOnline.findIndex((e) => { return e.socketId === botDataStatus.socketId })
 
-  // Caution inmutabilidad is requeried!
   const botsOnlineUpdate = [
     ...botsOnline
   ]
@@ -40,6 +39,21 @@ export const updateMasters = (newMasters) => (dispatch) => {
   dispatch({
     type: SET_MASTERS,
     payload: newMasters
+  })
+}
+
+export const setConfig = (botConfig) => (dispatch, getState) => {
+  const { botsOnline } = getState().botsReducer
+  const botIndex = botsOnline.findIndex((e) => { return e.socketId === botConfig.socketId })
+
+  const botsOnlineUpdate = [
+    ...botsOnline
+  ]
+  botsOnlineUpdate[botIndex]['config'] = botConfig
+
+  dispatch({
+    type: SET_BOTS,
+    payload: botsOnlineUpdate
   })
 }
 

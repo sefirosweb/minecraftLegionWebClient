@@ -31,7 +31,7 @@ const ItemsToBeReady = (props) => {
 
       <div className='row'>
         <div className='col-6'>
-          <div class="form-group">
+          <div className="form-group">
             <label for="inputItem">Select Item</label>
             <input className='form-control' type="text" list="itemsList" value={item} onChange={handleItemChange} />
             <datalist id="itemsList">
@@ -41,14 +41,14 @@ const ItemsToBeReady = (props) => {
         </div>
 
         <div className='col-2'>
-          <div class="form-group">
+          <div className="form-group">
             <label>Quantity</label>
-            <input type="text" class="form-control" value={quantity} onChange={handleQuantityChange} />
+            <input type="text" className="form-control" value={quantity} onChange={handleQuantityChange} />
           </div>
         </div>
 
         <div className='col-2'>
-          <div class="form-group">
+          <div className="form-group">
             <label>.</label>
             <button className='form-control btn btn-primary'>Insert</button>
           </div>
@@ -59,8 +59,8 @@ const ItemsToBeReady = (props) => {
       <div className='row'>
         <div className='col-12'>
 
-          <table class="table">
-            <thead class="thead-dark">
+          <table className="table">
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Item</th>

@@ -32,7 +32,7 @@ const Chest = (props) => {
 
             <div className='row'>
                 <div className='col-6'>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label for="inputItem">Select Item</label>
                         <input className='form-control' type="text" list={chestId} value={item} onChange={handleItemChange} />
                         <datalist id={chestId}>
@@ -42,15 +42,15 @@ const Chest = (props) => {
                 </div>
 
                 <div className='col-2'>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label>Quantity</label>
-                        <input type="text" class="form-control" value={quantity} onChange={handleQuantityChange} />
+                        <input type="text" className="form-control" value={quantity} onChange={handleQuantityChange} />
                     </div>
                 </div>
 
 
                 <div className='col-2'>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label>Type</label>
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name={radioId} value="withdraw" />
@@ -65,7 +65,7 @@ const Chest = (props) => {
                 </div>
 
                 <div className='col-2'>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label>.</label>
                         <button type='button' className='form-control btn btn-primary'>Insert Item</button>
                     </div>
@@ -92,8 +92,8 @@ const Chest = (props) => {
             <div className='row mt-3'>
                 <div className='col-12'>
 
-                    <table class="table">
-                        <thead class="thead-dark">
+                    <table className="table">
+                        <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Item</th>

@@ -29,7 +29,7 @@ const Combat = (props) => {
           </form>
         </div>
         <div className='col-3'>
-          <div class="form-group">
+          <div className="form-group">
             <label for="inputItem">Distance for start combat?</label>
             <input className='form-control' type="text" />
           </div>

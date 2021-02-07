@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateMasters, setBots, addLog, updateBotStatus } from '../actions/botsAction'
+import { updateMasters, setBots, addLog, updateBotStatus, setConfig } from '../actions/botsAction'
 import { setSocket, setOnlineServer, setLoged } from '../actions/configurationAction'
 
 import NavbarLayout from './NavbarLayout'
 import socketIOClient from 'socket.io-client'
+import { Fragment } from 'react'
 
 class Layout extends React.Component {
 
@@ -71,7 +72,7 @@ class Layout extends React.Component {
     })
 
     this.socket.on('sendConfig', data => {
-      console.log('sendConfig', data)
+      this.props.setConfig(data)
     })
   }
 
@@ -97,23 +98,29 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <>
+      <Fragment>
         <NavbarLayout />
         <div className='container'>
           {this.props.children}
         </div>
-      </>
+      </Fragment>
     )
   }
 }
 
 const mapStateToProps = (reducers) => {
-  return reducers.configurationReducer
+  const { botsReducer, configurationReducer } = reducers
+  const { botsOnline } = botsReducer
+  const { webServerSocketURL, webServerSocketPort, webServerSocketPassword } = configurationReducer
+
+  return { webServerSocketURL, webServerSocketPort, webServerSocketPassword, botsOnline }
 }
+
 
 const mapDispatchToProps = {
   setLoged,
   setSocket,
+  setConfig,
   setOnlineServer,
   updateMasters,
   setBots,
