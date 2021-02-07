@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react'
-import { Link } from 'react-router-dom'
 import ItemsAviable from './ItemsAviable'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
+import TrashIcon from './Icons/Trash'
 
 const ItemsToBeReady = (props) => {
   const [item, setItem] = useState('')
@@ -61,7 +61,7 @@ const ItemsToBeReady = (props) => {
           <th scope="row">{index}</th>
           <td>{item.item}</td>
           <td>{item.quantity}</td>
-          <td><Link onClick={handleRemoveItem.bind(this, index)}>Delete</Link></td>
+          <td><TrashIcon onClick={handleRemoveItem.bind(this, index)} /></td>
         </tr>
       )
     })

@@ -2,25 +2,22 @@ import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemsAviable from './ItemsAviable'
+import TrashIcon from './Icons/Trash'
 
 const Chest = (props) => {
     const [item, setItem] = useState('')
     const [quantity, setQuantity] = useState(1)
-    const [x, setX] = useState('')
-    const [y, seyY] = useState('')
-    const [z, setZ] = useState('')
-
 
     const chestId = `chest-${props.id}`
     const radioId = `radio-${props.id}`
 
-    const handleDeleteChest = (index, event) => {
+    const handleDeleteChest = (event) => {
         props.socket.emit('sendAction', {
             action: 'changeConfig',
             socketId: props.socketId,
             value: {
                 configToChange: 'deleteChest',
-                value: index
+                value: props.id
             }
         })
     }
@@ -36,6 +33,33 @@ const Chest = (props) => {
         setItem(event.target.value)
     }
 
+    const handleInsertItemInChest = (event) => {
+        props.socket.emit('sendAction', {
+            action: 'changeConfig',
+            socketId: props.socketId,
+            value: {
+                configToChange: 'insertItemInChest',
+                chestId: props.id,
+                item,
+                quantity
+            }
+        })
+    }
+
+    const handleDeleteItemInChest = (event) => {
+        props.socket.emit('sendAction', {
+            action: 'changeConfig',
+            socketId: props.socketId,
+            value: {
+                configToChange: 'insertItemInChest',
+                chestId: props.id,
+                item,
+                quantity
+            }
+        })
+    }
+
+
     const renderItemsTable = () => {
         return props.chest.items.map((item, index) => {
             return (
@@ -43,14 +67,22 @@ const Chest = (props) => {
                     <th scope="row">{index}</th>
                     <td>{item.item}</td>
                     <td>{item.quantity}</td>
-                    <td><Link onClick={handleRemoveItemFromChest.bind(this, index)}>Delete</Link></td>
+                    <td><TrashIcon onClick={handleRemoveItemFromChest.bind(this, index)} /></td>
                 </tr>
             )
         })
     }
 
     const handleRemoveItemFromChest = (index, event) => {
-
+        props.socket.emit('sendAction', {
+            action: 'changeConfig',
+            socketId: props.socketId,
+            value: {
+                configToChange: 'removeItemFromChest',
+                chestId: props.id,
+                itemIndex: index
+            }
+        })
     }
 
     const handleChangeChestType = (event) => {
@@ -142,7 +174,7 @@ const Chest = (props) => {
                 <div className='col-2'>
                     <div className="form-group">
                         <label>.</label>
-                        <button type='button' className='form-control btn btn-primary'>Insert Item</button>
+                        <button type='button' className='form-control btn btn-primary' onClick={handleInsertItemInChest}>Insert Item</button>
                     </div>
                 </div>
             </div>
@@ -185,7 +217,7 @@ const Chest = (props) => {
 
             <div className='row'>
                 <div className='col-3 ml-auto'>
-                    <button type='button' className='btn btn-danger float-right' onClick={handleDeleteChest.bind(this, props.id)}>Delete chest "{props.chest.name}"</button>
+                    <button type='button' className='btn btn-danger float-right' onClick={handleDeleteChest}>Delete chest "{props.chest.name}"</button>
                 </div>
             </div>
             <hr className='mb-5' />

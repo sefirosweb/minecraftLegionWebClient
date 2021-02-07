@@ -2,8 +2,9 @@ import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import { Link } from "react-router-dom"
-import ArrowUp from './ArrowUp'
-import ArrowDown from './ArrowDown'
+import ArrowUp from './Icons/ArrowUp'
+import ArrowDown from './Icons/ArrowDown'
+import TrashIcon from './Icons/Trash'
 
 const GuardJob = (props) => {
   const [x, setX] = useState('')
@@ -99,7 +100,7 @@ const GuardJob = (props) => {
           <th scope="row">{index}</th>
           <td>X:{pos.x}<br />Y:{pos.y}<br />Z:{pos.z}</td>
           <td><ArrowUp onClick={handleMovePosPrev.bind(this, index)} /> <ArrowDown onClick={handleMovePosNext.bind(this, index)} /></td>
-          <td><Link onClick={handleRemovePos.bind(this, index)}>Delete</Link></td>
+          <td><TrashIcon onClick={handleRemovePos.bind(this, index)} /></td>
         </tr>
       )
     })
