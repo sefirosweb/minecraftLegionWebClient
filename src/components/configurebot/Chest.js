@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ItemsAviable from './ItemsAviable'
 
@@ -9,8 +10,20 @@ const Chest = (props) => {
     const [y, seyY] = useState('')
     const [z, setZ] = useState('')
 
+
     const chestId = `chest-${props.id}`
     const radioId = `radio-${props.id}`
+
+    const handleDeleteChest = (index, event) => {
+        props.socket.emit('sendAction', {
+            action: 'changeConfig',
+            socketId: props.socketId,
+            value: {
+                configToChange: 'deleteChest',
+                value: index
+            }
+        })
+    }
 
     const handleQuantityChange = (event) => {
         const value = Number(event.target.value);
@@ -23,6 +36,61 @@ const Chest = (props) => {
         setItem(event.target.value)
     }
 
+    const renderItemsTable = () => {
+        return props.chest.items.map((item, index) => {
+            return (
+                <tr key={index}>
+                    <th scope="row">{index}</th>
+                    <td>{item.item}</td>
+                    <td>{item.quantity}</td>
+                    <td><Link onClick={handleRemoveItemFromChest.bind(this, index)}>Delete</Link></td>
+                </tr>
+            )
+        })
+    }
+
+    const handleRemoveItemFromChest = (index, event) => {
+
+    }
+
+    const handleChangeChestType = (event) => {
+        props.socket.emit('sendAction', {
+            action: 'changeConfig',
+            socketId: props.socketId,
+            value: {
+                configToChange: 'changeChestType',
+                value: event.target.value,
+                chestId: props.id
+            }
+        })
+    }
+
+
+    const handleChangeChestName = (event) => {
+        props.socket.emit('sendAction', {
+            action: 'changeConfig',
+            socketId: props.socketId,
+            value: {
+                configToChange: 'changeChestName',
+                value: event.target.value,
+                chestId: props.id
+            }
+        })
+    }
+
+    const handleChangeChestPos = (event) => {
+        props.socket.emit('sendAction', {
+            action: 'changeConfig',
+            socketId: props.socketId,
+            value: {
+                configToChange: 'changeChestPos',
+                pos: event.target.value,
+                chestId: props.id,
+                coord: event.target.dataset.coord
+            }
+        })
+    }
+
     return (
         <Fragment>
 
@@ -31,7 +99,7 @@ const Chest = (props) => {
                     <div className="form-group row">
                         <label className="col-sm-3 col-form-label font-weight-bold">Chest Nº{props.id}</label>
                         <div className="col-sm-9">
-                            <input type="text" className="form-control-plaintext font-weight-bold" value="Input chest name" />
+                            <input type="text" className="form-control-plaintext font-weight-bold" value={props.chest.name} onChange={handleChangeChestName} />
                         </div>
                     </div>
                 </div>
@@ -60,11 +128,11 @@ const Chest = (props) => {
                     <div className="form-group">
                         <label>Type</label>
                         <div className="form-check">
-                            <input className="form-check-input" type="radio" name={radioId} value="withdraw" />
+                            <input className="form-check-input" type="radio" name={radioId} value="withdraw" onChange={handleChangeChestType} checked={props.chest.type === "withdraw"} />
                             <label className="form-check-label">Withdraw</label>
                         </div>
                         <div className="form-check">
-                            <input className="form-check-input" type="radio" name={radioId} value="deposit" />
+                            <input className="form-check-input" type="radio" name={radioId} value="deposit" onChange={handleChangeChestType} checked={props.chest.type === "deposit"} />
                             <label className="form-check-label">Deposit</label>
                         </div>
 
@@ -84,13 +152,13 @@ const Chest = (props) => {
                     <form className="form-inline">
                         <label>Position XYZ:</label>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" placeholder="X" value={x} />
+                            <input type="text" className="form-control" placeholder="X" data-coord='x' value={props.chest.position.x ? props.chest.position.x : ''} onChange={handleChangeChestPos} />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" placeholder="Y" value={y} />
+                            <input type="text" className="form-control" placeholder="Y" data-coord='y' value={props.chest.position.y ? props.chest.position.y : ''} onChange={handleChangeChestPos} />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" placeholder="Z" value={z} />
+                            <input type="text" className="form-control" placeholder="Z" data-coord='z' value={props.chest.position.z ? props.chest.position.z : ''} onChange={handleChangeChestPos} />
                         </div>
                     </form>
                 </div>
@@ -109,24 +177,7 @@ const Chest = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td><Link>Delete</Link></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td><Link>Delete</Link></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td><Link>Delete</Link></td>
-                            </tr>
+                            {renderItemsTable()}
                         </tbody>
                     </table>
                 </div>
@@ -134,7 +185,7 @@ const Chest = (props) => {
 
             <div className='row'>
                 <div className='col-3 ml-auto'>
-                    <button type='button' className='btn btn-danger float-right' onClick={props.handleDeleteChest.bind(this, props.id)}>Delete chest "{props.chest.name}"</button>
+                    <button type='button' className='btn btn-danger float-right' onClick={handleDeleteChest.bind(this, props.id)}>Delete chest "{props.chest.name}"</button>
                 </div>
             </div>
             <hr className='mb-5' />
@@ -142,4 +193,14 @@ const Chest = (props) => {
     )
 }
 
-export default Chest
+
+const mapStateToProps = (reducers) => {
+    const { botsReducer, configurationReducer } = reducers
+    const { botsOnline } = botsReducer
+    const { socket } = configurationReducer
+
+    return { socket, botsOnline }
+}
+
+
+export default connect(mapStateToProps, null)(Chest);

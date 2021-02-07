@@ -21,25 +21,13 @@ const Chests = (props) => {
     })
   }
 
-  const handleDeleteChest = (index, event) => {
-    props.socket.emit('sendAction', {
-      action: 'changeConfig',
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: 'deleteChest',
-        value: index
-      }
-    })
-  }
-
   const renderChests = () => {
     return botConfig.config.chests.map((chest, index) => {
       return (
-        <Chest id={index} chest={chest} handleDeleteChest={handleDeleteChest} />
+        <Chest id={index} chest={chest} socketId={botConfig.socketId} />
       )
     })
   }
-
 
   return (
     <Fragment>
@@ -52,7 +40,7 @@ const Chests = (props) => {
           </label>
         </div>
       </div>
-
+      
       {renderChests()}
 
       <div className='row mb-5'>
