@@ -8,8 +8,7 @@ const BotActionButtons = (props) => {
   const [chat, setChat] = useState('')
 
   const handleChangeMessage = (event) => {
-    const message = event.target.value
-    setChat(message)
+    setChat(event.target.value)
   }
 
   const handleKeyPress = (event) => {
@@ -19,22 +18,20 @@ const BotActionButtons = (props) => {
   }
 
   const handleSendMessageButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendMessage',
       socketId: props.socketId,
       value: chat
-    }
-    props.socket.emit('sendAction', action)
+    })
     setChat('')
   }
 
   const handleDisconnectButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendDisconnect',
       socketId: props.socketId,
       value: 'Disconnect Bot'
-    }
-    props.socket.emit('sendAction', action)
+    })
     history.push('/')
   }
 
@@ -42,14 +39,13 @@ const BotActionButtons = (props) => {
     const bot = props.getBotBySocketId(props.socketId)
     if (bot.stateMachinePort === null) {
       const port = Math.floor((Math.random() * 1000) + 1) + 4000
-      const action = {
+      props.socket.emit('sendAction', {
         action: 'startStateMachine',
         socketId: props.socketId,
         value: {
           port
         }
-      }
-      props.socket.emit('sendAction', action)
+      })
       bot.stateMachinePort = port
       props.updateBotStatus(bot)
     }
@@ -60,14 +56,13 @@ const BotActionButtons = (props) => {
     const bot = props.getBotBySocketId(props.socketId)
     if (bot.inventoryPort === null) {
       const port = Math.floor((Math.random() * 1000) + 1) + 4000
-      const action = {
+      props.socket.emit('sendAction', {
         action: 'startInventory',
         socketId: props.socketId,
         value: {
           port
         }
-      }
-      props.socket.emit('sendAction', action)
+      })
       bot.inventoryPort = port
       props.updateBotStatus(bot)
     }
@@ -78,14 +73,13 @@ const BotActionButtons = (props) => {
     const bot = props.getBotBySocketId(props.socketId)
     if (bot.viewerPort === null) {
       const port = Math.floor((Math.random() * 1000) + 1) + 4000
-      const action = {
+      props.socket.emit('sendAction', {
         action: 'startViewer',
         socketId: props.socketId,
         value: {
           port
         }
-      }
-      props.socket.emit('sendAction', action)
+      })
       bot.viewerPort = port
       props.updateBotStatus(bot)
     }
@@ -93,140 +87,119 @@ const BotActionButtons = (props) => {
   }
 
   const handleSendStayButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendStay',
       socketId: props.socketId,
       value: props.master
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleSendFollowButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendFollow',
       socketId: props.socketId,
       value: props.master
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleSendEndCommandsButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendEndCommands',
       socketId: props.socketId,
       value: props.master
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleSendStartWayButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendStartWay',
       socketId: props.socketId,
       value: props.master
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleSendSavePatrolButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendSavePatrol',
       socketId: props.socketId,
       value: props.master
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleSendSaveEquipmentChestButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendSaveChest',
       socketId: props.socketId,
       value: 'equipment'
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleSendSaveFoodChestButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendSaveChest',
       socketId: props.socketId,
       value: 'food'
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleSendSaveDepositChestButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'sendSaveChest',
       socketId: props.socketId,
       value: 'deposit'
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleConfigureButton = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'getConfig',
       socketId: props.socketId,
       value: ''
-    }
-
-    console.log('getConfig', action)
-    props.socket.emit('sendAction', action)
-
-    props.socket.on('sendConfig', data => {
-      console.log('sendConfig', data)
     })
   }
   const handleXup = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'move',
       socketId: props.socketId,
       value: 'x+'
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
   const handleXdown = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'move',
       socketId: props.socketId,
       value: 'x-'
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleZup = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'move',
       socketId: props.socketId,
       value: 'z+'
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
   const handleZdown = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'move',
       socketId: props.socketId,
       value: 'z-'
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
   const handleInteract = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'interact',
       socketId: props.socketId,
       value: props.master
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   const handleDrop = () => {
-    const action = {
+    props.socket.emit('sendAction', {
       action: 'drop',
       socketId: props.socketId,
       value: props.master
-    }
-    props.socket.emit('sendAction', action)
+    })
   }
 
   return (
@@ -250,8 +223,7 @@ const BotActionButtons = (props) => {
       </div>
       <div className='row mt-2'>
         <div className='col-12'>
-          <button type='button' className='btn btn-warning mr-3' onClick={handleConfigureButton}>Configure</button>
-          <Link className='btn btn-warning mr-3' to={`/configurebot/${props.socketId}/generalConfig`}>Configure Bot</Link>
+          <Link className='btn btn-warning mr-3' to={`/configurebot/${props.socketId}/generalConfig`} onClick={handleConfigureButton}>Configure Bot</Link>
         </div>
       </div>
 

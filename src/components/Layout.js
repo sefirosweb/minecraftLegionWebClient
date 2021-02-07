@@ -69,6 +69,10 @@ class Layout extends React.Component {
 
       this.props.setBots(botsConnected)
     })
+
+    this.socket.on('sendConfig', data => {
+      console.log('sendConfig', data)
+    })
   }
 
 
