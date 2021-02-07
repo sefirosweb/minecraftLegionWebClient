@@ -20,12 +20,12 @@ const MinerJob = (props) => {
               <legend className="col-form-label col-sm-3 float-sm-left pt-0">Tunel type?</legend>
               <div className="col-sm-9">
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsTrue" value="yes" />
-                  <label className="form-check-label" for="pickUpItemsTrue">Make a Hole</label>
+                  <input className="form-check-input" type="radio" name="tunnelType" value="yes" />
+                  <label className="form-check-label">Make a Hole</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsFalse" value="no" />
-                  <label className="form-check-label" for="pickUpItemsFalse">Make a Tunel</label>
+                  <input className="form-check-input" type="radio" name="tunnelType" value="no" />
+                  <label className="form-check-label">Make a Tunel</label>
                 </div>
               </div>
             </fieldset>
@@ -37,20 +37,20 @@ const MinerJob = (props) => {
               <legend className="col-form-label col-sm-3 float-sm-left pt-0">Horientation?</legend>
               <div className="col-sm-9">
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsTrue" value="yes" />
-                  <label className="form-check-label" for="pickUpItemsTrue">X+</label>
+                  <input className="form-check-input" type="radio" name="onrientationType" value="yes" />
+                  <label className="form-check-label">X+</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsFalse" value="no" />
-                  <label className="form-check-label" for="pickUpItemsFalse">X-</label>
+                  <input className="form-check-input" type="radio" name="onrientationType" value="no" />
+                  <label className="form-check-label">X-</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsFalse" value="no" />
-                  <label className="form-check-label" for="pickUpItemsFalse">Z+</label>
+                  <input className="form-check-input" type="radio" name="onrientationType" value="no" />
+                  <label className="form-check-label">Z+</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsFalse" value="no" />
-                  <label className="form-check-label" for="pickUpItemsFalse">Z-</label>
+                  <input className="form-check-input" type="radio" name="gridPionrientationTypeckupItems" value="no" />
+                  <label className="form-check-label">Z-</label>
                 </div>
               </div>
             </fieldset>

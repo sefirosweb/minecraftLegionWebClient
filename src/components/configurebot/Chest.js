@@ -53,7 +53,7 @@ const Chest = (props) => {
                     <div class="form-group">
                         <label>Type</label>
                         <div className="form-check">
-                            <input className="form-check-input" type="radio" name={radioId} value="withdraw" checked='true' />
+                            <input className="form-check-input" type="radio" name={radioId} value="withdraw" />
                             <label className="form-check-label">Withdraw</label>
                         </div>
                         <div className="form-check">
@@ -77,13 +77,13 @@ const Chest = (props) => {
                     <form className="form-inline">
                         <label for="staticEmail2" >Position XYZ:</label>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" id="inputPassword2" placeholder="X" />
+                            <input type="text" className="form-control" placeholder="X" />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" id="inputPassword2" placeholder="Y" />
+                            <input type="text" className="form-control" placeholder="Y" />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
-                            <input type="text" className="form-control" id="inputPassword2" placeholder="Z" />
+                            <input type="text" className="form-control" placeholder="Z" />
                         </div>
                     </form>
                 </div>

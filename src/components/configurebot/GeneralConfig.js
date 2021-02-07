@@ -30,7 +30,7 @@ const GeneralConfig = (props) => {
               <legend className="col-form-label col-sm-2 float-sm-left pt-0">Pick up items?</legend>
               <div className="col-sm-10">
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsTrue" value="yes" checked />
+                  <input className="form-check-input" type="radio" name="gridPickupItems" id="pickUpItemsTrue" value="yes" />
                   <label className="form-check-label" for="pickUpItemsTrue">Yes</label>
                 </div>
                 <div className="form-check">
