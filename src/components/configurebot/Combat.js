@@ -1,6 +1,40 @@
-import { Fragment } from "react"
+import { Fragment, useState } from 'react'
+import { connect } from 'react-redux'
+import { getBotBySocketId } from '../../actions/botsAction'
 
 const Combat = (props) => {
+  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
+  if (botConfig === undefined) {
+    props.history.push('/dashboard')
+    return null
+  }
+
+  const handleChangeMode = (event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'mode',
+        value: event.target.value
+      }
+    })
+  }
+
+  const handleChangeDistance = (event) => {
+    const distance = Number(event.target.value);
+    if (Number.isInteger(distance)) {
+      props.socket.emit('sendAction', {
+        action: 'changeConfig',
+        socketId: botConfig.socketId,
+        value: {
+          configToChange: 'distance',
+          value: distance
+        }
+      })
+    }
+  }
+
+
   return (
     <Fragment>
       <div className='row'>
@@ -11,15 +45,15 @@ const Combat = (props) => {
               <legend className="col-form-label col-sm-4 float-sm-left pt-0">Combat Mode?</legend>
               <div className="col-sm-8">
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="combatMode" value="none" />
+                  <input className="form-check-input" type="radio" name="combatMode" value="none" onChange={handleChangeMode} checked={botConfig.config.mode === "none"} />
                   <label className="form-check-label">None</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="combatMode" value="miner" />
+                  <input className="form-check-input" type="radio" name="combatMode" value="pve" onChange={handleChangeMode} checked={botConfig.config.mode === "pve"} />
                   <label className="form-check-label">PVE</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="combatMode" value="guard" />
+                  <input className="form-check-input" type="radio" name="combatMode" value="pvp" onChange={handleChangeMode} checked={botConfig.config.mode === "pvp"} />
                   <label className="form-check-label">PVP</label>
                 </div>
 
@@ -30,12 +64,26 @@ const Combat = (props) => {
         </div>
         <div className='col-3'>
           <div className="form-group">
-            <label for="inputItem">Distance for start combat?</label>
-            <input className='form-control' type="text" />
+            <label>Distance for start combat?</label>
+            <input className='form-control' type="text" onChange={handleChangeDistance} value={botConfig.config.distance} />
           </div>
         </div>
       </div>
     </Fragment>
   )
 }
-export default Combat
+
+const mapStateToProps = (reducers) => {
+  const { botsReducer, configurationReducer } = reducers
+  const { botsOnline } = botsReducer
+  const { socket } = configurationReducer
+
+  return { socket, botsOnline }
+}
+
+const mapDispatchToProps = {
+  getBotBySocketId
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Combat);
+

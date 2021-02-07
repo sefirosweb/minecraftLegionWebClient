@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 
 const GeneralConfig = (props) => {
-  const [botConfig, setBotConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
+  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
+  if (botConfig === undefined) {
+    props.history.push('/dashboard')
+    return null
+  }
 
   const handleChangeJob = (event) => {
     props.socket.emit('sendAction', {
