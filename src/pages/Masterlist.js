@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 
 const Masterlist = (props) => {
   const [inputBox, setInputBox] = useState('')
+  
+  if (!props.loged) {
+    props.history.push('/configuration')
+    return null
+  }
 
   const handleInputBox = (event) => {
     setInputBox(event.target.value.trim())
@@ -66,10 +71,10 @@ const Masterlist = (props) => {
 
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
-  const { master, socket } = configurationReducer
+  const { master, socket, loged } = configurationReducer
   const { masters } = botsReducer
 
-  return { master, masters, socket }
+  return { master, masters, socket, loged }
 }
 
 export default connect(mapStateToProps)(Masterlist)

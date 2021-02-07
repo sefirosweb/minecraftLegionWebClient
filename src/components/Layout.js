@@ -111,9 +111,9 @@ class Layout extends React.Component {
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
   const { botsOnline } = botsReducer
-  const { webServerSocketURL, webServerSocketPort, webServerSocketPassword } = configurationReducer
+  const { webServerSocketURL, webServerSocketPort, webServerSocketPassword, master } = configurationReducer
 
-  return { webServerSocketURL, webServerSocketPort, webServerSocketPassword, botsOnline }
+  return { webServerSocketURL, webServerSocketPort, webServerSocketPassword, botsOnline, master }
 }
 
 
