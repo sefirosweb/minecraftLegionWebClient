@@ -1,11 +1,18 @@
 import { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ItemsAviable from './ItemsAviable'
+import { connect } from 'react-redux'
+import { getBotBySocketId } from '../../actions/botsAction'
 
 const ItemsToBeReady = (props) => {
-
   const [item, setItem] = useState('')
   const [quantity, setQuantity] = useState(1)
+
+  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
+  if (botConfig === undefined) {
+    props.history.push('/dashboard')
+    return null
+  }
 
   const handleQuantityChange = (event) => {
     const value = Number(event.target.value);
@@ -16,6 +23,48 @@ const ItemsToBeReady = (props) => {
 
   const handleItemChange = (event) => {
     setItem(event.target.value)
+  }
+
+  const handleInsertItem = (event) => {
+    if (item === '' || quantity === 0) {
+      return null
+    }
+
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'InsertItemToBeReady',
+        value: {
+          item, quantity
+        }
+      }
+    })
+  }
+
+  const handleRemoveItem = (index, event) => {
+    console.log(index)
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'DeleteItemToBeReady',
+        value: index
+      }
+    })
+  }
+
+  const renderItemsTable = () => {
+    return botConfig.config.itemsToBeReady.map((item, index) => {
+      return (
+        <tr key={index}>
+          <th scope="row">{index}</th>
+          <td>{item.item}</td>
+          <td>{item.quantity}</td>
+          <td><Link onClick={handleRemoveItem.bind(this, index)}>Delete</Link></td>
+        </tr>
+      )
+    })
   }
 
   return (
@@ -50,7 +99,7 @@ const ItemsToBeReady = (props) => {
         <div className='col-2'>
           <div className="form-group">
             <label>.</label>
-            <button className='form-control btn btn-primary'>Insert</button>
+            <button className='form-control btn btn-primary' onClick={handleInsertItem}>Insert</button>
           </div>
         </div>
       </div>
@@ -69,24 +118,7 @@ const ItemsToBeReady = (props) => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td><Link>Delete</Link></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td><Link>Delete</Link></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td><Link>Delete</Link></td>
-              </tr>
+              {renderItemsTable()}
             </tbody>
           </table>
         </div>
@@ -97,4 +129,17 @@ const ItemsToBeReady = (props) => {
   )
 }
 
-export default ItemsToBeReady
+const mapStateToProps = (reducers) => {
+  const { botsReducer, configurationReducer } = reducers
+  const { botsOnline } = botsReducer
+  const { socket } = configurationReducer
+
+  return { socket, botsOnline }
+}
+
+const mapDispatchToProps = {
+  getBotBySocketId
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsToBeReady);
+
