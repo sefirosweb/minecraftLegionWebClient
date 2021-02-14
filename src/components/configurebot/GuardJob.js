@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
-import { Link } from "react-router-dom"
 import ArrowUp from './Icons/ArrowUp'
 import ArrowDown from './Icons/ArrowDown'
 import TrashIcon from './Icons/Trash'
@@ -127,11 +126,11 @@ const GuardJob = (props) => {
               <legend className="col-form-label col-sm-3 float-sm-left pt-0">Help Friend?</legend>
               <div className="col-sm-9">
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="checkHelpFriend" value="true" onChange={handleCHangeHelp} checked={botConfig.config.help_friends === true} />
+                  <input className="form-check-input" type="radio" name="checkHelpFriend" value="true" onChange={handleCHangeHelp} checked={botConfig.config.helpFriends === true} />
                   <label className="form-check-label">Yes</label>
                 </div>
                 <div className="form-check">
-                  <input className="form-check-input" type="radio" name="checkHelpFriend" value="false" onChange={handleCHangeHelp} checked={botConfig.config.help_friends === false} />
+                  <input className="form-check-input" type="radio" name="checkHelpFriend" value="false" onChange={handleCHangeHelp} checked={botConfig.config.helpFriends === false} />
                   <label className="form-check-label">No</label>
                 </div>
               </div>

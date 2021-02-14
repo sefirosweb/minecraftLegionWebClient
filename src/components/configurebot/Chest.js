@@ -1,6 +1,5 @@
 import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import ItemsAviable from './ItemsAviable'
 import TrashIcon from './Icons/Trash'
 
@@ -45,20 +44,6 @@ const Chest = (props) => {
             }
         })
     }
-
-    const handleDeleteItemInChest = (event) => {
-        props.socket.emit('sendAction', {
-            action: 'changeConfig',
-            socketId: props.socketId,
-            value: {
-                configToChange: 'insertItemInChest',
-                chestId: props.id,
-                item,
-                quantity
-            }
-        })
-    }
-
 
     const renderItemsTable = () => {
         return props.chest.items.map((item, index) => {

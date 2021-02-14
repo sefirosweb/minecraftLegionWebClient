@@ -126,30 +126,6 @@ const BotActionButtons = (props) => {
     })
   }
 
-  const handleSendSaveEquipmentChestButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendSaveChest',
-      socketId: props.socketId,
-      value: 'equipment'
-    })
-  }
-
-  const handleSendSaveFoodChestButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendSaveChest',
-      socketId: props.socketId,
-      value: 'food'
-    })
-  }
-
-  const handleSendSaveDepositChestButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendSaveChest',
-      socketId: props.socketId,
-      value: 'deposit'
-    })
-  }
-
   const handleConfigureButton = () => {
     props.socket.emit('sendAction', {
       action: 'getConfig',
@@ -234,13 +210,6 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStartWayButton}>Start Way</button>
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSavePatrolButton}>Save Patrol</button>
           <button type='button' className='btn btn-warning mr-3' onClick={handleSendEndCommandsButton}>End commands</button>
-        </div>
-      </div>
-      <div className='row mt-2'>
-        <div className='col-12'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveEquipmentChestButton}>Save Equipment Chest</button>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveFoodChestButton}>Save Food Chest</button>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSaveDepositChestButton}>Save Deposit Chest</button>
         </div>
       </div>
       <div className='row mt-2'>
