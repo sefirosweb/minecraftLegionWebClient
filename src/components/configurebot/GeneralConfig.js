@@ -1,12 +1,61 @@
 import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
+import ItemsAviable from './ItemsAviable'
+import TrashIcon from './Icons/Trash'
 
 const GeneralConfig = (props) => {
+  const [item, setItem] = useState('')
+
   const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
   if (botConfig === undefined) {
     props.history.push('/dashboard')
     return null
+  }
+
+  const handleItemChange = (event) => {
+    setItem(event.target.value)
+  }
+
+  const handleInsertItem = (event) => {
+    if (item === '') {
+      return null
+    }
+
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'InsertItemCanBeEat',
+        value: {
+          item
+        }
+      }
+    })
+  }
+
+  const handleRemoveItem = (index, event) => {
+    console.log(index)
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'DeleteItemCanBeEat',
+        value: index
+      }
+    })
+  }
+
+  const renderItemsTable = () => {
+    return botConfig.config.itemsCanBeEat.map((food, index) => {
+      return (
+        <tr key={index}>
+          <th scope="row">{index}</th>
+          <td>{food}</td>
+          <td><TrashIcon onClick={handleRemoveItem.bind(this, index)} /></td>
+        </tr>
+      )
+    })
   }
 
   const handleChangeJob = (event) => {
@@ -71,6 +120,49 @@ const GeneralConfig = (props) => {
               </div>
             </fieldset>
           </form>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-6'>
+          <h3>Valid food for eat</h3>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-6'>
+          <div className="form-group">
+            <label for="inputItem">(!) The food consumition have priority based on # inserted</label>
+            <input className='form-control' type="text" list="itemsList" value={item} onChange={handleItemChange} />
+            <datalist id="itemsList">
+              <ItemsAviable item={item} type={'foods'} />
+            </datalist>
+          </div>
+        </div>
+
+        <div className='col-2'>
+          <div className="form-group">
+            <label>.</label>
+            <button className='form-control btn btn-primary' onClick={handleInsertItem}>Insert</button>
+          </div>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-12'>
+
+          <table className="table">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Food</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {renderItemsTable()}
+            </tbody>
+          </table>
         </div>
       </div>
     </Fragment >

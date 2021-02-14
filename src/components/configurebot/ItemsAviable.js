@@ -4,9 +4,23 @@ const MC_VERSION = '1.15.1'
 const mcData = require("minecraft-data")(MC_VERSION)
 
 const ItemsAviable = (props) => {
+
     const renderBlocks = () => {
+        let type
+        switch (props.type) {
+            case 'all':
+                type = 'itemsArray'
+                break
+            case 'foods':
+                type = 'foodsArray'
+                break
+            default:
+                type = 'itemsArray'
+                break
+        }
+
         const matchRegularExpression = new RegExp(props.item, 'gi');
-        const items = mcData.itemsArray.filter(itemIndex => {
+        const items = mcData[type].filter(itemIndex => {
             return itemIndex.displayName.match(matchRegularExpression)
         })
 
