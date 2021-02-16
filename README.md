@@ -1,3 +1,4 @@
+
 # minecraftLegionWebClient
 
 This project was part of [minecraftLegion](https://github.com/sefirosweb/minecraftLegion).
@@ -5,9 +6,9 @@ This project was part of [minecraftLegion](https://github.com/sefirosweb/minecra
 This is a frontend for manage the bot, this frontend need to connect to the backend: [minecraftLegionWebServer](https://github.com/sefirosweb/minecraftLegionWebServer).
 
 ## Install: 
-- Install Novde version 14+
-- npm i minecraftLegionWebClient
-
+- Install [Node.js](https://nodejs.dev/) version 10+ 
+- go to the directory witch you want to install into
+- run `npm i minecraftLegionWebClient` on command promt
 
 ## Usage:
 
