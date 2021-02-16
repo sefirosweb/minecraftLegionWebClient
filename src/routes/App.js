@@ -13,9 +13,7 @@ function App () {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/dashboard/:socketId' component={Dashboard} />
-          <Route exact path='/configuration/:socketId' component={Dashboard} />
+          <Route exact path='/dashboard/:socketId?' component={Dashboard} />
           <Route exact path='/configuration' component={Configuration} />
           <Route path='/configurebot/:socketId' component={ConfigureBotRoute} />
           <Route exact path='/masterlist' component={Masterlist} />
