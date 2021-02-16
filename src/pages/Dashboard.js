@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
+import { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import { getBotIndexBySocketId } from '../actions/botsAction'
-class Dashboard extends React.Component {
+class Dashboard extends Component {
     renderLogs = () => {
         let logs = this.props.logs
 
@@ -48,7 +48,6 @@ class Dashboard extends React.Component {
             this.checkCurrentBotIsConnected()
         }
     }
-
 
     componentDidMount() {
         this.checkCurrentBotIsConnected()
