@@ -24,7 +24,7 @@ const Chests = (props) => {
   const renderChests = () => {
     return botConfig.config.chests.map((chest, index) => {
       return (
-        <Chest id={index} chest={chest} socketId={botConfig.socketId} />
+        <Chest key={index} id={index} chest={chest} socketId={botConfig.socketId} />
       )
     })
   }

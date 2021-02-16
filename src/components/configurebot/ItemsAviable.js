@@ -28,8 +28,8 @@ const ItemsAviable = (props) => {
             items.splice(0, items.length - 10)
         }
 
-        return items.map(item => {
-            return <option value={item.name}>{item.displayName}</option>
+        return items.map((item, index) => {
+            return <option key={index} value={item.name}>{item.displayName}</option>
         })
     }
 

@@ -132,7 +132,7 @@ const GeneralConfig = (props) => {
       <div className='row'>
         <div className='col-6'>
           <div className="form-group">
-            <label for="inputItem">(!) The food consumition have priority based on # inserted</label>
+            <label htmlFor="inputItem">(!) The food consumition have priority based on # inserted</label>
             <input className='form-control' type="text" list="itemsList" value={item} onChange={handleItemChange} />
             <datalist id="itemsList">
               <ItemsAviable item={item} type={'foods'} />

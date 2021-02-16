@@ -81,7 +81,7 @@ const ItemsToBeReady = (props) => {
       <div className='row'>
         <div className='col-6'>
           <div className="form-group">
-            <label for="inputItem">Select Item</label>
+            <label htmlFor="inputItem">Select Item</label>
             <input className='form-control' type="text" list="itemsList" value={item} onChange={handleItemChange} />
             <datalist id="itemsList">
               <ItemsAviable item={item} />
