@@ -22,10 +22,6 @@ class Dashboard extends React.Component {
         })
     }
 
-    renderCountBotsOnline = () => {
-        return this.props.botsOnline.length
-    }
-
     checkCurrentBotIsConnected = () => {
         if (!this.props.loged) {
             this.props.history.push('/configuration')
@@ -86,10 +82,7 @@ class Dashboard extends React.Component {
 
                     </div>
                     <div className='col-2'>
-                        <ul className='list-group'>
-                            <li className='list-group-item active'>Bots Online ({this.renderCountBotsOnline()})</li>
-                            <RenderBotsOnlineList />
-                        </ul>
+                        <RenderBotsOnlineList match={this.props.match} />
                     </div>
                 </div>
             </Fragment >
