@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
-import House_XYZ from '../../images/House_XYZ.png'
+import HouseXYZ from '../../images/HouseXYZ.png'
 
 const MinerJob = (props) => {
   const botConfig = props.getBotBySocketId(props.selectedSocketId)
@@ -165,7 +165,7 @@ const MinerJob = (props) => {
       <div className='row mb-5'>
         <div className='col-12'>
           <label>
-            <img src={House_XYZ} width='100%' alt='House_XYZ' />
+            <img src={HouseXYZ} width='100%' alt='House_XYZ' />
           </label>
         </div>
       </div>

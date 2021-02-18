@@ -1,6 +1,4 @@
-import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { getBotBySocketId } from '../../actions/botsAction'
 import RenderBotsOnlineList from './../../components/RenderBotsOnlineList'
 
 const ConfigureBotLayout = (props) => {
@@ -28,21 +26,10 @@ const ConfigureBotLayout = (props) => {
         </div>
       </div>
       <div className='col-2'>
-        <RenderBotsOnlineList match={props.match} history={props.history} />
+        <RenderBotsOnlineList />
       </div>
     </div>
   )
 }
 
-const mapStateToProps = (reducers) => {
-  const { botsReducer, configurationReducer } = reducers
-  const { botsOnline } = botsReducer
-  const { selectedSocketId } = configurationReducer
-
-  return { botsOnline, selectedSocketId }
-}
-const mapDispatchToProps = {
-  getBotBySocketId
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfigureBotLayout)
+export default ConfigureBotLayout

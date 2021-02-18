@@ -1,7 +1,7 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
-import { getBotIndexBySocketId, getBotBySocketId } from '../../actions/botsAction'
+import { getBotBySocketId } from '../../actions/botsAction'
 import NotFound from '../../pages/NotFound'
 
 import GeneralConfig from './GeneralConfig'
@@ -13,12 +13,12 @@ import MinerJob from './MinerJob'
 import ConfigureBotLayout from './ConfigureBotLayout'
 
 class ConfigureBotRoute extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = { botName: '' }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (!this.props.loged) {
       this.props.history.push('/configuration')
       return
@@ -26,7 +26,7 @@ class ConfigureBotRoute extends Component {
     this.updateBotconfig()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.selectedSocketId === undefined) {
       this.props.history.push('/dashboard')
       return
@@ -34,7 +34,7 @@ class ConfigureBotRoute extends Component {
 
     if (
       this.props.botsOnline !== prevProps.botsOnline ||
-            this.props.loged !== prevProps.loged
+      this.props.loged !== prevProps.loged
     ) {
       if (!this.props.loged) {
         this.props.history.push('/configuration')
@@ -47,7 +47,7 @@ class ConfigureBotRoute extends Component {
     }
   }
 
-  updateBotconfig () {
+  updateBotconfig() {
     this.props.socket.emit('sendAction', {
       action: 'getConfig',
       socketId: this.props.selectedSocketId,
@@ -56,7 +56,7 @@ class ConfigureBotRoute extends Component {
     this.setState({ botName: this.props.getBotBySocketId(this.props.selectedSocketId).name })
   }
 
-  render () {
+  render() {
     return (
       <>
         <div className='row'>
@@ -87,7 +87,6 @@ const mapStateToProps = (reducers) => {
 }
 
 const mapDispatchToProps = {
-  getBotIndexBySocketId,
   getBotBySocketId
 }
 
