@@ -13,10 +13,10 @@ function App () {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path='/dashboard/:socketId?' component={Dashboard} />
+          <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/configuration' component={Configuration} />
-          <Route path='/configurebot/:socketId' component={ConfigureBotRoute} />
           <Route exact path='/masterlist' component={Masterlist} />
+          <Route path='/configurebot' component={ConfigureBotRoute} />
           <Redirect exact from='/' to='/dashboard' />
           <Route component={NotFound} />
         </Switch>

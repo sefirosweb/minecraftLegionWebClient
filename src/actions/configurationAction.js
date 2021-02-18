@@ -1,9 +1,16 @@
-import { ONLINE_SERVER, SET_SOCKET, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_SOCKET_SERVER_PASSWORD, SET_LOGED, SET_BOT_SERVER } from '../types/configurationType'
+import { ONLINE_SERVER, SET_SOCKET, SET_SELECTED_SOCKETID, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_SOCKET_SERVER_PASSWORD, SET_LOGED, SET_BOT_SERVER } from '../types/configurationType'
 
 export const setSocket = (socket) => (dispatch) => {
   dispatch({
     type: SET_SOCKET,
     payload: socket
+  })
+}
+
+export const setSelectedSocketId = (socketId) => (dispatch) => {
+  dispatch({
+    type: SET_SELECTED_SOCKETID,
+    payload: socketId
   })
 }
 

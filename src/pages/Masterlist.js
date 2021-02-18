@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const Masterlist = (props) => {
   const [inputBox, setInputBox] = useState('')
-  
+
   if (!props.loged) {
     props.history.push('/configuration')
     return null

@@ -126,13 +126,6 @@ const BotActionButtons = (props) => {
     })
   }
 
-  const handleConfigureButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'getConfig',
-      socketId: props.socketId,
-      value: ''
-    })
-  }
   const handleXup = () => {
     props.socket.emit('sendAction', {
       action: 'move',
@@ -199,7 +192,7 @@ const BotActionButtons = (props) => {
       </div>
       <div className='row mt-2'>
         <div className='col-12'>
-          <Link className='btn btn-warning mr-3' to={`/configurebot/${props.socketId}/generalConfig`} onClick={handleConfigureButton}>Configure Bot</Link>
+          <Link className='btn btn-warning mr-3' to='/configurebot/generalconfig'>Configure Bot</Link>
         </div>
       </div>
 

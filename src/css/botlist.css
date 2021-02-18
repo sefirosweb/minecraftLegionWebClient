@@ -29,3 +29,7 @@
     /* background-color: rgba(200, 100, 100, 0.5); */
     /* border-radius: 5px; */
 }
+
+.pointer {
+    cursor:pointer;
+}

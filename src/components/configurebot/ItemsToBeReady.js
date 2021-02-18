@@ -8,14 +8,11 @@ const ItemsToBeReady = (props) => {
   const [item, setItem] = useState('')
   const [quantity, setQuantity] = useState(1)
 
-  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
-  if (botConfig === undefined) {
-    props.history.push('/dashboard')
-    return null
-  }
+  const botConfig = props.getBotBySocketId(props.selectedSocketId)
+  if (botConfig === undefined) { return null }
 
   const handleQuantityChange = (event) => {
-    const value = Number(event.target.value);
+    const value = Number(event.target.value)
     if (Number.isInteger(value)) {
       setQuantity(value)
     }
@@ -58,7 +55,7 @@ const ItemsToBeReady = (props) => {
     return botConfig.config.itemsToBeReady.map((item, index) => {
       return (
         <tr key={index}>
-          <th scope="row">{index}</th>
+          <th scope='row'>{index}</th>
           <td>{item.item}</td>
           <td>{item.quantity}</td>
           <td><TrashIcon onClick={handleRemoveItem.bind(this, index)} /></td>
@@ -68,7 +65,7 @@ const ItemsToBeReady = (props) => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='row'>
         <div className='col-12'>
           <label>
@@ -80,41 +77,40 @@ const ItemsToBeReady = (props) => {
 
       <div className='row'>
         <div className='col-6'>
-          <div className="form-group">
-            <label htmlFor="inputItem">Select Item</label>
-            <input className='form-control' type="text" list="itemsList" value={item} onChange={handleItemChange} />
-            <datalist id="itemsList">
+          <div className='form-group'>
+            <label htmlFor='inputItem'>Select Item</label>
+            <input className='form-control' type='text' list='itemsList' value={item} onChange={handleItemChange} />
+            <datalist id='itemsList'>
               <ItemsAviable item={item} />
             </datalist>
           </div>
         </div>
 
         <div className='col-2'>
-          <div className="form-group">
+          <div className='form-group'>
             <label>Quantity</label>
-            <input type="text" className="form-control" value={quantity} onChange={handleQuantityChange} />
+            <input type='text' className='form-control' value={quantity} onChange={handleQuantityChange} />
           </div>
         </div>
 
         <div className='col-2'>
-          <div className="form-group">
+          <div className='form-group'>
             <label>.</label>
             <button className='form-control btn btn-primary' onClick={handleInsertItem}>Insert</button>
           </div>
         </div>
       </div>
 
-
       <div className='row'>
         <div className='col-12'>
 
-          <table className="table">
-            <thead className="thead-dark">
+          <table className='table'>
+            <thead className='thead-dark'>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Item</th>
-                <th scope="col">Quantity</th>
-                <th scope="col"></th>
+                <th scope='col'>#</th>
+                <th scope='col'>Item</th>
+                <th scope='col'>Quantity</th>
+                <th scope='col' />
               </tr>
             </thead>
             <tbody>
@@ -124,22 +120,20 @@ const ItemsToBeReady = (props) => {
         </div>
       </div>
 
-
-    </Fragment >
+    </>
   )
 }
 
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
   const { botsOnline } = botsReducer
-  const { socket } = configurationReducer
+  const { socket, selectedSocketId } = configurationReducer
 
-  return { socket, botsOnline }
+  return { botsOnline, socket, selectedSocketId }
 }
 
 const mapDispatchToProps = {
   getBotBySocketId
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemsToBeReady);
-
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsToBeReady)

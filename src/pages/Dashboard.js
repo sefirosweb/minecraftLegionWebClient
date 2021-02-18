@@ -3,15 +3,14 @@ import { connect } from 'react-redux'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import { getBotIndexBySocketId } from '../actions/botsAction'
+import { setSelectedSocketId } from '../actions/configurationAction'
 class Dashboard extends Component {
     renderLogs = () => {
         let logs = this.props.logs
 
-        const socketId = this.props.match.params.socketId
-
-        if (socketId) {
+        if (this.props.selectedSocketId) {
             logs = logs.filter((log) => {
-                return log.socketId === socketId
+                return log.socketId === this.props.selectedSocketId
             })
         }
 
@@ -28,8 +27,7 @@ class Dashboard extends Component {
             return
         }
 
-        const { socketId } = this.props.match.params
-        if (this.props.getBotIndexBySocketId(socketId) < 0 && socketId !== undefined) {
+        if (this.props.getBotIndexBySocketId(this.props.selectedSocketId) < 0 && this.props.selectedSocketId !== undefined) {
             console.log('Bot not found')
             this.props.history.push('/dashboard')
             return
@@ -64,6 +62,7 @@ class Dashboard extends Component {
                 <div className='row'>
                     <div className='col-10'><h1>Dashboard</h1></div>
                 </div>
+                
                 <div className='row'>
                     <div className='col-10'>
 
@@ -77,11 +76,11 @@ class Dashboard extends Component {
                             </div>
                         </div>
 
-                        {(this.props.match.params.socketId) ? <BotActionsButtons socketId={this.props.match.params.socketId} /> : <div className='pendingSelectBot'>Select any bot for do actions</div>}
+                        {(this.props.selectedSocketId) ? <BotActionsButtons socketId={this.props.selectedSocketId} /> : <div className='pendingSelectBot'>Select any bot for do actions</div>}
 
                     </div>
                     <div className='col-2'>
-                        <RenderBotsOnlineList match={this.props.match} />
+                        <RenderBotsOnlineList match={this.props.match} history={this.props.history} />
                     </div>
                 </div>
             </Fragment >
@@ -92,14 +91,15 @@ class Dashboard extends Component {
 const mapStateToProps = (reducers) => {
     const { botsReducer, configurationReducer } = reducers
     const { botsOnline, logs } = botsReducer
-    const { loged } = configurationReducer
+    const { loged, selectedSocketId } = configurationReducer
 
-    return { botsOnline, logs, loged }
+    return { botsOnline, logs, loged, selectedSocketId }
 }
 
 
 const mapDispatchToProps = {
-    getBotIndexBySocketId
+    getBotIndexBySocketId,
+    setSelectedSocketId
 }
 
 

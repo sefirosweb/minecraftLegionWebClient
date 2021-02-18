@@ -1,15 +1,11 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import Chest from './Chest'
 
 const Chests = (props) => {
-
-  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
-  if (botConfig === undefined) {
-    props.history.push('/dashboard')
-    return null
-  }
+  const botConfig = props.getBotBySocketId(props.selectedSocketId)
+  if (botConfig === undefined) { return null }
 
   const handleInsertNewChest = (event) => {
     props.socket.emit('sendAction', {
@@ -30,7 +26,7 @@ const Chests = (props) => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className='row'>
         <div className='col-12'>
           <label>
@@ -40,7 +36,7 @@ const Chests = (props) => {
           </label>
         </div>
       </div>
-      
+
       {renderChests()}
 
       <div className='row mb-5'>
@@ -48,20 +44,20 @@ const Chests = (props) => {
           <button type='button' className='btn btn-success' onClick={handleInsertNewChest}>Insert New Chest</button>
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }
 
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
   const { botsOnline } = botsReducer
-  const { socket } = configurationReducer
+  const { socket, selectedSocketId } = configurationReducer
 
-  return { socket, botsOnline }
+  return { botsOnline, socket, selectedSocketId }
 }
 
 const mapDispatchToProps = {
   getBotBySocketId
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chests);
+export default connect(mapStateToProps, mapDispatchToProps)(Chests)

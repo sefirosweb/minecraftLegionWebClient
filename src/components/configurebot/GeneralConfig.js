@@ -6,12 +6,8 @@ import TrashIcon from './Icons/Trash'
 
 const GeneralConfig = (props) => {
   const [item, setItem] = useState('')
-
-  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
-  if (botConfig === undefined) {
-    props.history.push('/dashboard')
-    return null
-  }
+  const botConfig = props.getBotBySocketId(props.selectedSocketId)
+  if (botConfig === undefined) { return null }
 
   const handleItemChange = (event) => {
     setItem(event.target.value)
@@ -50,7 +46,7 @@ const GeneralConfig = (props) => {
     return botConfig.config.itemsCanBeEat.map((food, index) => {
       return (
         <tr key={index}>
-          <th scope="row">{index}</th>
+          <th scope='row'>{index}</th>
           <td>{food}</td>
           <td><TrashIcon onClick={handleRemoveItem.bind(this, index)} /></td>
         </tr>
@@ -82,40 +78,40 @@ const GeneralConfig = (props) => {
 
   return (
 
-    <Fragment>
+    <>
       <div className='row'>
         <div className='col-12'>
           <form>
 
-            <fieldset className="form-group row">
-              <legend className="col-form-label col-sm-2 float-sm-left pt-0">Job</legend>
-              <div className="col-sm-10">
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridJob" value="none" onChange={handleChangeJob} checked={botConfig.config.job === "none"} />
-                  <label className="form-check-label">None</label>
+            <fieldset className='form-group row'>
+              <legend className='col-form-label col-sm-2 float-sm-left pt-0'>Job</legend>
+              <div className='col-sm-10'>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridJob' value='none' onChange={handleChangeJob} checked={botConfig.config.job === 'none'} />
+                  <label className='form-check-label'>None</label>
                 </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridJob" value="miner" onChange={handleChangeJob} checked={botConfig.config.job === "miner"} />
-                  <label className="form-check-label">Miner</label>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridJob' value='miner' onChange={handleChangeJob} checked={botConfig.config.job === 'miner'} />
+                  <label className='form-check-label'>Miner</label>
                 </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridJob" value="guard" onChange={handleChangeJob} checked={botConfig.config.job === "guard"} />
-                  <label className="form-check-label">Guard</label>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridJob' value='guard' onChange={handleChangeJob} checked={botConfig.config.job === 'guard'} />
+                  <label className='form-check-label'>Guard</label>
                 </div>
 
               </div>
             </fieldset>
 
-            <fieldset className="form-group row">
-              <legend className="col-form-label col-sm-2 float-sm-left pt-0">Pick up items?</legend>
-              <div className="col-sm-10">
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" value="true" onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === true} />
-                  <label className="form-check-label">Yes</label>
+            <fieldset className='form-group row'>
+              <legend className='col-form-label col-sm-2 float-sm-left pt-0'>Pick up items?</legend>
+              <div className='col-sm-10'>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridPickupItems' value='true' onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === true} />
+                  <label className='form-check-label'>Yes</label>
                 </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="gridPickupItems" value="false" onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === false} />
-                  <label className="form-check-label">no</label>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridPickupItems' value='false' onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === false} />
+                  <label className='form-check-label'>no</label>
                 </div>
               </div>
             </fieldset>
@@ -131,17 +127,17 @@ const GeneralConfig = (props) => {
 
       <div className='row'>
         <div className='col-6'>
-          <div className="form-group">
-            <label htmlFor="inputItem">(!) The food consumition have priority based on # inserted</label>
-            <input className='form-control' type="text" list="itemsList" value={item} onChange={handleItemChange} />
-            <datalist id="itemsList">
-              <ItemsAviable item={item} type={'foods'} />
+          <div className='form-group'>
+            <label htmlFor='inputItem'>(!) The food consumition have priority based on # inserted</label>
+            <input className='form-control' type='text' list='itemsList' value={item} onChange={handleItemChange} />
+            <datalist id='itemsList'>
+              <ItemsAviable item={item} type='foods' />
             </datalist>
           </div>
         </div>
 
         <div className='col-2'>
-          <div className="form-group">
+          <div className='form-group'>
             <label>.</label>
             <button className='form-control btn btn-primary' onClick={handleInsertItem}>Insert</button>
           </div>
@@ -151,12 +147,12 @@ const GeneralConfig = (props) => {
       <div className='row'>
         <div className='col-12'>
 
-          <table className="table">
-            <thead className="thead-dark">
+          <table className='table'>
+            <thead className='thead-dark'>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Food</th>
-                <th scope="col"></th>
+                <th scope='col'>#</th>
+                <th scope='col'>Food</th>
+                <th scope='col' />
               </tr>
             </thead>
             <tbody>
@@ -165,20 +161,20 @@ const GeneralConfig = (props) => {
           </table>
         </div>
       </div>
-    </Fragment >
+    </>
   )
 }
 
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
   const { botsOnline } = botsReducer
-  const { socket } = configurationReducer
+  const { socket, selectedSocketId } = configurationReducer
 
-  return { socket, botsOnline }
+  return { botsOnline, socket, selectedSocketId }
 }
 
 const mapDispatchToProps = {
   getBotBySocketId
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GeneralConfig);
+export default connect(mapStateToProps, mapDispatchToProps)(GeneralConfig)
