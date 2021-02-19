@@ -121,6 +121,17 @@ const GuardJob = (props) => {
     })
   }
 
+  const copyPatrol = (event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'copyPatrol',
+        value: props.master
+      }
+    })
+  }
+
   return (
     <>
       <div className='row'>
@@ -142,27 +153,31 @@ const GuardJob = (props) => {
           </form>
         </div>
         <div className='col-6'>
-          <button type='button' className='btn btn-primary' onClick={handleButtonSavePositionHasMaster} >Copy the same position as the master</button>
+          <button type='button' className='btn btn-primary' onClick={handleButtonSavePositionHasMaster}>Copy the same position as the master</button>
         </div>
       </div>
 
-      <div className='row'>
-        <div className='col-12'>
-          <form className='form-inline'>
-            <label>Position XYZ:</label>
-            <div className='form-group mx-sm-2 mb-2'>
-              <input type='text' className='form-control' placeholder='X' id='xPos' value={x} onChange={changePos} />
-            </div>
-            <div className='form-group mx-sm-2 mb-2'>
-              <input type='text' className='form-control' placeholder='Y' id='yPos' value={y} onChange={changePos} />
-            </div>
-            <div className='form-group mx-sm-2 mb-2'>
-              <input type='text' className='form-control' placeholder='Z' id='zPos' value={z} onChange={changePos} />
-            </div>
-            <div className='form-group mx-sm-2 mb-2'>
-              <button type='button' className='btn btn-primary' onClick={insertPost}>Insert</button>
-            </div>
-          </form>
+      <div className='row mb-2'>
+        <div className='col-2'>
+          <label>Position XYZ:</label>
+        </div>
+        <div className='col-2'>
+          <input type='text' className='form-control' placeholder='X' id='xPos' value={x} onChange={changePos} />
+        </div>
+        <div className='col-2'>
+          <input type='text' className='form-control' placeholder='Y' id='yPos' value={y} onChange={changePos} />
+        </div>
+        <div className='col-2'>
+          <input type='text' className='form-control' placeholder='Z' id='zPos' value={z} onChange={changePos} />
+        </div>
+        <div className='col-2'>
+          <button type='button' className='btn btn-primary form-control' onClick={insertPost}>Insert</button>
+        </div>
+        <div className='col-2'>
+          {botConfig.config.isCopingPatrol ?
+            <button type='button' className='btn btn-warning form-control' onClick={copyPatrol}>Stop Copy</button>
+            : <button type='button' className='btn btn-success form-control' onClick={copyPatrol}>Start Copy</button>
+          }
         </div>
       </div>
 
