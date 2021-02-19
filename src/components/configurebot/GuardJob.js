@@ -85,6 +85,18 @@ const GuardJob = (props) => {
     })
   }
 
+  const handleButtonSavePositionHasMaster = (event) => {
+    console.log('handle save')
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'savePositionHasMaster',
+        value: props.master
+      }
+    })
+  }
+
   const renderPatrolTable = () => {
     return botConfig.config.patrol.map((pos, index) => {
       return (
@@ -130,7 +142,7 @@ const GuardJob = (props) => {
           </form>
         </div>
         <div className='col-6'>
-          <button type='button' className='btn btn-primary'>Copy the same position as the master</button>
+          <button type='button' className='btn btn-primary' onClick={handleButtonSavePositionHasMaster} >Copy the same position as the master</button>
         </div>
       </div>
 
@@ -181,9 +193,9 @@ const GuardJob = (props) => {
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
   const { botsOnline } = botsReducer
-  const { socket, selectedSocketId } = configurationReducer
+  const { socket, selectedSocketId, master } = configurationReducer
 
-  return { botsOnline, socket, selectedSocketId }
+  return { botsOnline, socket, selectedSocketId, master }
 }
 
 const mapDispatchToProps = {
