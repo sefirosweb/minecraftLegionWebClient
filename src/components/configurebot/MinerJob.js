@@ -30,7 +30,15 @@ const MinerJob = (props) => {
   }
 
   const handleChangePosMiner = (event) => {
-    const pos = event.target.value
+    const pos = Number(event.target.value)
+    console.log(event.target.value)
+
+    if (!Number.isInteger(pos) && event.target.value !== '-') {
+      return null
+    }
+
+    console.log('ok')
+
     const coord = event.target.id
     props.socket.emit('sendAction', {
       action: 'changeConfig',
@@ -39,7 +47,7 @@ const MinerJob = (props) => {
         configToChange: 'changePosMiner',
         value: {
           coord,
-          pos
+          pos: event.target.value
         }
       }
     })
@@ -109,21 +117,21 @@ const MinerJob = (props) => {
 
               <div className='form-group row'>
                 <label className='col-sm-1 col-form-label'>X</label>
-                <div className='col-sm-3'>
+                <div className='col-sm-4'>
                   <input type='text' className='form-control' id='xStart' onChange={handleChangePosMiner} value={botConfig.config.minerCords.xStart} />
                 </div>
               </div>
 
               <div className='form-group row'>
                 <label className='col-sm-1 col-form-label'>Y</label>
-                <div className='col-sm-3'>
+                <div className='col-sm-4'>
                   <input type='text' className='form-control' id='yStart' onChange={handleChangePosMiner} value={botConfig.config.minerCords.yStart} />
                 </div>
               </div>
 
               <div className='form-group row'>
                 <label className='col-sm-1 col-form-label'>Z</label>
-                <div className='col-sm-3'>
+                <div className='col-sm-4'>
                   <input type='text' className='form-control' id='zStart' onChange={handleChangePosMiner} value={botConfig.config.minerCords.zStart} />
                 </div>
               </div>
@@ -138,21 +146,21 @@ const MinerJob = (props) => {
 
               <div className='form-group row'>
                 <label className='col-sm-1 col-form-label'>X</label>
-                <div className='col-sm-3'>
+                <div className='col-sm-4'>
                   <input type='text' className='form-control' id='xEnd' onChange={handleChangePosMiner} value={botConfig.config.minerCords.xEnd} />
                 </div>
               </div>
 
               <div className='form-group row'>
                 <label className='col-sm-1 col-form-label'>Y</label>
-                <div className='col-sm-3'>
+                <div className='col-sm-4'>
                   <input type='text' className='form-control' id='yEnd' onChange={handleChangePosMiner} value={botConfig.config.minerCords.yEnd} />
                 </div>
               </div>
 
               <div className='form-group row'>
                 <label className='col-sm-1 col-form-label'>Z</label>
-                <div className='col-sm-3'>
+                <div className='col-sm-4'>
                   <input type='text' className='form-control' id='zEnd' onChange={handleChangePosMiner} value={botConfig.config.minerCords.zEnd} />
                 </div>
               </div>

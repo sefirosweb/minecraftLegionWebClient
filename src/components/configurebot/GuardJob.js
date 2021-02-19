@@ -15,7 +15,7 @@ const GuardJob = (props) => {
 
   const changePos = (event) => {
     const value = Number(event.target.value)
-    if (!Number.isInteger(value)) {
+    if (!Number.isInteger(value) && event.target.value !== '-') {
       return null
     }
 
@@ -138,16 +138,16 @@ const GuardJob = (props) => {
         <div className='col-12'>
           <form className='form-inline'>
             <label>Position XYZ:</label>
-            <div className='form-group mx-sm-3 mb-2'>
+            <div className='form-group mx-sm-2 mb-2'>
               <input type='text' className='form-control' placeholder='X' id='xPos' value={x} onChange={changePos} />
             </div>
-            <div className='form-group mx-sm-3 mb-2'>
+            <div className='form-group mx-sm-2 mb-2'>
               <input type='text' className='form-control' placeholder='Y' id='yPos' value={y} onChange={changePos} />
             </div>
-            <div className='form-group mx-sm-3 mb-2'>
+            <div className='form-group mx-sm-2 mb-2'>
               <input type='text' className='form-control' placeholder='Z' id='zPos' value={z} onChange={changePos} />
             </div>
-            <div className='form-group mx-sm-3 mb-2'>
+            <div className='form-group mx-sm-2 mb-2'>
               <button type='button' className='btn btn-primary' onClick={insertPost}>Insert</button>
             </div>
           </form>
