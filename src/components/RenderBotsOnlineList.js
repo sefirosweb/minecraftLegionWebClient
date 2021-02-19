@@ -24,7 +24,7 @@ const RenderBotsOnlineList = (props) => {
         return (
           <li key={bot.socketId} className={`list-group-item ${(bot.combat) ? 'botlistCombat' : 'botlist'}`}>
             <div className={` ${(bot.combat) ? 'botCombat' : ''}`}>
-              <span className={props.selectedSocketId === bot.socketId ? 'is-selected' : ''} onClick={() => { props.setSelectedSocketId(bot.socketId) }}>{bot.name}</span>
+              <span className={`pointer ${props.selectedSocketId === bot.socketId ? 'is-selected' : ''}`} onClick={() => { props.setSelectedSocketId(bot.socketId) }}>{bot.name}</span>
               <div>
                 <ProgressBar className='mt-1' variant='danger' now={bot.health / 20 * 100} />
                 <ProgressBar className='mt-1' variant='warning' now={bot.food / 20 * 100} />
