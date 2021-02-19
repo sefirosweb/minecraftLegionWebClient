@@ -40,7 +40,6 @@ const ItemsToBeReady = (props) => {
   }
 
   const handleRemoveItem = (index, event) => {
-    console.log(index)
     props.socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,

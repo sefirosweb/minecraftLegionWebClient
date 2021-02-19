@@ -5,6 +5,7 @@ import BotActionsButtons from '../components/BotActionsButtons'
 import { getBotIndexBySocketId } from '../actions/botsAction'
 import { setSelectedSocketId } from '../actions/configurationAction'
 class Dashboard extends Component {
+    
     renderLogs = () => {
         let logs = this.props.logs
 

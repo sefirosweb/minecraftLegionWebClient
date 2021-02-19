@@ -53,7 +53,6 @@ const GuardJob = (props) => {
   }
 
   const handleRemovePos = (index, event) => {
-    console.log(index)
     props.socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
@@ -65,7 +64,6 @@ const GuardJob = (props) => {
   }
 
   const handleMovePosNext = (index, event) => {
-    console.log(index)
     props.socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
@@ -77,7 +75,6 @@ const GuardJob = (props) => {
   }
 
   const handleMovePosPrev = (index, event) => {
-    console.log(index)
     props.socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,

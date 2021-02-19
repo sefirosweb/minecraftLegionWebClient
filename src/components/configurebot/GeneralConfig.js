@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import ItemsAviable from './ItemsAviable'
 import TrashIcon from './Icons/Trash'
+import ArrowUp from './Icons/ArrowUp'
+import ArrowDown from './Icons/ArrowDown'
 
 const GeneralConfig = (props) => {
   const [item, setItem] = useState('')
@@ -30,13 +32,34 @@ const GeneralConfig = (props) => {
     })
   }
 
-  const handleRemoveItem = (index, event) => {
-    console.log(index)
+  const handleMovePosNext = (index, event) => {
     props.socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
       value: {
-        configToChange: 'DeleteItemCanBeEat',
+        configToChange: 'moveItemCanBeEatNext',
+        value: index
+      }
+    })
+  }
+
+  const handleMovePosPrev = (index, event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'moveItemCanBeEatPrev',
+        value: index
+      }
+    })
+  }
+
+  const handleRemoveItem = (index, event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'deleteItemCanBeEat',
         value: index
       }
     })
@@ -46,8 +69,9 @@ const GeneralConfig = (props) => {
     return botConfig.config.itemsCanBeEat.map((food, index) => {
       return (
         <tr key={index}>
-          <th scope='row'>{index}</th>
+          <th scope='row'>{index + 1}</th>
           <td>{food}</td>
+          <td><ArrowUp onClick={handleMovePosPrev.bind(this, index)} /> <ArrowDown onClick={handleMovePosNext.bind(this, index)} /></td>
           <td><TrashIcon onClick={handleRemoveItem.bind(this, index)} /></td>
         </tr>
       )
@@ -150,8 +174,9 @@ const GeneralConfig = (props) => {
           <table className='table'>
             <thead className='thead-dark'>
               <tr>
-                <th scope='col'>#</th>
+                <th scope='col'>Priority</th>
                 <th scope='col'>Food</th>
+                <th scope='col'>Move</th>
                 <th scope='col' />
               </tr>
             </thead>

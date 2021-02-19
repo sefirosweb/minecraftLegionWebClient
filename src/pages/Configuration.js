@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 import { updateMaster, updateServer, updateServerPort, updateServerPassword, updateBotServer } from '../actions/configurationAction'
 
 class Configuration extends React.Component {
+    
     handleChangeMaster = (event) => {
         this.props.updateMaster(event.target.value)
     }
