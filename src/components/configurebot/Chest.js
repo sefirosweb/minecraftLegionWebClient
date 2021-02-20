@@ -2,6 +2,8 @@ import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import ItemsAviable from './ItemsAviable'
 import TrashIcon from './Icons/Trash'
+import ArrowUp from './Icons/ArrowUp'
+import ArrowDown from './Icons/ArrowDown'
 
 const Chest = (props) => {
   const [item, setItem] = useState('')
@@ -114,17 +116,39 @@ const Chest = (props) => {
     })
   }
 
+  const renderSwitch = () => {
+    switch (props.chest.type) {
+      case 'deposit':
+        return 'border-warning';
+      case 'depositAll':
+        return 'border-danger';
+      case 'withdraw':
+        return 'border-success';
+      default:
+        return '';
+    }
+  }
+
   return (
-    <>
+    <div className={`p-3 mb-3 border rounded ${renderSwitch()}`}>
 
       <div className='row'>
         <div className='col-6'>
           <div className='form-group row'>
-            <label className='col-sm-3 col-form-label font-weight-bold'>Chest Nº{props.id}</label>
-            <div className='col-sm-9'>
+            <label className='col-sm-4 col-form-label font-weight-bold'>Chest Nº{props.id}</label>
+            <div className='col-sm-8'>
               <input type='text' className='form-control-plaintext font-weight-bold' value={props.chest.name} onChange={handleChangeChestName} />
             </div>
           </div>
+        </div>
+        <div className='col-4'>
+          <div className='float-right'>
+            Sort chest:
+        </div>
+        </div>
+        <div className='col-2'>
+          <div className='float-right'><ArrowUp /> <ArrowDown /></div>
+          {/* <ArrowUp onClick={handleMovePosPrev.bind(this, index)} /> <ArrowDown onClick={handleMovePosNext.bind(this, index)} /> */}
         </div>
       </div>
 
@@ -156,6 +180,10 @@ const Chest = (props) => {
             <div className='form-check'>
               <input className='form-check-input' type='radio' name={radioId} value='deposit' onChange={handleChangeChestType} checked={props.chest.type === 'deposit'} />
               <label className='form-check-label'>Deposit</label>
+            </div>
+            <div className='form-check'>
+              <input className='form-check-input' type='radio' name={radioId} value='depositAll' onChange={handleChangeChestType} checked={props.chest.type === 'depositAll'} />
+              <label className='form-check-label'>Deposit All</label>
             </div>
 
           </div>
@@ -210,8 +238,7 @@ const Chest = (props) => {
           <button type='button' className='btn btn-danger float-right' onClick={handleDeleteChest}>Delete chest "{props.chest.name}"</button>
         </div>
       </div>
-      <hr className='mb-5' />
-    </>
+    </div>
   )
 }
 
