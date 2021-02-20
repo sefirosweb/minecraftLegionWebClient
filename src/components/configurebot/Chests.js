@@ -32,7 +32,8 @@ const Chests = (props) => {
           <label>
             When the bot is not ready, they go to chest to withdraw or deposit items <br />
             On withdraw try to get items in list,<br />
-            On deposit EXCLUDE items in list
+            On deposit EXCLUDE items in list,<br />
+            (!) The priority of chest is important for deposit / withdraw items
           </label>
         </div>
       </div>
