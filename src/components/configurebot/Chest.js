@@ -129,6 +129,28 @@ const Chest = (props) => {
     }
   }
 
+  const handleMovePosNext = (index, event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: props.socketId,
+      value: {
+        configToChange: 'moveChestNext',
+        value: props.id
+      }
+    })
+  }
+
+  const handleMovePosPrev = (index, event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: props.socketId,
+      value: {
+        configToChange: 'moveChestPrev',
+        value: props.id
+      }
+    })
+  }
+
   return (
     <div className={`p-3 mb-3 border rounded ${renderSwitch()}`}>
 
@@ -147,8 +169,7 @@ const Chest = (props) => {
         </div>
         </div>
         <div className='col-2'>
-          <div className='float-right'><ArrowUp /> <ArrowDown /></div>
-          {/* <ArrowUp onClick={handleMovePosPrev.bind(this, index)} /> <ArrowDown onClick={handleMovePosNext.bind(this, index)} /> */}
+          <div className='float-right'> <ArrowUp onClick={handleMovePosPrev} /> <ArrowDown onClick={handleMovePosNext} /></div>
         </div>
       </div>
 
