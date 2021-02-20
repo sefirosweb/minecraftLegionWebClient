@@ -1,4 +1,5 @@
 export const SET_SOCKET = 'bots_socket'
+export const SET_SELECTED_SOCKETID = 'set_selected_socketid'
 export const SET_MASTER = 'set_master'
 export const SET_SOCKET_SERVER = 'set_socket_server'
 export const SET_SOCKET_SERVER_PORT = 'set_socket_server_port'

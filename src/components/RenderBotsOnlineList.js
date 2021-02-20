@@ -1,29 +1,59 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 import '../css/botlist.css'
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import { setSelectedSocketId } from '../actions/configurationAction'
 
-class RenderBotsOnlineList extends React.Component {
-  render () {
-    return this.props.botsOnline.map((bot) => {
-      return (
-        <li key={bot.socketId} className={`list-group-item ${(bot.combat) ? 'botlistCombat' : 'botlist'}`}>
-          <div className={` ${(bot.combat) ? 'botCombat' : ''}`}>
-            <NavLink activeClassName='is-selected' to={`/dashboard/${bot.socketId}`}>{bot.name}</NavLink>
-            <div>
-              <ProgressBar className='mt-1' variant='danger' now={bot.health / 20 * 100} />
-              <ProgressBar className='mt-1' variant='warning' now={bot.food / 20 * 100} />
+const RenderBotsOnlineList = (props) => {
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) {
+        props.setSelectedSocketId(undefined)
+      }
+    }
+    window.addEventListener('keydown', handleEsc)
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc)
+    }
+  }, [props])
+
+  const renderBotList = () => {
+    return (
+      props.botsOnline.map((bot) => {
+        return (
+          <li key={bot.socketId} className={`list-group-item ${(bot.combat) ? 'botlistCombat' : 'botlist'}`}>
+            <div className={` ${(bot.combat) ? 'botCombat' : ''}`}>
+              <span className={`pointer ${props.selectedSocketId === bot.socketId ? 'is-selected' : ''}`} onClick={() => { props.setSelectedSocketId(bot.socketId) }}>{bot.name}</span>
+              <div>
+                <ProgressBar className='mt-1' variant='danger' now={bot.health / 20 * 100} />
+                <ProgressBar className='mt-1' variant='warning' now={bot.food / 20 * 100} />
+              </div>
             </div>
-          </div>
-        </li>
-      )
-    })
+          </li>
+        )
+      })
+
+    )
   }
+
+  return (
+    <ul className='list-group'>
+      <li className='list-group-item active'>Bots Online ({props.botsOnline.length})</li>
+      {renderBotList()}
+    </ul>
+  )
 }
 
 const mapStateToProps = (reducers) => {
-  return reducers.botsReducer
+  const { botsReducer, configurationReducer } = reducers
+  const { botsOnline } = botsReducer
+  const { selectedSocketId } = configurationReducer
+  return { botsOnline, selectedSocketId }
 }
 
-export default connect(mapStateToProps)(RenderBotsOnlineList)
+const mapDispatchToProps = {
+  setSelectedSocketId
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RenderBotsOnlineList)

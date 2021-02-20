@@ -1,13 +1,10 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 
 const Combat = (props) => {
-  const [botConfig] = useState(props.getBotBySocketId(props.match.params.socketId))
-  if (botConfig === undefined) {
-    props.history.push('/dashboard')
-    return null
-  }
+  const botConfig = props.getBotBySocketId(props.selectedSocketId)
+  if (botConfig === undefined) { return null }
 
   const handleChangeMode = (event) => {
     props.socket.emit('sendAction', {
@@ -21,7 +18,7 @@ const Combat = (props) => {
   }
 
   const handleChangeDistance = (event) => {
-    const distance = Number(event.target.value);
+    const distance = Number(event.target.value)
     if (Number.isInteger(distance)) {
       props.socket.emit('sendAction', {
         action: 'changeConfig',
@@ -34,27 +31,26 @@ const Combat = (props) => {
     }
   }
 
-
   return (
-    <Fragment>
+    <>
       <div className='row'>
         <div className='col-6'>
           <form>
 
-            <fieldset className="form-group row">
-              <legend className="col-form-label col-sm-4 float-sm-left pt-0">Combat Mode?</legend>
-              <div className="col-sm-8">
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="combatMode" value="none" onChange={handleChangeMode} checked={botConfig.config.mode === "none"} />
-                  <label className="form-check-label">None</label>
+            <fieldset className='form-group row'>
+              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Combat Mode?</legend>
+              <div className='col-sm-8'>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='combatMode' value='none' onChange={handleChangeMode} checked={botConfig.config.mode === 'none'} />
+                  <label className='form-check-label'>None</label>
                 </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="combatMode" value="pve" onChange={handleChangeMode} checked={botConfig.config.mode === "pve"} />
-                  <label className="form-check-label">PVE</label>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='combatMode' value='pve' onChange={handleChangeMode} checked={botConfig.config.mode === 'pve'} />
+                  <label className='form-check-label'>PVE</label>
                 </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="combatMode" value="pvp" onChange={handleChangeMode} checked={botConfig.config.mode === "pvp"} />
-                  <label className="form-check-label">PVP</label>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='combatMode' value='pvp' onChange={handleChangeMode} checked={botConfig.config.mode === 'pvp'} />
+                  <label className='form-check-label'>PVP</label>
                 </div>
 
               </div>
@@ -63,27 +59,26 @@ const Combat = (props) => {
           </form>
         </div>
         <div className='col-3'>
-          <div className="form-group">
+          <div className='form-group'>
             <label>Distance for start combat?</label>
-            <input className='form-control' type="text" onChange={handleChangeDistance} value={botConfig.config.distance} />
+            <input className='form-control' type='text' onChange={handleChangeDistance} value={botConfig.config.distance} />
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }
 
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
   const { botsOnline } = botsReducer
-  const { socket } = configurationReducer
+  const { socket, selectedSocketId } = configurationReducer
 
-  return { socket, botsOnline }
+  return { botsOnline, socket, selectedSocketId }
 }
 
 const mapDispatchToProps = {
   getBotBySocketId
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Combat);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Combat)

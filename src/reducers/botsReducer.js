@@ -14,13 +14,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         botsOnline: action.payload
       }
-      
-    case 'SET_CONFIG':
-      return {
-        ...state,
-        botsOnline: action.payload
-      }
-
 
     case SET_LOGS:
       return {

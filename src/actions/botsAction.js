@@ -49,7 +49,7 @@ export const setConfig = (botConfig) => (dispatch, getState) => {
   const botsOnlineUpdate = [
     ...botsOnline
   ]
-  botsOnlineUpdate[botIndex]['config'] = botConfig
+  botsOnlineUpdate[botIndex].config = botConfig
 
   dispatch({
     type: SET_BOTS,
