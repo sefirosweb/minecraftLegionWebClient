@@ -18,7 +18,13 @@ class Layout extends React.Component {
       this.socket.close()
     }
 
-    this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`)
+    this.socket = socketIOClient(`${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`,
+      {
+        withCredentials: true,
+        extraHeaders: {
+          "my-custom-header": "abcd"
+        }
+      })
     this.props.setSocket(this.socket)
 
     this.socket.on('connect', () => {
