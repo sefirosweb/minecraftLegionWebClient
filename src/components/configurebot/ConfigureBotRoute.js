@@ -1,6 +1,6 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import { getBotBySocketId } from '../../actions/botsAction'
 import NotFound from '../../pages/NotFound'
 
@@ -13,12 +13,12 @@ import MinerJob from './MinerJob'
 import ConfigureBotLayout from './ConfigureBotLayout'
 
 class ConfigureBotRoute extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = { botName: '' }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (!this.props.loged) {
       this.props.history.push('/configuration')
       return
@@ -26,7 +26,7 @@ class ConfigureBotRoute extends Component {
     this.updateBotconfig()
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (this.props.selectedSocketId === undefined) {
       this.props.history.push('/dashboard')
       return
@@ -47,7 +47,7 @@ class ConfigureBotRoute extends Component {
     }
   }
 
-  updateBotconfig () {
+  updateBotconfig() {
     this.props.socket.emit('sendAction', {
       action: 'getConfig',
       socketId: this.props.selectedSocketId,
@@ -56,11 +56,24 @@ class ConfigureBotRoute extends Component {
     this.setState({ botName: this.props.getBotBySocketId(this.props.selectedSocketId).name })
   }
 
-  render () {
+  updateReloadButton() {
+    this.props.socket.emit('sendAction', {
+      action: 'action',
+      socketId: this.props.selectedSocketId,
+      toBotData: {
+        type: 'reloadConfig',
+        value: ''
+      }
+    })
+  }
+
+  render() {
     return (
       <>
         <div className='row'>
-          <div className='col-12'><h1>Bot Configuration - {this.state.botName}</h1></div>
+          <div className='col-6'><h1>Bot Configuration - {this.state.botName}</h1></div>
+          <div className='col-2 pt-2'><Link to='/dashboard' className='btn btn-primary form-control'>Dashboard</Link></div>
+          <div className='col-2 pt-2'><button onClick={this.updateReloadButton.bind(this)} className='btn btn-danger form-control'>Reload</button></div>
         </div>
 
         <ConfigureBotLayout history={this.props.history} match={this.props.match}>

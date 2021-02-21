@@ -196,12 +196,7 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
         </div>
       </div>
-      <div className='row mt-2'>
-        <div className='col-12'>
-          <Link className='btn btn-warning mr-3' to='/configurebot/generalconfig'>Configure Bot</Link>
-        </div>
-      </div>
-
+      
       <div className='row mt-2'>
         <div className='col-12'>
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStayButton}>Stay</button>

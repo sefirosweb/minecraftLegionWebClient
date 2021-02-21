@@ -1,11 +1,12 @@
 import { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import { getBotIndexBySocketId } from '../actions/botsAction'
 import { setSelectedSocketId } from '../actions/configurationAction'
 class Dashboard extends Component {
-    
+
     renderLogs = () => {
         let logs = this.props.logs
 
@@ -61,9 +62,10 @@ class Dashboard extends Component {
         return (
             <Fragment>
                 <div className='row'>
-                    <div className='col-10'><h1>Dashboard</h1></div>
+                    <div className='col-8'><h1>Dashboard</h1></div>
+                    {(this.props.selectedSocketId) ? <div className='col-2 pt-2'><Link className='btn btn-warning mr-3' to='/configurebot/generalconfig'>Configure Bot</Link></div> : ''}
                 </div>
-                
+
                 <div className='row'>
                     <div className='col-10'>
 
