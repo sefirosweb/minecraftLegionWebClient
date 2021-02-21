@@ -9,5 +9,5 @@
 
 
 ## 0.0.2
-* Added dynamic configuration server websocket on front end
-* Also added password for connect to websocketserver
+* Added dynamic configuration server WebSocket on the front end
+* Also added a password for connecting to WebSocket server
