@@ -158,8 +158,14 @@ const BotActionButtons = (props) => {
   const handleInteract = () => {
     props.socket.emit('sendAction', {
       action: 'interact',
-      socketId: props.socketId,
-      value: props.master
+      socketId: props.socketId
+    })
+  }
+
+  const handleInteractBed = () => {
+    props.socket.emit('sendAction', {
+      action: 'interactBed',
+      socketId: props.socketId
     })
   }
 
@@ -210,8 +216,11 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-secondary mr-3' onClick={handleXup}>X+</button>
         </div>
 
-        <div className='col-2 offset-2'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleInteract}>Interact</button>
+        <div className='col-2'>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleInteract}>Interact With Player</button>
+        </div>
+        <div className='col-2'>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleInteractBed}>Interect With Bed</button>
         </div>
         <div className='col-1'>
           <button type='button' className='btn btn-danger mr-3' onClick={handleDrop}>Drop</button>
