@@ -18,11 +18,7 @@ const BotActionButtons = (props) => {
   }
 
   const handleSendMessageButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendMessage',
-      socketId: props.socketId,
-      value: chat
-    })
+    handleSendAction('sendMessage', chat)
     setChat('')
   }
 
@@ -86,97 +82,14 @@ const BotActionButtons = (props) => {
     window.open(`http://${props.serverBots}:${bot.viewerPort}`, '_blank')
   }
 
-  const handleSendStayButton = () => {
+  const handleSendAction = (type, value) => {
     props.socket.emit('sendAction', {
       action: 'action',
       socketId: props.selectedSocketId,
       toBotData: {
-        type: 'stay',
-        value: ''
+        type: type,
+        value: value
       }
-    })
-  }
-
-  const handleSendFollowButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendFollow',
-      socketId: props.socketId,
-      value: props.master
-    })
-  }
-
-  const handleSendEndCommandsButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendEndCommands',
-      socketId: props.socketId,
-      value: props.master
-    })
-  }
-
-  const handleSendStartWayButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendStartWay',
-      socketId: props.socketId,
-      value: props.master
-    })
-  }
-
-  const handleSendSavePatrolButton = () => {
-    props.socket.emit('sendAction', {
-      action: 'sendSavePatrol',
-      socketId: props.socketId,
-      value: props.master
-    })
-  }
-
-  const handleXup = () => {
-    props.socket.emit('sendAction', {
-      action: 'move',
-      socketId: props.socketId,
-      value: 'x+'
-    })
-  }
-  const handleXdown = () => {
-    props.socket.emit('sendAction', {
-      action: 'move',
-      socketId: props.socketId,
-      value: 'x-'
-    })
-  }
-
-  const handleZup = () => {
-    props.socket.emit('sendAction', {
-      action: 'move',
-      socketId: props.socketId,
-      value: 'z+'
-    })
-  }
-  const handleZdown = () => {
-    props.socket.emit('sendAction', {
-      action: 'move',
-      socketId: props.socketId,
-      value: 'z-'
-    })
-  }
-  const handleInteract = () => {
-    props.socket.emit('sendAction', {
-      action: 'interact',
-      socketId: props.socketId
-    })
-  }
-
-  const handleInteractBed = () => {
-    props.socket.emit('sendAction', {
-      action: 'interactBed',
-      socketId: props.socketId
-    })
-  }
-
-  const handleDrop = () => {
-    props.socket.emit('sendAction', {
-      action: 'drop',
-      socketId: props.socketId,
-      value: props.master
     })
   }
 
@@ -202,38 +115,36 @@ const BotActionButtons = (props) => {
 
       <div className='row mt-2'>
         <div className='col-12'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStayButton}>Stay</button>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendFollowButton}>Follow Master</button>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStartWayButton}>Start Way</button>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendSavePatrolButton}>Save Patrol</button>
-          <button type='button' className='btn btn-warning mr-3' onClick={handleSendEndCommandsButton}>End commands</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'stay', '')}>Stay</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'follow', props.master)}>Follow Master</button>
+          <button type='button' className='btn btn-warning mr-3' onClick={handleSendAction.bind(props, 'endCommands', '')}>End commands</button>
         </div>
       </div>
       <div className='row mt-2'>
         <div className='col-1 offset-1'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleXup}>X+</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'moveOneByOne', 'x+')}>X+</button>
         </div>
 
         <div className='col-2'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleInteract}>Interact With Player</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'interactWithPlayer', '')}>Interact With Player</button>
         </div>
         <div className='col-2'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleInteractBed}>Interect With Bed</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'interactWithBed', '')}>Interect With Bed</button>
         </div>
-        <div className='col-1'>
-          <button type='button' className='btn btn-danger mr-3' onClick={handleDrop}>Drop</button>
+        <div className='col-2'>
+          <button type='button' className='btn btn-danger mr-3 form-control' onClick={handleSendAction.bind(props, 'tossAllItems', '')}>Toss all items</button>
         </div>
       </div>
 
       <div className='row mt-2'>
         <div className='col-1'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleZdown}>Z-</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'moveOneByOne', 'z-')}>Z-</button>
         </div>
         <div className='col-1'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleXdown}>X-</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'moveOneByOne', 'x-')}>X-</button>
         </div>
         <div className='col-1'>
-          <button type='button' className='btn btn-secondary mr-3' onClick={handleZup}>Z+</button>
+          <button type='button' className='btn btn-secondary mr-3' onClick={handleSendAction.bind(props, 'moveOneByOne', 'z+')}>Z+</button>
         </div>
       </div>
     </>

@@ -5,6 +5,7 @@
 * Adding enable / disable dig (!caution the bot can stucks)
 * Adding reloading configuration button
 * Unify botWebsocket.on(XX events) to botWebsocket.on('action')
+  * Refactorized botactions less code more simply
 
 
 ## 0.0.2
