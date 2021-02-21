@@ -100,16 +100,38 @@ const GeneralConfig = (props) => {
     })
   }
 
+  const handleChangeAllowSprinting = (event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'allowSprinting',
+        value: event.target.value
+      }
+    })
+  }
+
+  const handleChangeCanDig = (event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'canDig',
+        value: event.target.value
+      }
+    })
+  }
+
   return (
 
     <>
       <div className='row'>
-        <div className='col-12'>
+        <div className='col-6'>
           <form>
 
             <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-2 float-sm-left pt-0'>Job</legend>
-              <div className='col-sm-10'>
+              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Job</legend>
+              <div className='col-sm-8'>
                 <div className='form-check'>
                   <input className='form-check-input' type='radio' name='gridJob' value='none' onChange={handleChangeJob} checked={botConfig.config.job === 'none'} />
                   <label className='form-check-label'>None</label>
@@ -127,8 +149,8 @@ const GeneralConfig = (props) => {
             </fieldset>
 
             <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-2 float-sm-left pt-0'>Pick up items?</legend>
-              <div className='col-sm-10'>
+              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Pick up items?</legend>
+              <div className='col-sm-8'>
                 <div className='form-check'>
                   <input className='form-check-input' type='radio' name='gridPickupItems' value='true' onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === true} />
                   <label className='form-check-label'>Yes</label>
@@ -140,6 +162,40 @@ const GeneralConfig = (props) => {
               </div>
             </fieldset>
           </form>
+        </div>
+
+        <div className='col-6'>
+          <form>
+
+            <fieldset className='form-group row'>
+              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Allow Sprint</legend>
+              <div className='col-sm-8'>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridAllowSprinting' value='true' onChange={handleChangeAllowSprinting} checked={botConfig.config.allowSprinting === true} />
+                  <label className='form-check-label'>Yes</label>
+                </div>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridAllowSprinting' value='false' onChange={handleChangeAllowSprinting} checked={botConfig.config.allowSprinting === false} />
+                  <label className='form-check-label'>no</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset className='form-group row'>
+              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Can dig?<br />(!) Caution can stuck the bot</legend>
+              <div className='col-sm-8'>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridCanDig' value='true' onChange={handleChangeCanDig} checked={botConfig.config.canDig === true} />
+                  <label className='form-check-label'>Yes</label>
+                </div>
+                <div className='form-check'>
+                  <input className='form-check-input' type='radio' name='gridCanDig' value='false' onChange={handleChangeCanDig} checked={botConfig.config.canDig === false} />
+                  <label className='form-check-label'>no</label>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
         </div>
       </div>
 
