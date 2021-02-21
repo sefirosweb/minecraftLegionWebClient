@@ -88,9 +88,12 @@ const BotActionButtons = (props) => {
 
   const handleSendStayButton = () => {
     props.socket.emit('sendAction', {
-      action: 'sendStay',
-      socketId: props.socketId,
-      value: props.master
+      action: 'action',
+      socketId: props.selectedSocketId,
+      toBotData: {
+        type: 'stay',
+        value: ''
+      }
     })
   }
 
@@ -196,7 +199,7 @@ const BotActionButtons = (props) => {
           <button type='button' className='btn btn-danger mr-3' onClick={handleDisconnectButton}>Disconnect</button>
         </div>
       </div>
-      
+
       <div className='row mt-2'>
         <div className='col-12'>
           <button type='button' className='btn btn-secondary mr-3' onClick={handleSendStayButton}>Stay</button>
@@ -239,9 +242,9 @@ const BotActionButtons = (props) => {
 
 const mapStateToProps = (reducers) => {
   const { configurationReducer } = reducers
-  const { socket, serverBots, master } = configurationReducer
+  const { socket, selectedSocketId, serverBots, master } = configurationReducer
 
-  return { socket, serverBots, master }
+  return { socket, selectedSocketId, serverBots, master }
 }
 
 const mapDispatchToProps = {
