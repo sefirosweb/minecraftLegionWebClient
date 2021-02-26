@@ -126,75 +126,83 @@ const GeneralConfig = (props) => {
 
     <>
       <div className='row'>
-        <div className='col-6'>
-          <form>
+        <div className='col-8'>
 
-            <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Job</legend>
-              <div className='col-sm-8'>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridJob' value='none' onChange={handleChangeJob} checked={botConfig.config.job === 'none'} />
-                  <label className='form-check-label'>None</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridJob' value='miner' onChange={handleChangeJob} checked={botConfig.config.job === 'miner'} />
-                  <label className='form-check-label'>Miner</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridJob' value='guard' onChange={handleChangeJob} checked={botConfig.config.job === 'guard'} />
-                  <label className='form-check-label'>Guard</label>
-                </div>
+
+          <fieldset className='form-group row'>
+            <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Job</legend>
+            <div className='col-sm-2'>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridJob' value='none' onChange={handleChangeJob} checked={botConfig.config.job === 'none'} />
+                <label className='form-check-label'>None</label>
+              </div>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridJob' value='miner' onChange={handleChangeJob} checked={botConfig.config.job === 'miner'} />
+                <label className='form-check-label'>Miner</label>
+              </div>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridJob' value='guard' onChange={handleChangeJob} checked={botConfig.config.job === 'guard'} />
+                <label className='form-check-label'>Guard</label>
+              </div>
+            </div>
+            <div className='col-sm-2'>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridJob' value='farmer' onChange={handleChangeJob} checked={botConfig.config.job === 'farmer'} />
+                <label className='form-check-label'>Farmer</label>
+              </div>
+              <div className='form-check'>
 
               </div>
-            </fieldset>
-
-            <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Pick up items?</legend>
-              <div className='col-sm-8'>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridPickupItems' value='true' onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === true} />
-                  <label className='form-check-label'>Yes</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridPickupItems' value='false' onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === false} />
-                  <label className='form-check-label'>no</label>
-                </div>
+              <div className='form-check'>
               </div>
-            </fieldset>
-          </form>
+
+            </div>
+          </fieldset>
+
+          <fieldset className='form-group row'>
+            <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Pick up items?</legend>
+            <div className='col-sm-8'>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridPickupItems' value='true' onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === true} />
+                <label className='form-check-label'>Yes</label>
+              </div>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridPickupItems' value='false' onChange={handleChangePickUpItems} checked={botConfig.config.pickUpItems === false} />
+                <label className='form-check-label'>no</label>
+              </div>
+            </div>
+          </fieldset>
+
         </div>
 
-        <div className='col-6'>
-          <form>
-
-            <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Allow Sprint</legend>
-              <div className='col-sm-8'>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridAllowSprinting' value='true' onChange={handleChangeAllowSprinting} checked={botConfig.config.allowSprinting === true} />
-                  <label className='form-check-label'>Yes</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridAllowSprinting' value='false' onChange={handleChangeAllowSprinting} checked={botConfig.config.allowSprinting === false} />
-                  <label className='form-check-label'>no</label>
-                </div>
+        <div className='col-4'>
+          <fieldset className='form-group row'>
+            <legend className='col-form-label col-sm-6 float-sm-left pt-0'>Allow Sprint</legend>
+            <div className='col-sm-6'>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridAllowSprinting' value='true' onChange={handleChangeAllowSprinting} checked={botConfig.config.allowSprinting === true} />
+                <label className='form-check-label'>Yes</label>
               </div>
-            </fieldset>
-
-            <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Can dig?<br />(!) Caution can stuck the bot</legend>
-              <div className='col-sm-8'>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridCanDig' value='true' onChange={handleChangeCanDig} checked={botConfig.config.canDig === true} />
-                  <label className='form-check-label'>Yes</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='gridCanDig' value='false' onChange={handleChangeCanDig} checked={botConfig.config.canDig === false} />
-                  <label className='form-check-label'>no</label>
-                </div>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridAllowSprinting' value='false' onChange={handleChangeAllowSprinting} checked={botConfig.config.allowSprinting === false} />
+                <label className='form-check-label'>no</label>
               </div>
-            </fieldset>
-          </form>
+            </div>
+          </fieldset>
+
+          <fieldset className='form-group row'>
+            <legend className='col-form-label col-sm-6 float-sm-left pt-0'>Can dig?<br />(!) Caution can stuck the bot</legend>
+            <div className='col-sm-6'>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridCanDig' value='true' onChange={handleChangeCanDig} checked={botConfig.config.canDig === true} />
+                <label className='form-check-label'>Yes</label>
+              </div>
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridCanDig' value='false' onChange={handleChangeCanDig} checked={botConfig.config.canDig === false} />
+                <label className='form-check-label'>no</label>
+              </div>
+            </div>
+          </fieldset>
 
         </div>
       </div>
