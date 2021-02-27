@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { connect } from 'react-redux'
 import ItemsAviable from './ItemsAviable'
 import TrashIcon from './Icons/Trash'
@@ -263,11 +263,9 @@ const Chest = (props) => {
 }
 
 const mapStateToProps = (reducers) => {
-  const { botsReducer, configurationReducer } = reducers
-  const { botsOnline } = botsReducer
+  const { configurationReducer } = reducers
   const { socket } = configurationReducer
-
-  return { socket, botsOnline }
+  return { socket }
 }
 
 export default connect(mapStateToProps, null)(Chest)

@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { updateBotStatus, getBotBySocketId } from '../actions/botsAction'
 
 const BotActionButtons = (props) => {

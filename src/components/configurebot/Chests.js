@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import Chest from './Chest'
