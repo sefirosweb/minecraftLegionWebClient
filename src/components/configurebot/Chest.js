@@ -98,7 +98,6 @@ const Chest = (props) => {
 
   const handleChangeChestPos = (event) => {
     const pos = Number(event.target.value)
-    console.log(event.target.value)
 
     if (!Number.isInteger(pos) && event.target.value !== '-') {
       return null

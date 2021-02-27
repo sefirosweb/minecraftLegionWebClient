@@ -50,11 +50,10 @@ const Chests = (props) => {
 }
 
 const mapStateToProps = (reducers) => {
-  const { botsReducer, configurationReducer } = reducers
-  const { botsOnline } = botsReducer
+  const { configurationReducer } = reducers
   const { socket, selectedSocketId } = configurationReducer
 
-  return { botsOnline, socket, selectedSocketId }
+  return { socket, selectedSocketId }
 }
 
 const mapDispatchToProps = {
