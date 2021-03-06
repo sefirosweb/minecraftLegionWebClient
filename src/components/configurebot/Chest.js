@@ -118,13 +118,13 @@ const Chest = (props) => {
   const renderSwitch = () => {
     switch (props.chest.type) {
       case 'deposit':
-        return 'border-warning';
+        return 'border-warning'
       case 'depositAll':
-        return 'border-danger';
+        return 'border-danger'
       case 'withdraw':
-        return 'border-success';
+        return 'border-success'
       default:
-        return '';
+        return ''
     }
   }
 
@@ -165,7 +165,7 @@ const Chest = (props) => {
         <div className='col-4'>
           <div className='float-right'>
             Sort chest:
-        </div>
+          </div>
         </div>
         <div className='col-2'>
           <div className='float-right'> <ArrowUp onClick={handleMovePosPrev} /> <ArrowDown onClick={handleMovePosNext} /></div>

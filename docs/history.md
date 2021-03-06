@@ -1,3 +1,6 @@
+## 0.1.9
+* Added plants in farmer job
+
 ## 0.1.8
 * Added on General Confi "Farmer" Job
 * Added Tab "Farmer Job"

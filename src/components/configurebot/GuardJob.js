@@ -174,10 +174,9 @@ const GuardJob = (props) => {
           <button type='button' className='btn btn-primary form-control' onClick={insertPost}>Insert</button>
         </div>
         <div className='col-2'>
-          {botConfig.config.isCopingPatrol ?
-            <button type='button' className='btn btn-warning form-control' onClick={copyPatrol}>Stop Copy</button>
-            : <button type='button' className='btn btn-success form-control' onClick={copyPatrol}>Start Copy</button>
-          }
+          {botConfig.config.isCopingPatrol
+            ? <button type='button' className='btn btn-warning form-control' onClick={copyPatrol}>Stop Copy</button>
+            : <button type='button' className='btn btn-success form-control' onClick={copyPatrol}>Start Copy</button>}
         </div>
       </div>
 

@@ -128,7 +128,6 @@ const GeneralConfig = (props) => {
       <div className='row'>
         <div className='col-8'>
 
-
           <fieldset className='form-group row'>
             <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Job</legend>
             <div className='col-sm-2'>
@@ -150,11 +149,8 @@ const GeneralConfig = (props) => {
                 <input className='form-check-input' type='radio' name='gridJob' value='farmer' onChange={handleChangeJob} checked={botConfig.config.job === 'farmer'} />
                 <label className='form-check-label'>Farmer</label>
               </div>
-              <div className='form-check'>
-
-              </div>
-              <div className='form-check'>
-              </div>
+              <div className='form-check' />
+              <div className='form-check' />
 
             </div>
           </fieldset>
