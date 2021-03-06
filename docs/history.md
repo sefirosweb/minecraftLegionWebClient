@@ -1,7 +1,7 @@
 ## 0.1.8
 * Added on General Confi "Farmer" Job
 * Added Tab "Farmer Job"
-
+* Update dependency
 ## 0.1.7
 * Added find chest and interect (save a home bed)
   * With command line and front end
