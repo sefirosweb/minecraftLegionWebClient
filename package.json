@@ -31,7 +31,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "standard": "npx standard --fix"
+    "standard": "npx standard --fix",
+    "dockerbuild": "docker build -t minecraftlegionwebclient .",
+    "dockerrun": "docker run --rm -p:3000:3000 minecraftlegionwebclient"
   },
   "eslintConfig": {
     "extends": [
