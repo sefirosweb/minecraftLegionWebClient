@@ -2,6 +2,7 @@
 .dockerignore
 .git
 .gitignore
+.vscode/
 build/*
 Dockerfile
 node_modules
