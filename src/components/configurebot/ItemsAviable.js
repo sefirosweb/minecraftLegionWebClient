@@ -8,6 +8,7 @@ const plants = [
   { displayName: 'Beetroot', name: 'beetroot' },
   { displayName: 'Wheat', name: 'wheat' },
   { displayName: 'Melon', name: 'melon' },
+  { displayName: 'Sweet Berries', name: 'sweet_berries' },
   { displayName: 'Pumpkin', name: 'pumpkin' },
   { displayName: 'Oak Sapling', name: 'oak_sapling' },
   { displayName: 'Cabirch Saplingrrot', name: 'cabirch_saplingrrot' },
