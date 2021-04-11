@@ -1,5 +1,6 @@
 ## 0.1.9
 * Added plants in farmer job
+* Added see events at real time
 
 ## 0.1.8
 * Added on General Confi "Farmer" Job

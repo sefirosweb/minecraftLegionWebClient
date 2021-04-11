@@ -14,7 +14,8 @@ const ConfigureBotLayout = (props) => {
               <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/combat'>Combat</NavLink></li>
               <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/guardjob'>Guard Job</NavLink></li>
               <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/minerjob'>Miner Job</NavLink></li>
-              <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/farmerJob'>Farmer Job</NavLink></li>
+              <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/farmerjob'>Farmer Job</NavLink></li>
+              <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/processlist'>Process list</NavLink></li>
             </ul>
           </div>
         </div>
