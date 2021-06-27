@@ -16,7 +16,9 @@ const plants = [
   { displayName: 'Acacia Sapling', name: 'acacia_sapling' },
   { displayName: 'Dark Oak Sapling', name: 'dark_oak_sapling' },
   { displayName: 'Spruce Sapling', name: 'spruce_sapling' },
-  { displayName: 'Cactus', name: 'cactus' }
+  { displayName: 'Cactus', name: 'cactus' },
+  { displayName: 'Bamboo', name: 'bamboo' },
+  { displayName: 'Sugar Cane', name: 'sugar_cane' },
 ]
 
 const ItemsAviable = (props) => {
