@@ -14,7 +14,9 @@ const plants = [
   { displayName: 'Cabirch Saplingrrot', name: 'cabirch_saplingrrot' },
   { displayName: 'Jungle Sapling', name: 'jungle_sapling' },
   { displayName: 'Acacia Sapling', name: 'acacia_sapling' },
-  { displayName: 'Dark Oak Sapling', name: 'dark_oak_sapling' }
+  { displayName: 'Dark Oak Sapling', name: 'dark_oak_sapling' },
+  { displayName: 'Spruce Sapling', name: 'spruce_sapling' },
+  { displayName: 'Cactus', name: 'cactus' }
 ]
 
 const ItemsAviable = (props) => {
