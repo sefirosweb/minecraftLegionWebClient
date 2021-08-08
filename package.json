@@ -1,6 +1,6 @@
 {
   "name": "minecraftlegionwebclient",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
