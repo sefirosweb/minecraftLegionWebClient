@@ -11,6 +11,7 @@ import Combat from './Combat'
 import GuardJob from './GuardJob'
 import MinerJob from './MinerJob'
 import FarmerJob from './FarmerJob'
+import BreederJob from './BreederJob'
 import ProcessList from './ProcessList'
 import ConfigureBotLayout from './ConfigureBotLayout'
 
@@ -87,6 +88,7 @@ class ConfigureBotRoute extends Component {
             <Route exact path='/configurebot/guardjob' component={GuardJob} />
             <Route exact path='/configurebot/minerjob' component={MinerJob} />
             <Route exact path='/configurebot/farmerjob' component={FarmerJob} />
+            <Route exact path='/configurebot/breederjob' component={BreederJob} />
             <Route exact path='/configurebot/processlist' component={ProcessList} />
             <Route component={NotFound} />
           </Switch>
