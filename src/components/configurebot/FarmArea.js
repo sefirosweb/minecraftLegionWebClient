@@ -1,30 +1,31 @@
 import { connect } from 'react-redux'
-import ItemsAviable from './ItemsAviable'
 
-const HarvestArea = (props) =>  {
+
+
+const FarmArea = (props) => {
   const handleChange = (type, event) => {
-    const copyPlant = { ...props.plantArea }
-    copyPlant[type] = event.target.value
+    const copyFarm = { ...props.farmArea }
+    copyFarm[type] = event.target.value
 
     props.socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: props.selectedSocketId,
       value: {
-        configToChange: 'changePlantArea',
+        configToChange: 'changeFarmArea',
         value: {
           id: props.id,
-          plantArea: copyPlant
+          farmArea: copyFarm
         }
       }
     })
   }
 
-  const handleDeletePlantArea = (event) => {
+  const handleDeleteFarmArea = (event) => {
     props.socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: props.selectedSocketId,
       value: {
-        configToChange: 'deletePlantArea',
+        configToChange: 'deleteFarmArea',
         value: props.id
       }
     })
@@ -33,53 +34,42 @@ const HarvestArea = (props) =>  {
   return (
     <div className='p-3 mb-3 border rounded'>
       <div className='row'>
-        <div className='col-6'>
-          <div className='form-group'>
-            <label htmlFor='inputItem'>Select Plant</label>
-            <input className='form-control' type='text' list={props.id} value={props.plantArea.plant ? props.plantArea.plant : ''} onChange={handleChange.bind(props, 'plant')} />
-            <datalist id={props.id}>
-              <ItemsAviable item={props.plantArea.plant ? props.plantArea.plant : ''} type='plants' />
-            </datalist>
-          </div>
-        </div>
-        <div className='offset-3 col-3'>
-          <button className='btn btn-danger form-control' onClick={handleDeletePlantArea}>Delete Area</button>
-        </div>
-      </div>
-
-      <div className='row'>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X Start</span></label>
-            <input className='form-control' type='text' value={props.plantArea.xStart} onChange={handleChange.bind(props, 'xStart')} />
+            <input className='form-control' type='text' value={props.farmArea.xStart} onChange={handleChange.bind(props, 'xStart')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-warning text-dark'>Y Layer</span></label>
-            <input className='form-control' type='text' value={props.plantArea.yLayer} onChange={handleChange.bind(props, 'yLayer')} />
+            <input className='form-control' type='text' value={props.farmArea.yLayer} onChange={handleChange.bind(props, 'yLayer')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z Start</span></label>
-            <input className='form-control' type='text' value={props.plantArea.zStart} onChange={handleChange.bind(props, 'zStart')} />
+            <input className='form-control' type='text' value={props.farmArea.zStart} onChange={handleChange.bind(props, 'zStart')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X End</span></label>
-            <input className='form-control' type='text' value={props.plantArea.xEnd} onChange={handleChange.bind(props, 'xEnd')} />
+            <input className='form-control' type='text' value={props.farmArea.xEnd} onChange={handleChange.bind(props, 'xEnd')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z End</span></label>
-            <input className='form-control' type='text' value={props.plantArea.zEnd} onChange={handleChange.bind(props, 'zEnd')} />
+            <input className='form-control' type='text' value={props.farmArea.zEnd} onChange={handleChange.bind(props, 'zEnd')} />
           </div>
         </div>
       </div>
-
+      <div className='row mt-2'>
+        <div className='col-3'>
+          <button className='btn btn-danger form-control' onClick={handleDeleteFarmArea}>Delete Area</button>
+        </div>
+      </div>
     </div>
 
   )
@@ -91,4 +81,4 @@ const mapStateToProps = (reducers) => {
   return { socket, selectedSocketId }
 }
 
-export default connect(mapStateToProps, null)(HarvestArea)
+export default connect(mapStateToProps, null)(FarmArea)
