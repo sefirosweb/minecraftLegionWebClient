@@ -28,6 +28,31 @@ const BreederJob = (props) => {
     <>
       <div className='row'>
         <div className='col-12'>
+          <h4>Animal max by area</h4>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-12'>
+          <form>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Cow</label>
+              <div className="col-sm-2">
+                <input type="text" className="form-control" />
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Sheep</label>
+              <div className="col-sm-2">
+                <input type="text" className="form-control" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-12'>
           <h4>Insert new farm area</h4>
           {renderFarmArea()}
         </div>
