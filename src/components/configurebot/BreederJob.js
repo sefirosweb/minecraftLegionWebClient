@@ -16,6 +16,22 @@ const BreederJob = (props) => {
     })
   }
 
+  const handleUpdateAnimal = (animal, event) => {
+    const value = event.target.value
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: props.selectedSocketId,
+      value: {
+        configToChange: 'changeAnimalValue',
+        value: {
+          id: props.id,
+          animal,
+          value
+        }
+      }
+    })
+  }
+
   const renderFarmArea = () => {
     return botConfig.config.farmAreas.map((farmArea, index) => {
       return (
@@ -38,13 +54,13 @@ const BreederJob = (props) => {
             <div className="form-group row">
               <label className="col-sm-2 col-form-label">Cow</label>
               <div className="col-sm-2">
-                <input type="text" className="form-control" />
+                <input type="text" className="form-control" value={botConfig.config.farmAnimal.cow} onChange={handleUpdateAnimal.bind(props, 'cow')} />
               </div>
             </div>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label">Sheep</label>
               <div className="col-sm-2">
-                <input type="text" className="form-control" />
+                <input type="text" className="form-control" value={botConfig.config.farmAnimal.sheep} onChange={handleUpdateAnimal.bind(props, 'sheep')} />
               </div>
             </div>
           </form>
