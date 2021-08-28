@@ -31,13 +31,10 @@ const MinerJob = (props) => {
 
   const handleChangePosMiner = (event) => {
     const pos = Number(event.target.value)
-    console.log(event.target.value)
 
     if (!Number.isInteger(pos) && event.target.value !== '-') {
       return null
     }
-
-    console.log('ok')
 
     const coord = event.target.id
     props.socket.emit('sendAction', {
