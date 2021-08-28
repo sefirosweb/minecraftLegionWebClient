@@ -52,6 +52,12 @@ const BreederJob = (props) => {
         <div className='col-12'>
           <form>
             <div className="form-group row">
+              <label className="col-sm-2 col-form-label">Feed every seconds</label>
+              <div className="col-sm-2">
+                <input type="text" className="form-control" value={botConfig.config.farmAnimal.seconds} onChange={handleUpdateAnimal.bind(props, 'seconds')} />
+              </div>
+            </div>
+            <div className="form-group row">
               <label className="col-sm-2 col-form-label">Cow</label>
               <div className="col-sm-2">
                 <input type="text" className="form-control" value={botConfig.config.farmAnimal.cow} onChange={handleUpdateAnimal.bind(props, 'cow')} />
