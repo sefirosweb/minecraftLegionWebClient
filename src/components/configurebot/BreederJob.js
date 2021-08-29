@@ -102,7 +102,7 @@ const BreederJob = (props) => {
                 <input type="text" className="form-control" value={botConfig.config.farmAnimal.panda} onChange={handleUpdateAnimal.bind(props, 'panda')} />
               </div>
             </div>
-            
+
             <div className="form-group row">
               <label className="col-sm-2 col-form-label">Wolf</label>
               <div className="col-sm-2">
@@ -111,6 +111,10 @@ const BreederJob = (props) => {
               <label className="col-sm-2 col-form-label">Cat</label>
               <div className="col-sm-2">
                 <input type="text" className="form-control" value={botConfig.config.farmAnimal.cat} onChange={handleUpdateAnimal.bind(props, 'cat')} />
+              </div>
+              <label className="col-sm-2 col-form-label">Rabbit</label>
+              <div className="col-sm-2">
+                <input type="text" className="form-control" value={botConfig.config.farmAnimal.rabbit} onChange={handleUpdateAnimal.bind(props, 'rabbit')} />
               </div>
             </div>
 
