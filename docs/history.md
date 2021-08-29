@@ -1,3 +1,5 @@
+# 1.10
+* Add breeder job info tab
 ## 1.0.0
 * Added plants in farmer job
 * Added see events at real time
