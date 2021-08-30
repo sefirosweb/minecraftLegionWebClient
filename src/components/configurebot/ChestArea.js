@@ -1,11 +1,9 @@
 import { connect } from 'react-redux'
 
-
-
 const chestArea = (props) => {
   const handleChange = (type, event) => {
-    const copyFarm = { ...props.chestArea }
-    copyFarm[type] = event.target.value
+    const copyChest = { ...props.chestArea }
+    copyChest[type] = event.target.value
 
     props.socket.emit('sendAction', {
       action: 'changeConfig',
@@ -14,7 +12,7 @@ const chestArea = (props) => {
         configToChange: 'changeChestArea',
         value: {
           id: props.id,
-          chestArea: copyFarm
+          chestArea: copyChest
         }
       }
     })

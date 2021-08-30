@@ -18,9 +18,9 @@ const SorterJob = (props) => {
 
 
   const renderChestArea = () => {
-    return botConfig.config.farmAreas.map((farmArea, index) => {
+    return botConfig.config.chestAreas.map((chestArea, index) => {
       return (
-        <ChestArea key={index} id={index} farmArea={farmArea} />
+        <ChestArea key={index} id={index} chestArea={chestArea} />
       )
     })
   }
