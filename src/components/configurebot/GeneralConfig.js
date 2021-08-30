@@ -164,8 +164,10 @@ const GeneralConfig = (props) => {
                 <input className='form-check-input' type='radio' name='gridJob' value='breeder' onChange={handleChangeJob} checked={botConfig.config.job === 'breeder'} />
                 <label className='form-check-label'>Breeder</label>
               </div>
-              <div className='form-check' />
-
+              <div className='form-check'>
+                <input className='form-check-input' type='radio' name='gridJob' value='sorter' onChange={handleChangeJob} checked={botConfig.config.job === 'sorter'} />
+                <label className='form-check-label'>Sorter</label>
+              </div>
             </div>
           </fieldset>
 
