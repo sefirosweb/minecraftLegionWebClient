@@ -1,4 +1,6 @@
-# 1.10
+1.2.0
+* Added sorter job tab
+# 1.1.0
 * Add breeder job info tab
 ## 1.0.0
 * Added plants in farmer job
