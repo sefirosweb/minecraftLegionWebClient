@@ -121,6 +121,16 @@ const GuardJob = (props) => {
     })
   }
 
+  const handleButtonClearPositions = (event) => {
+    props.socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'clearAllPositions'
+      }
+    })
+  }
+
   const copyPatrol = (event) => {
     props.socket.emit('sendAction', {
       action: 'changeConfig',
@@ -152,8 +162,11 @@ const GuardJob = (props) => {
             </fieldset>
           </form>
         </div>
-        <div className='col-6'>
+        <div className='col-3'>
           <button type='button' className='btn btn-primary' onClick={handleButtonSavePositionHasMaster}>Copy the same position as the master</button>
+        </div>
+        <div className='col-3'>
+          <button type='button' className='btn btn-danger' onClick={handleButtonClearPositions}>Clear all positions</button>
         </div>
       </div>
 
