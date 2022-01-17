@@ -4,6 +4,7 @@ import ItemsAviable from "./ItemsAviable";
 import TrashIcon from "./Icons/Trash";
 import ArrowUp from "./Icons/ArrowUp";
 import ArrowDown from "./Icons/ArrowDown";
+import { Button, Col, Form, Row } from "react-bootstrap";
 
 const Chest = (props) => {
   const [item, setItem] = useState("");
@@ -113,6 +114,18 @@ const Chest = (props) => {
         pos: event.target.value,
         chestId: props.id,
         coord: event.target.dataset.coord,
+      },
+    });
+  };
+
+  const handleCopyPositionMaster = () => {
+    props.socket.emit("sendAction", {
+      action: "changeConfig",
+      socketId: props.socketId,
+      value: {
+        configToChange: "changeChestPosMaster",
+        chestId: props.id,
+        value: props.master,
       },
     });
   };
@@ -264,43 +277,38 @@ const Chest = (props) => {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-12">
-          <form className="form-inline">
-            <label>Position XYZ:</label>
-            <div className="form-group mx-sm-3 mb-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="X"
-                data-coord="x"
-                value={props.chest.position.x ? props.chest.position.x : ""}
-                onChange={handleChangeChestPos}
-              />
-            </div>
-            <div className="form-group mx-sm-3 mb-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Y"
-                data-coord="y"
-                value={props.chest.position.y ? props.chest.position.y : ""}
-                onChange={handleChangeChestPos}
-              />
-            </div>
-            <div className="form-group mx-sm-3 mb-2">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Z"
-                data-coord="z"
-                value={props.chest.position.z ? props.chest.position.z : ""}
-                onChange={handleChangeChestPos}
-              />
-            </div>
-          </form>
-        </div>
-      </div>
+      <Row>
+        <Form.Group as={Col}>
+          <Form.Label>X</Form.Label>
+          <Form.Control
+            data-coord="x"
+            value={props.chest.position.x ? props.chest.position.x : ""}
+            onChange={handleChangeChestPos}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col}>
+          <Form.Label>Y</Form.Label>
+          <Form.Control
+            data-coord="y"
+            value={props.chest.position.y ? props.chest.position.y : ""}
+            onChange={handleChangeChestPos}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col}>
+          <Form.Label>Z</Form.Label>
+          <Form.Control
+            data-coord="z"
+            value={props.chest.position.z ? props.chest.position.z : ""}
+            onChange={handleChangeChestPos}
+          />
+        </Form.Group>
+      </Row>
+
+      <Button type="button" onClick={handleCopyPositionMaster}>
+        Copy position same has master
+      </Button>
 
       <div className="row mt-3">
         <div className="col-12">
@@ -335,8 +343,8 @@ const Chest = (props) => {
 
 const mapStateToProps = (reducers) => {
   const { configurationReducer } = reducers;
-  const { socket } = configurationReducer;
-  return { socket };
+  const { socket, master } = configurationReducer;
+  return { socket, master };
 };
 
 export default connect(mapStateToProps, null)(Chest);
