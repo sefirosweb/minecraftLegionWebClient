@@ -35,35 +35,13 @@ const GeneralConfig = (props) => {
     });
   };
 
-  const handleMovePosNext = (index, event) => {
+  const changeConfig = (configToChange, value) => {
     props.socket.emit("sendAction", {
       action: "changeConfig",
       socketId: botConfig.socketId,
       value: {
-        configToChange: "moveItemCanBeEatNext",
-        value: index,
-      },
-    });
-  };
-
-  const handleMovePosPrev = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "moveItemCanBeEatPrev",
-        value: index,
-      },
-    });
-  };
-
-  const handleRemoveItem = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "deleteItemCanBeEat",
-        value: index,
+        configToChange,
+        value,
       },
     });
   };
@@ -75,11 +53,17 @@ const GeneralConfig = (props) => {
           <th scope="row">{index + 1}</th>
           <td>{food}</td>
           <td>
-            <ArrowUp onClick={handleMovePosPrev.bind(this, index)} />{" "}
-            <ArrowDown onClick={handleMovePosNext.bind(this, index)} />
+            <ArrowUp
+              onClick={() => changeConfig("moveItemCanBeEatPrev", index)}
+            />{" "}
+            <ArrowDown
+              onClick={() => changeConfig("moveItemCanBeEatNext", index)}
+            />
           </td>
           <td>
-            <TrashIcon onClick={handleRemoveItem.bind(this, index)} />
+            <TrashIcon
+              onClick={() => changeConfig("deleteItemCanBeEat", index)}
+            />
           </td>
         </tr>
       );
@@ -104,17 +88,6 @@ const GeneralConfig = (props) => {
       value: {
         configToChange: "pickUpItems",
         value: event.target.value,
-      },
-    });
-  };
-
-  const handleChangeRandomFarmArea = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "randomFarmArea",
-        value: !botConfig.config.randomFarmArea,
       },
     });
   };
@@ -253,7 +226,9 @@ const GeneralConfig = (props) => {
 
           <FormCheck
             botConfig={botConfig}
-            onChange={handleChangeRandomFarmArea}
+            onChange={() =>
+              changeConfig("randomFarmArea", !botConfig.config.randomFarmArea)
+            }
             label={`Random Farmer area?`}
             checked={botConfig.config.randomFarmArea}
           />
