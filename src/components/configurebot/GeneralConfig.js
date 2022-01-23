@@ -71,14 +71,7 @@ const GeneralConfig = (props) => {
   };
 
   const handleChangeJob = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "job",
-        value: event.target.value,
-      },
-    });
+    changeConfig("job", event.target.value);
   };
 
   const handleChangePickUpItems = (event) => {
