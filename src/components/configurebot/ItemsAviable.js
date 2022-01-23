@@ -48,8 +48,6 @@ const ItemsAviable = (props) => {
       return itemIndex.displayName.match(matchRegularExpression)
     })
 
-    console.log(mcData)
-
     if (items.length > 10) {
       items.splice(0, items.length - 10)
     }
