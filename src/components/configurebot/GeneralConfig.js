@@ -5,6 +5,7 @@ import ItemsAviable from "./ItemsAviable";
 import TrashIcon from "./Icons/Trash";
 import ArrowUp from "./Icons/ArrowUp";
 import ArrowDown from "./Icons/ArrowDown";
+import FormCheck from "../forms/FormCheck";
 
 const GeneralConfig = (props) => {
   const [item, setItem] = useState("");
@@ -113,7 +114,7 @@ const GeneralConfig = (props) => {
       socketId: botConfig.socketId,
       value: {
         configToChange: "randomFarmArea",
-        value: event.target.value,
+        value: !botConfig.config.randomFarmArea,
       },
     });
   };
@@ -250,35 +251,12 @@ const GeneralConfig = (props) => {
             </div>
           </fieldset>
 
-          <fieldset className="form-group row">
-            <legend className="col-form-label col-sm-4 float-sm-left pt-0">
-              Random Farmer area?
-            </legend>
-            <div className="col-sm-8">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gridRandomFarmArea"
-                  value="true"
-                  onChange={handleChangeRandomFarmArea}
-                  checked={botConfig.config.randomFarmArea === true}
-                />
-                <label className="form-check-label">Yes</label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gridRandomFarmArea"
-                  value="false"
-                  onChange={handleChangeRandomFarmArea}
-                  checked={botConfig.config.randomFarmArea === false}
-                />
-                <label className="form-check-label">no</label>
-              </div>
-            </div>
-          </fieldset>
+          <FormCheck
+            botConfig={botConfig}
+            onChange={handleChangeRandomFarmArea}
+            label={`Random Farmer area?`}
+            checked={botConfig.config.randomFarmArea}
+          />
         </div>
 
         <div className="col-4">
