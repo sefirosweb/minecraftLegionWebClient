@@ -74,32 +74,10 @@ const GeneralConfig = (props) => {
     changeConfig("job", event.target.value);
   };
 
-  const handleChangeAllowSprinting = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "allowSprinting",
-        value: event.target.value,
-      },
-    });
-  };
-
-  const handleChangeCanDig = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "canDig",
-        value: event.target.value,
-      },
-    });
-  };
-
   return (
     <>
       <div className="row">
-        <div className="col-8">
+        <div className="col-7">
           <fieldset className="form-group row">
             <legend className="col-form-label col-sm-4 float-sm-left pt-0">
               Job
@@ -195,68 +173,26 @@ const GeneralConfig = (props) => {
           />
         </div>
 
-        <div className="col-4">
-          <fieldset className="form-group row">
-            <legend className="col-form-label col-sm-6 float-sm-left pt-0">
-              Allow Sprint
-            </legend>
-            <div className="col-sm-6">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gridAllowSprinting"
-                  value="true"
-                  onChange={handleChangeAllowSprinting}
-                  checked={botConfig.config.allowSprinting === true}
-                />
-                <label className="form-check-label">Yes</label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gridAllowSprinting"
-                  value="false"
-                  onChange={handleChangeAllowSprinting}
-                  checked={botConfig.config.allowSprinting === false}
-                />
-                <label className="form-check-label">no</label>
-              </div>
-            </div>
-          </fieldset>
+        <div className="col-5">
+          <FormCheck
+            id={"allowSprinting"}
+            onChange={() =>
+              changeConfig("allowSprinting", !botConfig.config.allowSprinting)
+            }
+            label={`Allow Sprint`}
+            checked={botConfig.config.allowSprinting}
+          />
 
-          <fieldset className="form-group row">
-            <legend className="col-form-label col-sm-6 float-sm-left pt-0">
-              Can dig?
-              <br />
-              (!) Caution can stuck the bot
-            </legend>
-            <div className="col-sm-6">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gridCanDig"
-                  value="true"
-                  onChange={handleChangeCanDig}
-                  checked={botConfig.config.canDig === true}
-                />
-                <label className="form-check-label">Yes</label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="gridCanDig"
-                  value="false"
-                  onChange={handleChangeCanDig}
-                  checked={botConfig.config.canDig === false}
-                />
-                <label className="form-check-label">no</label>
-              </div>
-            </div>
-          </fieldset>
+          <FormCheck
+            id={"allowScanDigprinting"}
+            onChange={() => changeConfig("canDig", !botConfig.config.canDig)}
+            label={
+              <>
+                Can dig? <br /> (!) Caution can stuck the bot
+              </>
+            }
+            checked={botConfig.config.canDig}
+          />
         </div>
       </div>
 
