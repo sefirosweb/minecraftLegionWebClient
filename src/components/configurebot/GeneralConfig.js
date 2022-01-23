@@ -10,30 +10,10 @@ import FormCheck from "../forms/FormCheck";
 const GeneralConfig = (props) => {
   const [item, setItem] = useState("");
   const botConfig = props.getBotBySocketId(props.selectedSocketId);
+
   if (botConfig === undefined) {
     return null;
   }
-
-  const handleItemChange = (event) => {
-    setItem(event.target.value);
-  };
-
-  const handleInsertItem = (event) => {
-    if (item === "") {
-      return null;
-    }
-
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "InsertItemCanBeEat",
-        value: {
-          item,
-        },
-      },
-    });
-  };
 
   const changeConfig = (configToChange, value) => {
     props.socket.emit("sendAction", {
@@ -44,6 +24,18 @@ const GeneralConfig = (props) => {
         value,
       },
     });
+  };
+
+  const handleItemChange = (event) => {
+    setItem(event.target.value);
+  };
+
+  const handleInsertItem = (event) => {
+    if (item === "") {
+      return null;
+    }
+
+    changeConfig("InsertItemCanBeEat", { item });
   };
 
   const renderItemsTable = () => {
