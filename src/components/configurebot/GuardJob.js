@@ -4,6 +4,7 @@ import { getBotBySocketId } from "../../actions/botsAction";
 import ArrowUp from "./Icons/ArrowUp";
 import ArrowDown from "./Icons/ArrowDown";
 import TrashIcon from "./Icons/Trash";
+import FormCheck from "../forms/FormCheck";
 
 const GuardJob = (props) => {
   const [x, setX] = useState("");
@@ -14,6 +15,17 @@ const GuardJob = (props) => {
   if (botConfig === undefined) {
     return null;
   }
+
+  const changeConfig = (configToChange, value) => {
+    props.socket.emit("sendAction", {
+      action: "changeConfig",
+      socketId: botConfig.socketId,
+      value: {
+        configToChange,
+        value,
+      },
+    });
+  };
 
   const changePos = (event) => {
     const value = Number(event.target.value);
@@ -44,63 +56,27 @@ const GuardJob = (props) => {
       return null;
     }
 
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "addPatrol",
-        value: {
-          x: Number(x),
-          y: Number(y),
-          z: Number(z),
-        },
-      },
+    changeConfig("addPatrol", {
+      x: Number(x),
+      y: Number(y),
+      z: Number(z),
     });
   };
 
   const handleRemovePos = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "removePatrol",
-        value: index,
-      },
-    });
+    changeConfig("removePatrol", index);
   };
 
   const handleMovePosNext = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "movePatrolNext",
-        value: index,
-      },
-    });
+    changeConfig("movePatrolNext", index);
   };
 
   const handleMovePosPrev = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "movePatrolPrev",
-        value: index,
-      },
-    });
+    changeConfig("movePatrolPrev", index);
   };
 
   const handleButtonSavePositionHasMaster = (event) => {
-    console.log("handle save");
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "savePositionHasMaster",
-        value: props.master,
-      },
-    });
+    changeConfig("savePositionHasMaster", props.master);
   };
 
   const renderPatrolTable = () => {
@@ -127,73 +103,27 @@ const GuardJob = (props) => {
     });
   };
 
-  const handleCHangeHelp = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "helpFriend",
-        value: event.target.value,
-      },
-    });
-  };
 
   const handleButtonClearPositions = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "clearAllPositions",
-      },
-    });
+    changeConfig("clearAllPositions");
   };
 
   const copyPatrol = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: botConfig.socketId,
-      value: {
-        configToChange: "copyPatrol",
-        value: props.master,
-      },
-    });
+    changeConfig("copyPatrol", props.master);
   };
 
   return (
     <>
       <div className="row">
         <div className="col-6">
-          <form>
-            <fieldset className="form-group row">
-              <legend className="col-form-label col-sm-3 float-sm-left pt-0">
-                Help Friend?
-              </legend>
-              <div className="col-sm-9">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="checkHelpFriend"
-                    value="true"
-                    onChange={handleCHangeHelp}
-                    checked={botConfig.config.helpFriends === true}
-                  />
-                  <label className="form-check-label">Yes</label>
-                </div>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="checkHelpFriend"
-                    value="false"
-                    onChange={handleCHangeHelp}
-                    checked={botConfig.config.helpFriends === false}
-                  />
-                  <label className="form-check-label">No</label>
-                </div>
-              </div>
-            </fieldset>
-          </form>
+          <FormCheck
+            id={"helpFriends"}
+            onChange={() =>
+              changeConfig("helpFriends", !botConfig.config.helpFriends)
+            }
+            label={`Help Friend?`}
+            checked={botConfig.config.helpFriends}
+          />
         </div>
         <div className="col-3">
           <button
