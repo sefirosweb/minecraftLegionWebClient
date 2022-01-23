@@ -2,7 +2,8 @@ import React from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
 
-export default ({ id, checked, label, onChange }) => {
+
+const FormCheck = ({ id, checked, label, onChange }) => {
     return (
         <Form>
             <Form.Group
@@ -27,3 +28,5 @@ export default ({ id, checked, label, onChange }) => {
         </Form>
     )
 }
+
+export default FormCheck;
