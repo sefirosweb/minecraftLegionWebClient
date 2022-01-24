@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import {
   updateMasters,
+  updateChests,
   setBots,
   addLog,
   updateBotStatus,
@@ -57,6 +58,7 @@ class Layout extends React.Component {
           value: this.props.master,
         });
         this.socket.emit("getBotsOnline");
+        this.socket.emit("sendAction", { action: "getChests" });
       } else {
         this.props.setLoged(false);
       }
@@ -78,6 +80,12 @@ class Layout extends React.Component {
 
     this.socket.on("mastersOnline", (data) => {
       this.props.updateMasters(data);
+    });
+
+    this.socket.on("action", ({ type, value }) => {
+      if (type === "getChests") {
+        this.props.updateChests(value);
+      }
     });
 
     this.socket.on("botsOnline", (botsOnline) => {
@@ -153,6 +161,7 @@ const mapDispatchToProps = {
   setConfig,
   setOnlineServer,
   updateMasters,
+  updateChests,
   setBots,
   addLog,
   updateBotStatus,

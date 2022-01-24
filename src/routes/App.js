@@ -7,6 +7,7 @@ import NotFound from '../pages/NotFound'
 import Dashboard from '../pages/Dashboard'
 import Configuration from '../pages/Configuration'
 import Masterlist from '../pages/Masterlist'
+import Chests from '../pages/Chests'
 
 function App () {
   return (
@@ -16,6 +17,7 @@ function App () {
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/configuration' component={Configuration} />
           <Route exact path='/masterlist' component={Masterlist} />
+          <Route exact path='/chests' component={Chests} />
           <Route path='/configurebot' component={ConfigureBotRoute} />
           <Redirect exact from='/' to='/dashboard' />
           <Route component={NotFound} />

@@ -1,4 +1,4 @@
-import { SET_BOTS, SET_LOGS, SET_MASTERS } from '../types/botsType'
+import { SET_BOTS, SET_LOGS, SET_MASTERS, SET_CHESTS } from '../types/botsType'
 
 export const setBots = (bots) => (dispatch) => {
   dispatch({
@@ -39,6 +39,13 @@ export const updateMasters = (newMasters) => (dispatch) => {
   dispatch({
     type: SET_MASTERS,
     payload: newMasters
+  })
+}
+
+export const updateChests = (newChests) => (dispatch) => {
+  dispatch({
+    type: SET_CHESTS,
+    payload: newChests
   })
 }
 
