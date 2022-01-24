@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import chest from "./chest.png";
 
 import Canvas from "./Canvas";
-import windowSlotsCoords from "./windowSlotsCoords";
 
-import mcAssets from "../components/configurebot/ItemsAssets";
+import windowSlotsCoords from "../utils/windowSlotsCoords";
+import { mcAssets } from "../utils/mc";
 
 const Chests = ({ loged, chests, history }) => {
   if (!loged) {

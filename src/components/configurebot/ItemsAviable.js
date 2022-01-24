@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 
-const MC_VERSION = '1.16.5'
-const mcData = require('minecraft-data')(MC_VERSION)
+import { mcData } from "../../utils/mc";
+
 const plants = [
   { displayName: 'Carrot', name: 'carrot' },
   { displayName: 'Potato', name: 'potato' },
