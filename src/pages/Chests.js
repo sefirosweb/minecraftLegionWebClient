@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 import { connect } from "react-redux";
-import chest from "./chest.png";
+import chest from "../images/chest.png";
 
 import Canvas from "./Canvas";
 
