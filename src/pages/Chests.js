@@ -4,15 +4,21 @@ import { Card } from "react-bootstrap";
 import { connect } from "react-redux";
 import chest from "./chest.png";
 
+import Canvas from "./Canvas";
+// import windowSlotsCoords from "./windowSlotsCoords";
+
 const Chests = ({ loged, chests, history }) => {
   if (!loged) {
     history.push("/configuration");
     return null;
   }
 
-  
+  const draw = (ctx) => {
+    const base_image = new Image();
+    base_image.src = chest
+    base_image.onload = () => ctx.drawImage(base_image, 0, 0);
+  };
 
-  console.log(chests);
 
   return (
     <>
@@ -20,16 +26,10 @@ const Chests = ({ loged, chests, history }) => {
         <Card.Body>
           <Card.Title>Chests</Card.Title>
           <Card.Text>Contain all chests in memory of server</Card.Text>
-          {chests.map((c, key) => {
-            console.log(c);
-            return (
-              <div key={key}>
-                {/* <canvas id="windowCanvas" width="352" height="332"> */}
-                <img alt="" id="windowImage" src={chest} />
+          <Canvas draw={draw} width={352} height={332} />
 
-                {/* </canvas> */}
-              </div>
-            );
+          {chests.map((c, key) => {
+            return <div key={key}></div>;
           })}
         </Card.Body>
       </Card>
