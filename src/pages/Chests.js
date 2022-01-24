@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import chest from "./chest.png";
 
 import Canvas from "./Canvas";
-// import windowSlotsCoords from "./windowSlotsCoords";
+import windowSlotsCoords from "./windowSlotsCoords";
+
+import mcAssets from "../components/configurebot/ItemsAssets";
 
 const Chests = ({ loged, chests, history }) => {
   if (!loged) {
@@ -15,10 +17,46 @@ const Chests = ({ loged, chests, history }) => {
 
   const draw = (ctx) => {
     const base_image = new Image();
-    base_image.src = chest
+    base_image.src = chest;
     base_image.onload = () => ctx.drawImage(base_image, 0, 0);
-  };
 
+    for (const item in chests[0].slots) {
+      if (!chests[0].slots[item]) continue;
+
+      const inventorySlot =
+        windowSlotsCoords["chest"][chests[0].slots[item].slot];
+
+      const itemInfo = chests[0].slots[item];
+      const texture = mcAssets.textureContent[itemInfo.name].texture;
+
+      const itemImage = new Image();
+      itemImage.src = texture;
+
+      itemImage.onload = function () {
+        // Draw item image
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(itemImage, inventorySlot[0], inventorySlot[1], 32, 32);
+
+        // Draw item count
+        if (chests[0].slots[item].count > 1) {
+          ctx.font = "20px monospace";
+          ctx.fillStyle = "black";
+          ctx.textAlign = "end";
+          ctx.fillText(
+            chests[0].slots[item].count,
+            inventorySlot[0] + 33,
+            inventorySlot[1] + 31
+          );
+          ctx.fillStyle = "white";
+          ctx.fillText(
+            chests[0].slots[item].count,
+            inventorySlot[0] + 32,
+            inventorySlot[1] + 30
+          );
+        }
+      };
+    }
+  };
 
   return (
     <>

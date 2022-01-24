@@ -10,6 +10,7 @@
     "express": "4.17.1",
     "install": "0.13.0",
     "js-cookie": "3.0.1",
+    "minecraft-assets": "^1.8.2",
     "minecraft-data": "2.93.0",
     "node-fetch": "3.0.0",
     "npm": "7.24.1",
