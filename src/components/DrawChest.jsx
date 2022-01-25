@@ -4,12 +4,13 @@ import smallChest from "../images/smallChest.png";
 import largeChest from "../images/largeChest.png";
 import Canvas from "./Canvas";
 import windowSlotsCoords from '../utils/windowSlotsCoords';
+import { Card, Col, Row } from 'react-bootstrap';
 
 
 const DrawChest = ({ chest }) => {
 
-    console.log(chest.slots.length)
     const draw = (ctx) => {
+        const chestType = chest.slots.length === 27 ? 'chest' : 'large-chest'
         const base_image = new Image();
         base_image.src = chest.slots.length === 27 ? smallChest : largeChest
         base_image.onload = () => ctx.drawImage(base_image, 0, 0);
@@ -18,7 +19,7 @@ const DrawChest = ({ chest }) => {
             if (!chest.slots[item]) continue;
 
             const inventorySlot =
-                windowSlotsCoords["chest"][chest.slots[item].slot];
+                windowSlotsCoords[chestType][chest.slots[item].slot];
 
             const itemInfo = chest.slots[item];
             const texture = mcAssets.textureContent[itemInfo.name].texture;
@@ -52,11 +53,40 @@ const DrawChest = ({ chest }) => {
         }
     }
 
-    return <Canvas
-        draw={draw}
-        width={352}
-        height={chest.slots.length === 27 ? 150 : 260}
-    />
+    return (
+        <div>
+            <Card className='m-3'>
+                <Card.Body>
+                    <Card.Title>Chests</Card.Title>
+                    <Card.Text>
+                        <Row>
+                            <Col>
+                                <span className='badge bg-primary text-white'>
+                                    X: {chest.position.x}
+                                </span>
+                            </Col>
+                            <Col>
+                                <span className='badge bg-warning text-dark'>
+                                    Y: {chest.position.y}
+                                </span>
+                            </Col>
+                            <Col>
+                                <span className='badge bg-secondary text-white'>
+                                    Z: {chest.position.z}
+                                </span>
+                            </Col>
+                        </Row>
+                    </Card.Text>
+                    <Canvas
+                        draw={draw}
+                        width={352}
+                        height={chest.slots.length === 27 ? 150 : 260}
+                    />
+                </Card.Body>
+            </Card>
+        </div>
+
+    )
 }
 
 export default DrawChest
