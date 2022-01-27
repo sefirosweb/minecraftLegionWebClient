@@ -108,6 +108,17 @@ const GeneralConfig = (props) => {
                 />
                 <label className="form-check-label">Guard</label>
               </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="gridJob"
+                  value="crafter"
+                  onChange={handleChangeJob}
+                  checked={botConfig.config.job === "crafter"}
+                />
+                <label className="form-check-label">Crafter</label>
+              </div>
             </div>
             <div className="col-sm-2">
               <div className="form-check">
