@@ -167,8 +167,8 @@ const Chest = (props) => {
 
   return (
     <div className={`p-3 mb-3 border rounded ${renderSwitch()}`}>
-      <div className="row">
-        <div className="col-6">
+      <Row>
+        <Col xs={6}>
           <div className="form-group row">
             <label className="col-sm-4 col-form-label font-weight-bold">
               Chest Nº{props.id}
@@ -182,18 +182,20 @@ const Chest = (props) => {
               />
             </div>
           </div>
-        </div>
-        <div className="col-4">
+        </Col>
+
+        <Col xs={4}>
           <div className="float-right">Sort chest:</div>
-        </div>
-        <div className="col-2">
+        </Col>
+
+        <Col xs={2}>
           <div className="float-right">
             {" "}
             <ArrowUp onClick={handleMovePosPrev} />{" "}
             <ArrowDown onClick={handleMovePosNext} />
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
       <div className="row">
         <div className="col-6">
