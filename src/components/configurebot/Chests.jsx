@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getBotBySocketId } from "../../actions/botsAction";
 import Chest from "./Chest";
@@ -38,31 +38,28 @@ const Chests = (props) => {
     <>
       <Row>
         <Col>
-          <label>
-            When the bot is not ready, they go to chest to withdraw or deposit
-            items <br />
-            On withdraw try to get items in list,
-            <br />
-            On deposit EXCLUDE items in list,
-            <br />
-            (!) The priority of chest is important for deposit / withdraw items
-          </label>
+          <ListGroup className='mb-3'>
+            <ListGroup.Item>When the bot is not ready, they go to chest to withdraw or deposit items</ListGroup.Item>
+            <ListGroup.Item variant="success">Withdraw the items selected</ListGroup.Item>
+            <ListGroup.Item variant="warning">Deposit: only the items selected</ListGroup.Item>
+            <ListGroup.Item variant="danger">Deposit all: excluding item to deposit selected</ListGroup.Item>
+            <ListGroup.Item variant="dark">(!) The priority of chest is important for deposit / withdraw items in order</ListGroup.Item>
+          </ListGroup>
         </Col>
       </Row>
 
       {renderChests()}
 
-      <div className="row mb-5">
-        <div className="col-12">
-          <button
-            type="button"
-            className="btn btn-success"
+      <Row className='mb-5'>
+        <Col>
+          <Button
+            variant="success"
             onClick={handleInsertNewChest}
           >
             Insert New Chest
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Col>
+      </Row>
     </>
   );
 };
