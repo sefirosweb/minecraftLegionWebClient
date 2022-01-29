@@ -3,6 +3,7 @@ import React from 'react'
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getBotBySocketId } from "../../actions/botsAction";
+import FormCheck from '../forms/FormCheck';
 import Chest from './Chest.jsx'
 
 const Chests = (props) => {
@@ -11,14 +12,19 @@ const Chests = (props) => {
     return null;
   }
 
-  const handleInsertNewChest = (event) => {
+  const changeConfig = (configToChange, value) => {
     props.socket.emit("sendAction", {
       action: "changeConfig",
       socketId: botConfig.socketId,
       value: {
-        configToChange: "insertNewChest",
+        configToChange,
+        value,
       },
     });
+  };
+
+  const handleInsertNewChest = (event) => {
+    changeConfig("insertNewChest", '')
   };
 
   const renderChests = () => {
@@ -36,6 +42,17 @@ const Chests = (props) => {
 
   return (
     <>
+      <FormCheck
+        id={"firstPickUpItemsFromKnownChests"}
+        onChange={() => changeConfig("firstPickUpItemsFromKnownChests", !botConfig.config.firstPickUpItemsFromKnownChests)}
+        label={
+          <>
+            Use a memorized chest first?
+          </>
+        }
+        checked={botConfig.config.firstPickUpItemsFromKnownChests}
+      />
+
       <Row>
         <Col>
           <ListGroup className='mb-3'>
