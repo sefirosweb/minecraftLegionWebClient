@@ -63,38 +63,23 @@ const Chest = (props) => {
   };
 
   const handleRemoveItemFromChest = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "removeItemFromChest",
-        chestId: props.id,
-        itemIndex: index,
-      },
+    changeConfig("removeItemFromChest", {
+      chestId: props.id,
+      itemIndex: index,
     });
   };
 
   const handleChangeChestType = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "changeChestType",
-        value: event.target.value,
-        chestId: props.id,
-      },
+    changeConfig("changeChestType", {
+      value: event.target.value,
+      chestId: props.id,
     });
   };
 
   const handleChangeChestName = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "changeChestName",
-        value: event.target.value,
-        chestId: props.id,
-      },
+    changeConfig("changeChestName", {
+      value: event.target.value,
+      chestId: props.id,
     });
   };
 
@@ -105,27 +90,17 @@ const Chest = (props) => {
       return null;
     }
 
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "changeChestPos",
-        pos: event.target.value,
-        chestId: props.id,
-        coord: event.target.dataset.coord,
-      },
+    changeConfig("changeChestPos", {
+      pos: event.target.value,
+      chestId: props.id,
+      coord: event.target.dataset.coord,
     });
   };
 
   const handleCopyPositionMaster = () => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "changeChestPosMaster",
-        chestId: props.id,
-        value: props.master,
-      },
+    changeConfig("changeChestPosMaster", {
+      chestId: props.id,
+      master: props.master,
     });
   };
 
@@ -143,25 +118,11 @@ const Chest = (props) => {
   };
 
   const handleMovePosNext = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "moveChestNext",
-        value: props.id,
-      },
-    });
+    changeConfig("moveChestNext", props.id);
   };
 
   const handleMovePosPrev = (index, event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "moveChestPrev",
-        value: props.id,
-      },
-    });
+    changeConfig("moveChestPrev", props.id);
   };
 
   return (
