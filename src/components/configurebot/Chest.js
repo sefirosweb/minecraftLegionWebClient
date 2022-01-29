@@ -13,15 +13,19 @@ const Chest = (props) => {
   const chestId = `chest-${props.id}`;
   const radioId = `radio-${props.id}`;
 
-  const handleDeleteChest = (event) => {
+  const changeConfig = (configToChange, value) => {
     props.socket.emit("sendAction", {
       action: "changeConfig",
       socketId: props.socketId,
       value: {
-        configToChange: "deleteChest",
-        value: props.id,
+        configToChange,
+        value,
       },
     });
+  };
+
+  const handleDeleteChest = (event) => {
+    changeConfig("deleteChest", props.id);
   };
 
   const handleQuantityChange = (event) => {
@@ -36,15 +40,10 @@ const Chest = (props) => {
   };
 
   const handleInsertItemInChest = (event) => {
-    props.socket.emit("sendAction", {
-      action: "changeConfig",
-      socketId: props.socketId,
-      value: {
-        configToChange: "insertItemInChest",
-        chestId: props.id,
-        item,
-        quantity,
-      },
+    changeConfig("insertItemInChest", {
+      chestId: props.id,
+      item,
+      quantity,
     });
   };
 
@@ -197,8 +196,8 @@ const Chest = (props) => {
         </Col>
       </Row>
 
-      <div className="row">
-        <div className="col-6">
+      <Row>
+        <Col xs={6}>
           <div className="form-group">
             <label htmlFor="inputItem">Select Item</label>
             <input
@@ -212,9 +211,9 @@ const Chest = (props) => {
               <ItemsAviable item={item} />
             </datalist>
           </div>
-        </div>
+        </Col>
 
-        <div className="col-2">
+        <Col xs={2}>
           <div className="form-group">
             <label>Quantity</label>
             <input
@@ -224,9 +223,9 @@ const Chest = (props) => {
               onChange={handleQuantityChange}
             />
           </div>
-        </div>
+        </Col>
 
-        <div className="col-2">
+        <Col xs={2}>
           <div className="form-group">
             <label>Type</label>
             <div className="form-check">
@@ -263,9 +262,9 @@ const Chest = (props) => {
               <label className="form-check-label">Deposit All</label>
             </div>
           </div>
-        </div>
+        </Col>
 
-        <div className="col-2">
+        <Col xs={2}>
           <div className="form-group">
             <label>.</label>
             <button
@@ -276,8 +275,8 @@ const Chest = (props) => {
               Insert Item
             </button>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
       <Row>
         <Form.Group as={Col}>
