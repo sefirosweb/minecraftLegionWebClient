@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getBotBySocketId } from "../../actions/botsAction";
-import Chest from "./Chest";
+import Chest from './Chest.jsx'
 
 const Chests = (props) => {
   const botConfig = props.getBotBySocketId(props.selectedSocketId);
