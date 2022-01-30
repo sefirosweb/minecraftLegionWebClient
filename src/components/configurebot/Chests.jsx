@@ -52,6 +52,16 @@ const Chests = (props) => {
         }
         checked={botConfig.config.firstPickUpItemsFromKnownChests}
       />
+      <FormCheck
+        id={"canCraftItemWithdrawChest"}
+        onChange={() => changeConfig("canCraftItemWithdrawChest", !botConfig.config.canCraftItemWithdrawChest)}
+        label={
+          <>
+            Craft item if it is possible?
+          </>
+        }
+        checked={botConfig.config.canCraftItemWithdrawChest}
+      />
 
       <Row>
         <Col>
