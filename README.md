@@ -50,3 +50,5 @@ Set "Master" your name in minecraft, it is used for "follow" your orders in game
 Set "Server Bots (Used for connect to Bots Viewers)" it is used for see the inventory / view what does the bot
 
 Now you must have connected to the server
+
+![image](https://raw.githubusercontent.com/sefirosweb/minecraftLegionWebClient/master/docs/conection.png)
