@@ -52,3 +52,41 @@ Set "Server Bots (Used for connect to Bots Viewers)" it is used for see the inve
 Now you must have connected to the server
 
 ![image](https://raw.githubusercontent.com/sefirosweb/minecraftLegionWebClient/master/docs/conection.png)
+
+## Next usages
+
+For start again only you need to start docker and start the node:
+
+```
+docker run --rm -it --name minecraftLegionWebClient -p 3000:3000 --network minecraftLegionNetwork  -v $PWD:/home/app -w /home/app -u node node:16.13-bullseye /bin/bash
+```
+
+```
+npm start
+```
+
+## Manual update
+
+You need to "pull" the new code and install the new dependencies
+
+```
+git pull
+```
+
+Start docker:
+
+```
+docker run --rm -it --name minecraftLegionWebClient -p 3000:3000 --network minecraftLegionNetwork  -v $PWD:/home/app -w /home/app -u node node:16.13-bullseye /bin/bash
+```
+
+Install new dependencies:
+
+```
+npm install
+```
+
+Start bot
+
+```
+npm start
+```
