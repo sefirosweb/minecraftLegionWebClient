@@ -63,9 +63,9 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
       </Row>
 
       <Row>
-        <div className='col-10'>
+        <Col xs={10}>
           <Row>
-            <div className='col-12'>
+            <Col>
               <ul className='nav nav-tabs bg-dark'>
                 <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/generalconfig'>General Configuration</NavLink></li>
                 <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/itemstobeready'>Items To Be Ready</NavLink></li>
@@ -78,7 +78,7 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
                 <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/sorterjob'>Sorter Job</NavLink></li>
                 <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/processlist'>Process list</NavLink></li>
               </ul>
-            </div>
+            </Col>
           </Row>
           <Row>
             <Col>
@@ -87,7 +87,7 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
               </div>
             </Col>
           </Row>
-        </div>
+        </Col>
         <Col xs={2}>
           <RenderBotsOnlineList />
         </Col>
