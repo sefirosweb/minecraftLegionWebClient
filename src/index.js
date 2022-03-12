@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
 
 import reducers from './reducers/reducers_index'
+import { BrowserRouter } from 'react-router-dom'
 
 const store = createStore(
   reducers, // Todos los reducers
@@ -19,7 +20,9 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

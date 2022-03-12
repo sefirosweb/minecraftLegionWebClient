@@ -1,6 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/general.css";
+
 import Layout from "../components/Layout";
 import NotFound from "../pages/NotFound";
 import Dashboard from "../pages/Dashboard";
@@ -21,13 +25,21 @@ import ProcessList from "../components/configurebot/ProcessList";
 
 import ConfigureBotLayout from "../components/configurebot/ConfigureBotLayout";
 
-function App() {
+
+const App = ({ loged }) => {
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loged) {
+      navigate('/configuration')
+    }
+  }, [loged, navigate])
+
   return (
-    <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} /> 
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/configuration" element={<Configuration />} />
           <Route path="/masterlist" element={<Masterlist />} />
           <Route path="/chests" element={<Chests />} />
@@ -48,8 +60,13 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
   );
 }
 
-export default App;
+const mapStateToProps = (reducers) => {
+  const { configurationReducer } = reducers;
+  const { loged } = configurationReducer;
+  return { loged };
+};
+
+export default connect(mapStateToProps)(App);

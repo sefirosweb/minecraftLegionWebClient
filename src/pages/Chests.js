@@ -2,16 +2,8 @@ import React from "react";
 import { Card, CardGroup } from "react-bootstrap";
 import { connect } from "react-redux";
 import DrawChest from "../components/DrawChest";
-import { useNavigate } from "react-router-dom";
 
-const Chests = ({ loged, chests }) => {
-  let navigate = useNavigate();
-
-  if (!loged) {
-    navigate('/configuration')
-    return null;
-  }
-
+const Chests = ({ chests }) => {
   return (
     <>
       <Card>
@@ -30,11 +22,10 @@ const Chests = ({ loged, chests }) => {
 };
 
 const mapStateToProps = (reducers) => {
-  const { botsReducer, configurationReducer } = reducers;
-  const { loged } = configurationReducer;
+  const { botsReducer } = reducers;
   const { chests } = botsReducer;
 
-  return { chests, loged };
+  return { chests };
 };
 
 export default connect(mapStateToProps)(Chests);
