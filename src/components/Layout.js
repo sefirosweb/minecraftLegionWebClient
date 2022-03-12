@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import {
@@ -17,19 +17,23 @@ import {
 
 import NavbarLayout from "./NavbarLayout";
 import socketIOClient from "socket.io-client";
-import { Fragment } from "react";
 
-class Layout extends React.Component {
-  loadWebSocket = () => {
+const Layout = ({
+  socket, setSocket,
+  webServerSocketPort, webServerSocketURL, webServerSocketPassword,
+  setOnlineServer, setLoged, master, setBots, addLog, setConfig, children,
+  updateMasters, updateChests, updateBotStatus }) => {
+
+  useEffect(() => {
     console.log("Conecting to server...");
 
-    if (this.socket !== undefined) {
-      this.socket.disconnect();
-      this.socket.close();
+    if (socket !== undefined) {
+      socket.disconnect();
+      socket.close();
     }
 
-    this.socket = socketIOClient(
-      `${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`,
+    const socketConection = socketIOClient(
+      `${webServerSocketURL}:${webServerSocketPort}`,
       {
         withCredentials: true,
         extraHeaders: {
@@ -37,58 +41,60 @@ class Layout extends React.Component {
         },
       }
     );
-    this.props.setSocket(this.socket);
 
-    this.socket.on("connect", () => {
-      this.props.setOnlineServer(true);
+    setSocket(socketConection);
+
+    socketConection.on("connect", () => {
+      setOnlineServer(true);
       console.log(
-        `Connected to: ${this.props.webServerSocketURL}:${this.props.webServerSocketPort}`
+        `Connected to: ${webServerSocketURL}:${webServerSocketPort}`
       );
 
-      this.socket.emit("login", this.props.webServerSocketPassword);
+      socketConection.emit("login", webServerSocketPassword);
     });
 
-    this.socket.on("login", (authenticate) => {
-      console.log(authenticate);
+    socketConection.on("login", (authenticate) => {
       if (authenticate.auth) {
-        this.props.setLoged(true);
+        console.log('Logged in!');
+        setLoged(true);
 
-        this.socket.emit("sendAction", {
+        socketConection.emit("sendAction", {
           action: "addMaster",
-          value: this.props.master,
+          value: master,
         });
-        this.socket.emit("getBotsOnline");
-        this.socket.emit("sendAction", { action: "getChests" });
+        socketConection.emit("getBotsOnline");
+        socketConection.emit("sendAction", { action: "getChests" });
       } else {
-        this.props.setLoged(false);
+        console.log('Login failed');
+        setLoged(false);
       }
     });
 
-    this.socket.on("disconnect", () => {
-      this.props.setOnlineServer(false);
-      this.props.setLoged(false);
-      this.props.setBots([]);
+    socketConection.on("disconnect", () => {
+      setOnlineServer(false);
+      setLoged(false);
+      setBots([]);
     });
 
-    this.socket.on("logs", (message) => {
-      this.props.addLog(message);
+    socketConection.on("logs", (message) => {
+      addLog(message);
     });
 
-    this.socket.on("botStatus", (data) => {
-      this.props.updateBotStatus(data);
+    socketConection.on("botStatus", (data) => {
+      updateBotStatus(data);
     });
 
-    this.socket.on("mastersOnline", (data) => {
-      this.props.updateMasters(data);
+    socketConection.on("mastersOnline", (data) => {
+      updateMasters(data);
     });
 
-    this.socket.on("action", ({ type, value }) => {
+    socketConection.on("action", ({ type, value }) => {
       if (type === "getChests") {
-        this.props.updateChests(value);
+        updateChests(value);
       }
     });
 
-    this.socket.on("botsOnline", (botsOnline) => {
+    socketConection.on("botsOnline", (botsOnline) => {
       const botsConnected = botsOnline.sort(function (a, b) {
         if (a.name < b.name) {
           return -1;
@@ -99,41 +105,27 @@ class Layout extends React.Component {
         return 0;
       });
 
-      this.props.setBots(botsConnected);
+      setBots(botsConnected);
     });
 
-    this.socket.on("sendConfig", (data) => {
-      this.props.setConfig(data);
+    socketConection.on("sendConfig", (data) => {
+      setConfig(data);
     });
-  };
 
-  componentDidUpdate(prevProps) {
-    // Detect if have any changes on IP / PORT / PASSWORD
-    if (
-      this.props.webServerSocketURL !== prevProps.webServerSocketURL ||
-      this.props.webServerSocketPort !== prevProps.webServerSocketPort ||
-      this.props.webServerSocketPassword !== prevProps.webServerSocketPassword
-    ) {
-      this.loadWebSocket();
-    }
-  }
+    return () => socketConection.disconnect();
+  }, [
+    socket, setSocket, webServerSocketURL, webServerSocketPort, webServerSocketPassword,
+    updateBotStatus, updateChests, updateMasters,
+    setBots, setConfig, setLoged, setOnlineServer,
+    addLog, master
+  ])
 
-  componentDidMount() {
-    this.loadWebSocket();
-  }
-
-  componentWillUnmount() {
-    this.socket.disconnect();
-  }
-
-  render() {
-    return (
-      <Fragment>
-        <NavbarLayout />
-        <div className="container">{this.props.children}</div>
-      </Fragment>
-    );
-  }
+  return (
+    <>
+      <NavbarLayout />
+      <div className="container">{children}</div>
+    </>
+  );
 }
 
 const mapStateToProps = (reducers) => {
