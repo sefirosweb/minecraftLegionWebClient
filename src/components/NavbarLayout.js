@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Modal from './Modal'
 
 import '../css/NavbarLayout.css'
+import { Col, Row } from 'react-bootstrap'
 
 const NavbarLayout = (props) => {
   const [show, setShow] = useState(false)
@@ -51,8 +52,8 @@ const NavbarLayout = (props) => {
 
   const getModalFields = () => {
     return (
-      <div className='row'>
-        <div className='col-12'>
+      <Row>
+        <Col>
           <div className='form-group'>
             <Form onKeyPress={handleKeyPress}>
               <Form.Group>
@@ -68,8 +69,8 @@ const NavbarLayout = (props) => {
               </Form.Group>
             </Form>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
     )
   }
 

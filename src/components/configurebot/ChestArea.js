@@ -1,3 +1,4 @@
+import { Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 const chestArea = (props) => {
@@ -31,44 +32,51 @@ const chestArea = (props) => {
 
   return (
     <div className='p-3 mb-3 border rounded'>
-      <div className='row'>
-        <div className='col-2'>
+      <Row>
+
+        <Col xs={2}>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X Start</span></label>
             <input className='form-control' type='text' value={props.chestArea.xStart} onChange={handleChange.bind(props, 'xStart')} />
           </div>
-        </div>
-        <div className='col-2'>
+        </Col>
+
+        <Col xs={2}>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-warning text-dark'>Y Layer</span></label>
             <input className='form-control' type='text' value={props.chestArea.yLayer} onChange={handleChange.bind(props, 'yLayer')} />
           </div>
-        </div>
-        <div className='col-2'>
+        </Col>
+
+        <Col xs={2}>
           <div className='form-group'>
             <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z Start</span></label>
             <input className='form-control' type='text' value={props.chestArea.zStart} onChange={handleChange.bind(props, 'zStart')} />
           </div>
-        </div>
-        <div className='col-2'>
+        </Col>
+
+        <Col xs={2}>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X End</span></label>
             <input className='form-control' type='text' value={props.chestArea.xEnd} onChange={handleChange.bind(props, 'xEnd')} />
           </div>
-        </div>
-        <div className='col-2'>
+        </Col>
+
+        <Col xs={2}>
           <div className='form-group'>
             <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z End</span></label>
             <input className='form-control' type='text' value={props.chestArea.zEnd} onChange={handleChange.bind(props, 'zEnd')} />
           </div>
-        </div>
-      </div>
-      <div className='row mt-2'>
-        <div className='col-3'>
+        </Col>
+
+      </Row>
+      
+      <Row className='mt-2'>
+        <Col xs={3}>
           <button className='btn btn-danger form-control' onClick={handleDeleteChestArea}>Delete Area</button>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </div >
 
   )
 }

@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 
@@ -33,13 +34,14 @@ const Combat = (props) => {
 
   return (
     <>
-      <div className='row'>
-        <div className='col-6'>
+      <Row>
+        <Col xs={6}>
           <form>
+
 
             <fieldset className='form-group row'>
               <legend className='col-form-label col-sm-4 float-sm-left pt-0'>Combat Mode?</legend>
-              <div className='col-sm-8'>
+              <Col xs={8}>
                 <div className='form-check'>
                   <input className='form-check-input' type='radio' name='combatMode' value='none' onChange={handleChangeMode} checked={botConfig.config.mode === 'none'} />
                   <label className='form-check-label'>None</label>
@@ -53,18 +55,18 @@ const Combat = (props) => {
                   <label className='form-check-label'>PVP</label>
                 </div>
 
-              </div>
+              </Col>
             </fieldset>
 
           </form>
-        </div>
-        <div className='col-3'>
+        </Col>
+        <Col xs={3}>
           <div className='form-group'>
             <label>Distance for start combat?</label>
             <input className='form-control' type='text' onChange={handleChangeDistance} value={botConfig.config.distance} />
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </>
   )
 }

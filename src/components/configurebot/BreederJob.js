@@ -1,3 +1,4 @@
+import { Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import FarmArea from './FarmArea'
@@ -42,14 +43,14 @@ const BreederJob = (props) => {
 
   return (
     <>
-      <div className='row'>
-        <div className='col-12'>
+      <Row>
+        <Col>
           <h4>Animal max by area</h4>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className='row'>
-        <div className='col-12'>
+      <Row>
+        <Col>
           <form>
             <div className="form-group row">
               <label className="col-sm-2 col-form-label">Feed every seconds</label>
@@ -131,24 +132,26 @@ const BreederJob = (props) => {
             </div>
 
 
-   
+
 
           </form>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className='row'>
-        <div className='col-12'>
+      <Row>
+        <Col>
           <h4>Insert new farm area</h4>
           {renderFarmArea()}
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className='row mb-5'>
-        <div className='col-12'>
+
+      <Row className='mb-5'>
+        <Col>
           <button type='button' className='btn btn-success' onClick={handleInsertNewFarmArea}>Insert New Farm Area</button>
-        </div>
-      </div>
+        </Col>
+      </Row>
+
     </>
   )
 }
