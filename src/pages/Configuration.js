@@ -2,85 +2,89 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import { updateMaster, updateServer, updateServerPort, updateServerPassword, updateBotServer } from '../actions/configurationAction'
+import { Col, Row } from 'react-bootstrap'
 
-class Configuration extends React.Component {
-    
-    handleChangeMaster = (event) => {
-        this.props.updateMaster(event.target.value)
+const Configuration = ({ loged, connected, master, webServerSocketPassword, webServerSocketURL, webServerSocketPort, serverBots,
+    updateMaster, updateServer, updateServerPort, updateServerPassword, updateBotServer
+}) => {
+
+    const handleChangeMaster = (event) => {
+        updateMaster(event.target.value)
     }
 
-    handleChangeWebSocketServer = (event) => {
-        this.props.updateServer(event.target.value)
+    const handleChangeWebSocketServer = (event) => {
+        updateServer(event.target.value)
     }
 
-    handleChangeWebSocketServerPort = (event) => {
-        this.props.updateServerPort(event.target.value)
+    const handleChangeWebSocketServerPort = (event) => {
+        updateServerPort(event.target.value)
     }
 
-    handleChangeWebSocketServerPassword = (event) => {
-        this.props.updateServerPassword(event.target.value)
+    const handleChangeWebSocketServerPassword = (event) => {
+        updateServerPassword(event.target.value)
     }
 
-    handleChangeBotServer = (event) => {
-        this.props.updateBotServer(event.target.value)
+    const handleChangeBotServer = (event) => {
+        updateBotServer(event.target.value)
     }
 
+    return (
+        <Fragment>
+            <Row>
+                <Col>
+                    <h1>Configuration</h1>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Form>
 
-    renderServerConection() {
-        if (this.props.connected) {
-            return <span className='color-green'>Online</span>
-        } else {
-            return <span className='color-red'>Offline</span>
-        }
-    }
+                        <Form.Group controlId="handleChangeWebSocketServerPassword">
+                            <Form.Label>Web Socket Server Password</Form.Label>
+                            <Form.Control type="password" value={webServerSocketPassword} onChange={handleChangeWebSocketServerPassword} />
+                        </Form.Group>
 
-    renderLogedStatus() {
-        if (this.props.loged) {
-            return <span className='color-green'>Loged!</span>
-        } else {
-            return <span className='color-red'>Not loged</span>
-        }
-    }
+                        <Form.Group controlId="handleChangeMaster">
+                            <Form.Label>Master</Form.Label>
+                            <Form.Control type="text" value={master} onChange={handleChangeMaster} />
+                        </Form.Group>
 
-    render() {
-        return (
-            <Fragment>
-                <div className='row'>
-                    <div className='col-12'><h1>Configuration</h1></div>
-                </div>
-                <div className='row'>
-                    <div className='col-12'>
-                        <Form>
-                            <div className="form-group">
-                                <label>Web Socket Server Password</label>
-                                <input type="password" className="form-control" onChange={this.handleChangeWebSocketServerPassword} value={this.props.webServerSocketPassword} />
-                            </div>
-                            <div className="form-group">
-                                <label>Master</label>
-                                <input type="text" className="form-control" onChange={this.handleChangeMaster} value={this.props.master} />
-                            </div>
-                            <div className="form-group">
-                                <label>Web Socket Server URL</label>
-                                <input type="text" className="form-control" onChange={this.handleChangeWebSocketServer} value={this.props.webServerSocketURL} />
-                            </div>
-                            <div className="form-group">
-                                <label>Web Socket Server Port</label>
-                                <input type="text" className="form-control" onChange={this.handleChangeWebSocketServerPort} value={this.props.webServerSocketPort} />
-                            </div>
-                            <div className="form-group">
-                                <label>Server Bots (Used for connect to Bots Viewers)</label>
-                                <input type="text" className="form-control" onChange={this.handleChangeBotServer} value={this.props.serverBots} />
-                            </div>
-                            <div className="form-group">
-                                <label>Server status: {this.renderServerConection()}</label><br />
-                                <label>Login status: {this.renderLogedStatus()}</label>
-                            </div>
-                        </Form>
-                    </div>
-                </div>
-            </Fragment>
-        );
-    }
+                        <Form.Group controlId="handleChangeWebSocketServer">
+                            <Form.Label>Web Socket Server URL</Form.Label>
+                            <Form.Control type="text" value={webServerSocketURL} onChange={handleChangeWebSocketServer} />
+                        </Form.Group>
+
+                        <Form.Group controlId="handleChangeWebSocketServerPort">
+                            <Form.Label>Web Socket Server Port</Form.Label>
+                            <Form.Control type="text" value={webServerSocketPort} onChange={handleChangeWebSocketServerPort} />
+                        </Form.Group>
+
+                        <Form.Group controlId="handleChangeBotServer">
+                            <Form.Label>Server Bots (Used for connect to Bots Viewers)</Form.Label>
+                            <Form.Control type="text" value={serverBots} onChange={handleChangeBotServer} />
+                        </Form.Group>
+
+                        <div>
+                            Server status:
+                            {connected ?
+                                <span className='color-green'>Online</span> :
+                                <span className='color-red'>Offline</span>
+                            }
+                        </div>
+                        <div>
+                            Login status:
+                            {loged ?
+                                <span className='color-green'>Loged!</span> :
+                                <span className='color-red'>Not loged</span>
+                            }
+                        </div>
+
+                    </Form>
+                </Col>
+            </Row>
+        </Fragment>
+    );
+
 }
 
 const mapStateToProps = (reducers) => {
