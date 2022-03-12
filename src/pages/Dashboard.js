@@ -1,94 +1,84 @@
-import { Fragment, Component } from 'react'
+import { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import { getBotIndexBySocketId } from '../actions/botsAction'
 import { setSelectedSocketId } from '../actions/configurationAction'
-class Dashboard extends Component {
-
-    renderLogs = () => {
-        let logs = this.props.logs
-
-        if (this.props.selectedSocketId) {
-            logs = logs.filter((log) => {
-                return log.socketId === this.props.selectedSocketId
-            })
-        }
-
-        return logs.map((log, key) => {
-            return (
-                <div key={key}>{log.time} {log.botName} {log.message}</div>
-            )
-        })
+import { Button, Col, Row } from 'react-bootstrap'
+const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, history, loged, match, botsOnline, setSelectedSocketId }) => {
+    if (!loged) {
+        history.push('/configuration')
     }
 
-    checkCurrentBotIsConnected = () => {
-        if (!this.props.loged) {
-            this.props.history.push('/configuration')
-            return
+    const messagesEndRef = useRef(null)
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, [logs]);
+
+    useEffect(() => {
+        if (getBotIndexBySocketId(selectedSocketId) < 0) {
+            setSelectedSocketId(null)
         }
+    }, [botsOnline, selectedSocketId, getBotIndexBySocketId, setSelectedSocketId])
 
-        if (this.props.getBotIndexBySocketId(this.props.selectedSocketId) < 0 && this.props.selectedSocketId !== undefined) {
-            console.log('Bot not found')
-            this.props.history.push('/dashboard')
-            return
-        }
-    }
+    return (
+        <>
+            <Row>
+                <Col xs={8}>
+                    <h1>Dashboard</h1>
+                </Col>
 
-    componentDidUpdate(prevProps) {
-        if (this.props.loged) {
-            this.el.scrollTop = this.el.scrollHeight
-        }
+                <Col xs={2}>
+                    {!selectedSocketId ? '' :
+                        <Button
+                            as={Link}
+                            to='/configurebot/generalconfig'
+                            variant='warning'
+                        >
+                            Configure Bot
+                        </Button>
+                    }
+                </Col>
+            </Row>
 
-        if (
-            this.props.botsOnline !== prevProps.botsOnline ||
-            this.props.loged !== prevProps.loged
-        ) {
-            this.checkCurrentBotIsConnected()
-        }
-    }
+            <Row>
+                <Col xs={10}>
 
-    componentDidMount() {
-        this.checkCurrentBotIsConnected()
-    }
-
-    render() {
-        if (!this.props.loged) {
-            this.props.history.push('/configuration')
-            return null
-        }
-
-        return (
-            <Fragment>
-                <div className='row'>
-                    <div className='col-8'><h1>Dashboard</h1></div>
-                    {(this.props.selectedSocketId) ? <div className='col-2 pt-2'><Link className='btn btn-warning mr-3' to='/configurebot/generalconfig'>Configure Bot</Link></div> : ''}
-                </div>
-
-                <div className='row'>
-                    <div className='col-10'>
-
-                        <div className='row'>
-                            <div className='col-12'>
-                                <div className='form-group'>
-                                    <div ref={el => { this.el = el }} className='textAreaStyle form-control'>
-                                        {this.renderLogs()}
-                                    </div>
+                    <Row>
+                        <Col xs={12}>
+                            <div className='form-group'>
+                                <div className='textAreaStyle form-control'>
+                                    {
+                                        logs.filter(log => {
+                                            if (!selectedSocketId) return true
+                                            return log.socketId === selectedSocketId
+                                        }).map((log, key) => <div key={key}>{log.time} {log.botName} {log.message}</div>)
+                                    }
+                                    <div ref={messagesEndRef} />
                                 </div>
                             </div>
-                        </div>
+                        </Col>
+                    </Row>
 
-                        {(this.props.selectedSocketId) ? <BotActionsButtons socketId={this.props.selectedSocketId} /> : <div className='pendingSelectBot'>Select any bot for do actions</div>}
+                    <Row>
+                        <Col xs={12}>
+                            {selectedSocketId ?
+                                <BotActionsButtons socketId={selectedSocketId} /> :
+                                <div className='pendingSelectBot'>Select any bot for do actions</div>
+                            }
+                        </Col>
+                    </Row>
 
-                    </div>
-                    <div className='col-2'>
-                        <RenderBotsOnlineList match={this.props.match} history={this.props.history} />
-                    </div>
-                </div>
-            </Fragment >
-        )
-    }
+                </Col>
+                <Col xs={2}>
+                    <RenderBotsOnlineList match={match} history={history} />
+                </Col>
+            </Row>
+        </>
+    )
+
 }
 
 const mapStateToProps = (reducers) => {
