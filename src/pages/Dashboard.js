@@ -79,7 +79,7 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, lo
 
                 </Col>
                 <Col xs={2}>
-                    <RenderBotsOnlineList match={match} />
+                    <RenderBotsOnlineList />
                 </Col>
             </Row>
         </>
