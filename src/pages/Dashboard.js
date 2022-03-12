@@ -16,9 +16,9 @@ class Dashboard extends Component {
             })
         }
 
-        return logs.map((log) => {
+        return logs.map((log, key) => {
             return (
-                <div>{log.time} {log.botName} {log.message}</div>
+                <div key={key}>{log.time} {log.botName} {log.message}</div>
             )
         })
     }
