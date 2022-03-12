@@ -14,14 +14,13 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route exact path="/configuration" element={Configuration} />
-          <Route exact path="/masterlist" element={Masterlist} />
-          <Route exact path="/chests" element={Chests} />
-          <Route path="/configurebot" element={ConfigureBotRoute} />
-          <Route exact from="/" element={<Navigate replace to="/dashboard" />}
-          />
-          <Route element={NotFound} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/configuration" element={<Configuration />} />
+          <Route path="/masterlist" element={<Masterlist />} />
+          <Route path="/chests" element={<Chests />} />
+          <Route path="/configurebot" element={<ConfigureBotRoute />} />
+          <Route path="/" element={<Navigate replace to="/dashboard" />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </Layout>
     </BrowserRouter>

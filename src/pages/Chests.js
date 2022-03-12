@@ -2,10 +2,13 @@ import React from "react";
 import { Card, CardGroup } from "react-bootstrap";
 import { connect } from "react-redux";
 import DrawChest from "../components/DrawChest";
+import { useNavigate } from "react-router-dom";
 
-const Chests = ({ loged, chests, history }) => {
+const Chests = ({ loged, chests }) => {
+  let navigate = useNavigate();
+
   if (!loged) {
-    history.push("/configuration");
+    navigate('/configuration')
     return null;
   }
 

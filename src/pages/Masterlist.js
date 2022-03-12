@@ -1,12 +1,13 @@
 import React, { useState, Fragment } from 'react'
-
+import { useNavigate } from "react-router-dom";
 import { connect } from 'react-redux'
 
 const Masterlist = (props) => {
   const [inputBox, setInputBox] = useState('')
+  let navigate = useNavigate();
 
   if (!props.loged) {
-    props.history.push('/configuration')
+    navigate('/configuration')
     return null
   }
 

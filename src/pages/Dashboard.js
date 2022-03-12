@@ -1,15 +1,21 @@
 import { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import { getBotIndexBySocketId } from '../actions/botsAction'
 import { setSelectedSocketId } from '../actions/configurationAction'
 import { Button, Col, Row } from 'react-bootstrap'
-const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, history, loged, match, botsOnline, setSelectedSocketId }) => {
-    if (!loged) {
-        history.push('/configuration')
-    }
+
+const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, loged, match, botsOnline, setSelectedSocketId }) => {
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loged) {
+            navigate('/configuration')
+        }
+    }, [loged, navigate]);
 
     const messagesEndRef = useRef(null)
 
@@ -73,7 +79,7 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, hi
 
                 </Col>
                 <Col xs={2}>
-                    <RenderBotsOnlineList match={match} history={history} />
+                    <RenderBotsOnlineList match={match} />
                 </Col>
             </Row>
         </>

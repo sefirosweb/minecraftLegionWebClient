@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import NotFound from "../../pages/NotFound";
 
 import GeneralConfig from "./GeneralConfig";
@@ -18,19 +18,19 @@ import { setSelectedSocketId } from '../../actions/configurationAction'
 import { getBotBySocketId, getBotIndexBySocketId } from "../../actions/botsAction";
 import { Button, Col, Row } from "react-bootstrap";
 
-const ConfigureBotRoute = ({ loged, history, match, socket, botsOnline, getBotBySocketId, selectedSocketId, setSelectedSocketId, getBotIndexBySocketId }) => {
+const ConfigureBotRoute = ({ loged, match, socket, botsOnline, getBotBySocketId, selectedSocketId, setSelectedSocketId, getBotIndexBySocketId }) => {
   const [botName, setBotName] = useState('')
-
+  let navigate = useNavigate();
   useEffect(() => {
     if (!loged) {
-      history.push("/configuration");
+      navigate('/configuration')
       return
     }
-  }, [loged, history])
+  }, [loged, navigate])
 
   useEffect(() => {
     if (selectedSocketId === undefined) {
-      history.push("/dashboard");
+      navigate('/dashboard')
       return
     }
 
@@ -46,7 +46,7 @@ const ConfigureBotRoute = ({ loged, history, match, socket, botsOnline, getBotBy
     });
 
     setBotName(getBotBySocketId(selectedSocketId).name)
-  }, [selectedSocketId, history, getBotBySocketId, socket, botsOnline, getBotIndexBySocketId, setSelectedSocketId])
+  }, [selectedSocketId, getBotBySocketId, socket, botsOnline, getBotIndexBySocketId, setSelectedSocketId, navigate])
 
   const updateReloadButton = () => {
     socket.emit("sendAction", {
@@ -79,22 +79,21 @@ const ConfigureBotRoute = ({ loged, history, match, socket, botsOnline, getBotBy
       </Row>
 
       <ConfigureBotLayout
-        history={history}
         match={match}
       >
-        <Switch>
-          <Route exact path="/configurebot/generalconfig" component={GeneralConfig} />
-          <Route exact path="/configurebot/itemstobeready" component={ItemsToBeReady} />
-          <Route exact path="/configurebot/chests" component={Chests} />
-          <Route exact path="/configurebot/combat" component={Combat} />
-          <Route exact path="/configurebot/guardjob" component={GuardJob} />
-          <Route exact path="/configurebot/minerjob" component={MinerJob} />
-          <Route exact path="/configurebot/farmerjob" component={FarmerJob} />
-          <Route exact path="/configurebot/breederjob" component={BreederJob} />
-          <Route exact path="/configurebot/SorterJob" component={SorterJob} />
-          <Route exact path="/configurebot/processlist" component={ProcessList} />
-          <Route component={NotFound} />
-        </Switch>
+        <Routes>
+          <Route path="/configurebot/generalconfig" element={<GeneralConfig />} />
+          <Route path="/configurebot/itemstobeready" element={<ItemsToBeReady />} />
+          <Route path="/configurebot/chests" element={<Chests />} />
+          <Route path="/configurebot/combat" element={<Combat />} />
+          <Route path="/configurebot/guardjob" element={<GuardJob />} />
+          <Route path="/configurebot/minerjob" element={<MinerJob />} />
+          <Route path="/configurebot/farmerjob" element={<FarmerJob />} />
+          <Route path="/configurebot/breederjob" element={<BreederJob />} />
+          <Route path="/configurebot/SorterJob" element={<SorterJob />} />
+          <Route path="/configurebot/processlist" element={<ProcessList />} />
+          <Route path="/configurebot/*" element={<NotFound />} />
+        </Routes>
       </ConfigureBotLayout>
     </>
   );
