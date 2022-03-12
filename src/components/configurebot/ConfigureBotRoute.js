@@ -1,7 +1,6 @@
-import { Component, Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Link } from "react-router-dom";
-import { getBotBySocketId } from "../../actions/botsAction";
 import NotFound from "../../pages/NotFound";
 
 import GeneralConfig from "./GeneralConfig";
@@ -15,57 +14,44 @@ import BreederJob from "./BreederJob";
 import SorterJob from "./SorterJob";
 import ProcessList from "./ProcessList";
 import ConfigureBotLayout from "./ConfigureBotLayout";
+import { setSelectedSocketId } from '../../actions/configurationAction'
+import { getBotBySocketId, getBotIndexBySocketId } from "../../actions/botsAction";
+import { Button, Col, Row } from "react-bootstrap";
 
-class ConfigureBotRoute extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { botName: "" };
-  }
+const ConfigureBotRoute = ({ loged, history, match, socket, botsOnline, getBotBySocketId, selectedSocketId, setSelectedSocketId, getBotIndexBySocketId }) => {
+  const [botName, setBotName] = useState('')
 
-  componentDidMount() {
-    if (!this.props.loged) {
-      this.props.history.push("/configuration");
-      return;
+  useEffect(() => {
+    if (!loged) {
+      history.push("/configuration");
+      return
     }
-    this.updateBotconfig();
-  }
+  }, [loged, history])
 
-  componentDidUpdate(prevProps) {
-    if (this.props.selectedSocketId === undefined) {
-      this.props.history.push("/dashboard");
-      return;
-    }
-
-    if (
-      this.props.botsOnline !== prevProps.botsOnline ||
-      this.props.loged !== prevProps.loged
-    ) {
-      if (!this.props.loged) {
-        this.props.history.push("/configuration");
-        return;
-      }
+  useEffect(() => {
+    if (selectedSocketId === undefined) {
+      history.push("/dashboard");
+      return
     }
 
-    if (this.props.selectedSocketId !== prevProps.selectedSocketId) {
-      this.updateBotconfig();
+    if (getBotIndexBySocketId(selectedSocketId) < 0) {
+      setSelectedSocketId(undefined)
+      return
     }
-  }
 
-  updateBotconfig() {
-    this.props.socket.emit("sendAction", {
+    socket.emit("sendAction", {
       action: "getConfig",
-      socketId: this.props.selectedSocketId,
+      socketId: selectedSocketId,
       value: "",
     });
-    this.setState({
-      botName: this.props.getBotBySocketId(this.props.selectedSocketId).name,
-    });
-  }
 
-  updateReloadButton() {
-    this.props.socket.emit("sendAction", {
+    setBotName(getBotBySocketId(selectedSocketId).name)
+  }, [selectedSocketId, history, getBotBySocketId, socket, botsOnline, getBotIndexBySocketId, setSelectedSocketId])
+
+  const updateReloadButton = () => {
+    socket.emit("sendAction", {
       action: "action",
-      socketId: this.props.selectedSocketId,
+      socketId: selectedSocketId,
       toBotData: {
         type: "reloadConfig",
         value: "",
@@ -73,65 +59,46 @@ class ConfigureBotRoute extends Component {
     });
   }
 
-  render() {
-    return (
-      <>
-        <div className="row">
-          <div className="col-6">
-            <h1>Bot Configuration - {this.state.botName}</h1>
-          </div>
-          <div className="col-2 pt-2">
-            <Link to="/dashboard" className="btn btn-primary form-control">
-              Dashboard
-            </Link>
-          </div>
-          <div className="col-2 pt-2">
-            <button
-              onClick={this.updateReloadButton.bind(this)}
-              className="btn btn-danger form-control"
-            >
-              Reload
-            </button>
-          </div>
-        </div>
 
-        <ConfigureBotLayout
-          history={this.props.history}
-          match={this.props.match}
-        >
-          <Switch>
-            <Route
-              exact
-              path="/configurebot/generalconfig"
-              component={GeneralConfig}
-            />
-            <Route
-              exact
-              path="/configurebot/itemstobeready"
-              component={ItemsToBeReady}
-            />
-            <Route exact path="/configurebot/chests" component={Chests} />
-            <Route exact path="/configurebot/combat" component={Combat} />
-            <Route exact path="/configurebot/guardjob" component={GuardJob} />
-            <Route exact path="/configurebot/minerjob" component={MinerJob} />
-            <Route exact path="/configurebot/farmerjob" component={FarmerJob} />
-            <Route
-              exact
-              path="/configurebot/breederjob"
-              component={BreederJob}
-            />
-            <Route exact path="/configurebot/SorterJob" component={SorterJob} />
-            <Route
-              exact
-              path="/configurebot/processlist"
-              component={ProcessList}
-            />
-            <Route component={NotFound} />
-          </Switch>
-        </ConfigureBotLayout>
-      </>
-    );
-  }
+  return (
+    <>
+      <Row className="mb-2">
+        <Col xs={6}>
+          <h2>Bot Configuration - {botName}</h2>
+        </Col>
+        <Col xs={2}>
+          <Button as={Link} to='/dashboard'>
+            Dashboard
+          </Button>
+        </Col>
+        <Col xs={2}>
+          <Button onClick={updateReloadButton} variant='danger'>
+            Reload
+          </Button>
+        </Col>
+      </Row>
+
+      <ConfigureBotLayout
+        history={history}
+        match={match}
+      >
+        <Switch>
+          <Route exact path="/configurebot/generalconfig" component={GeneralConfig} />
+          <Route exact path="/configurebot/itemstobeready" component={ItemsToBeReady} />
+          <Route exact path="/configurebot/chests" component={Chests} />
+          <Route exact path="/configurebot/combat" component={Combat} />
+          <Route exact path="/configurebot/guardjob" component={GuardJob} />
+          <Route exact path="/configurebot/minerjob" component={MinerJob} />
+          <Route exact path="/configurebot/farmerjob" component={FarmerJob} />
+          <Route exact path="/configurebot/breederjob" component={BreederJob} />
+          <Route exact path="/configurebot/SorterJob" component={SorterJob} />
+          <Route exact path="/configurebot/processlist" component={ProcessList} />
+          <Route component={NotFound} />
+        </Switch>
+      </ConfigureBotLayout>
+    </>
+  );
+
 }
 
 const mapStateToProps = (reducers) => {
@@ -143,6 +110,8 @@ const mapStateToProps = (reducers) => {
 
 const mapDispatchToProps = {
   getBotBySocketId,
+  setSelectedSocketId,
+  getBotIndexBySocketId
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfigureBotRoute);

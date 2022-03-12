@@ -19,7 +19,7 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, hi
 
     useEffect(() => {
         if (getBotIndexBySocketId(selectedSocketId) < 0) {
-            setSelectedSocketId(null)
+            setSelectedSocketId(undefined)
         }
     }, [botsOnline, selectedSocketId, getBotIndexBySocketId, setSelectedSocketId])
 
