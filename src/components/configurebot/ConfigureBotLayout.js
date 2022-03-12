@@ -6,7 +6,7 @@ import RenderBotsOnlineList from './../../components/RenderBotsOnlineList'
 import { getBotBySocketId, getBotIndexBySocketId } from "../../actions/botsAction";
 import { setSelectedSocketId } from '../../actions/configurationAction'
 
-const ConfigureBotLayout = ({ loged, match, socket, getBotBySocketId, selectedSocketId, setSelectedSocketId, getBotIndexBySocketId }) => {
+const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId, setSelectedSocketId, getBotIndexBySocketId }) => {
   const [botName, setBotName] = useState('')
   let navigate = useNavigate();
 
@@ -21,11 +21,6 @@ const ConfigureBotLayout = ({ loged, match, socket, getBotBySocketId, selectedSo
     setBotName(getBotBySocketId(selectedSocketId).name)
   }, [selectedSocketId, getBotBySocketId, socket])
 
-
-  if (!loged) {
-    navigate('/configuration')
-    return ''
-  }
 
   if (selectedSocketId === undefined) {
     navigate('/dashboard')
@@ -104,8 +99,8 @@ const ConfigureBotLayout = ({ loged, match, socket, getBotBySocketId, selectedSo
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers;
   const { logs } = botsReducer;
-  const { loged, socket, selectedSocketId } = configurationReducer;
-  return { logs, loged, socket, selectedSocketId };
+  const { socket, selectedSocketId } = configurationReducer;
+  return { logs, socket, selectedSocketId };
 };
 
 const mapDispatchToProps = {

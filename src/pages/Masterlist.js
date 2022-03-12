@@ -1,15 +1,8 @@
 import React, { useState, Fragment } from 'react'
-import { useNavigate } from "react-router-dom";
 import { connect } from 'react-redux'
 
 const Masterlist = (props) => {
   const [inputBox, setInputBox] = useState('')
-  let navigate = useNavigate();
-
-  if (!props.loged) {
-    navigate('/configuration')
-    return null
-  }
 
   const handleInputBox = (event) => {
     setInputBox(event.target.value.trim())
@@ -72,10 +65,10 @@ const Masterlist = (props) => {
 
 const mapStateToProps = (reducers) => {
   const { botsReducer, configurationReducer } = reducers
-  const { master, socket, loged } = configurationReducer
+  const { master, socket } = configurationReducer
   const { masters } = botsReducer
 
-  return { master, masters, socket, loged }
+  return { master, masters, socket }
 }
 
 export default connect(mapStateToProps)(Masterlist)

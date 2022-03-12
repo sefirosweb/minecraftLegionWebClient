@@ -1,22 +1,13 @@
 import { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import { getBotIndexBySocketId } from '../actions/botsAction'
 import { setSelectedSocketId } from '../actions/configurationAction'
 import { Button, Col, Row } from 'react-bootstrap'
 
-const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, loged, match, botsOnline, setSelectedSocketId }) => {
-
-    let navigate = useNavigate();
-
-    useEffect(() => {
-        if (!loged) {
-            navigate('/configuration')
-        }
-    }, [loged, navigate]);
-
+const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, match, botsOnline, setSelectedSocketId }) => {
     const messagesEndRef = useRef(null)
 
     useEffect(() => {
@@ -90,9 +81,9 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, lo
 const mapStateToProps = (reducers) => {
     const { botsReducer, configurationReducer } = reducers
     const { botsOnline, logs } = botsReducer
-    const { loged, selectedSocketId } = configurationReducer
+    const { selectedSocketId } = configurationReducer
 
-    return { botsOnline, logs, loged, selectedSocketId }
+    return { botsOnline, logs, selectedSocketId }
 }
 
 
