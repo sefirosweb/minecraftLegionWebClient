@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Button, Col, Row } from 'react-bootstrap'
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import RenderBotsOnlineList from './../../components/RenderBotsOnlineList'
 import { getBotBySocketId, getBotIndexBySocketId } from "../../actions/botsAction";
 import { setSelectedSocketId } from '../../actions/configurationAction'
 
 const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId, setSelectedSocketId, getBotIndexBySocketId }) => {
   const [botName, setBotName] = useState('')
-  let navigate = useNavigate();
-
+  
   useEffect(() => {
     socket.emit("sendAction", {
       action: "getConfig",
@@ -19,18 +18,6 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
 
     setBotName(getBotBySocketId(selectedSocketId).name)
   }, [selectedSocketId, getBotBySocketId, socket])
-
-
-  if (selectedSocketId === undefined) {
-    navigate('/dashboard')
-    return ''
-  }
-
-  if (getBotIndexBySocketId(selectedSocketId) < 0) {
-    setSelectedSocketId(undefined)
-    navigate('/dashboard')
-    return ''
-  }
 
   const updateReloadButton = () => {
     socket.emit("sendAction", {

@@ -23,6 +23,7 @@ import ProcessList from "../components/configurebot/ProcessList";
 
 import ConfigureBotLayout from "../components/configurebot/ConfigureBotLayout";
 import Authenticated from "../hooks/Authenticated";
+import SelectedBot from "../hooks/SelectedBot";
 
 
 const App = () => {
@@ -37,20 +38,23 @@ const App = () => {
           <Route path="/masterlist" element={<Masterlist />} />
           <Route path="/chests" element={<Chests />} />
 
-          <Route path="/configurebot" element={<ConfigureBotLayout />}>
-            <Route path="generalconfig" element={<GeneralConfig />} />
-            <Route path="itemstobeready" element={<ItemsToBeReady />} />
-            <Route path="chests" element={<ConfigurebotChests />} />
-            <Route path="combat" element={<Combat />} />
-            <Route path="guardjob" element={<GuardJob />} />
-            <Route path="minerjob" element={<MinerJob />} />
-            <Route path="farmerjob" element={<FarmerJob />} />
-            <Route path="breederjob" element={<BreederJob />} />
-            <Route path="SorterJob" element={<SorterJob />} />
-            <Route path="processlist" element={<ProcessList />} />
+          <Route exact path='/configurebot' element={<SelectedBot />}>
+            <Route path="/configurebot" element={<ConfigureBotLayout />}>
+              <Route path="generalconfig" element={<GeneralConfig />} />
+              <Route path="itemstobeready" element={<ItemsToBeReady />} />
+              <Route path="chests" element={<ConfigurebotChests />} />
+              <Route path="combat" element={<Combat />} />
+              <Route path="guardjob" element={<GuardJob />} />
+              <Route path="minerjob" element={<MinerJob />} />
+              <Route path="farmerjob" element={<FarmerJob />} />
+              <Route path="breederjob" element={<BreederJob />} />
+              <Route path="SorterJob" element={<SorterJob />} />
+              <Route path="processlist" element={<ProcessList />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFound />} />
+
         </Route>
 
       </Routes>
