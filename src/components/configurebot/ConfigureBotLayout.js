@@ -11,7 +11,6 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log('detect')
     socket.emit("sendAction", {
       action: "getConfig",
       socketId: selectedSocketId,
