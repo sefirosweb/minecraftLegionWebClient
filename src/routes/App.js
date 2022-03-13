@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { connect } from "react-redux";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/general.css";
@@ -24,23 +22,18 @@ import SorterJob from "../components/configurebot/SorterJob";
 import ProcessList from "../components/configurebot/ProcessList";
 
 import ConfigureBotLayout from "../components/configurebot/ConfigureBotLayout";
+import Authenticated from "../hooks/Authenticated";
 
 
-const App = ({ loged }) => {
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    if (!loged) {
-      navigate('/configuration')
-    }
-  }, [loged, navigate])
-
+const App = () => {
   return (
-      <Layout>
-        <Routes>
+    <Layout>
+      <Routes>
+        <Route path="/configuration" element={<Configuration />} />
+
+        <Route exact path='/' element={<Authenticated />}>
           <Route path="/" element={<Navigate replace to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/configuration" element={<Configuration />} />
           <Route path="/masterlist" element={<Masterlist />} />
           <Route path="/chests" element={<Chests />} />
 
@@ -58,15 +51,11 @@ const App = ({ loged }) => {
           </Route>
 
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Layout>
+        </Route>
+
+      </Routes>
+    </Layout>
   );
 }
 
-const mapStateToProps = (reducers) => {
-  const { configurationReducer } = reducers;
-  const { loged } = configurationReducer;
-  return { loged };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;
