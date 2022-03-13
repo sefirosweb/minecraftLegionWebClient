@@ -77,10 +77,15 @@ const NavbarLayout = (props) => {
   return (
     <div className='navBar'>
       <NavLink className={({ isActive }) => (isActive ? "is-selected ml-3" : 'ml-3')} to='/configuration'>Configuration</NavLink>
-      {props.loged ? <NavLink className='ml-3' to='/dashboard'>Dashboard</NavLink> : ''}
-      {props.loged ? <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span> : ''}
-      {props.loged ? <NavLink className='ml-3' to='/masterlist'>Master List</NavLink> : ''}
-      {props.loged ? <NavLink className='ml-3' to='/chests'>Chests</NavLink> : ''}
+
+      {!props.loged ? '' :
+        <>
+          <NavLink className='ml-3' to='/dashboard'>Dashboard</NavLink>
+          <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span>
+          <NavLink className='ml-3' to='/masterlist'>Master List</NavLink>
+          <NavLink className='ml-3' to='/chests'>Chests</NavLink>
+        </>
+      }
 
       <a className='ml-5' href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel='noreferrer'>Git</a>
 
