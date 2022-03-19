@@ -1,5 +1,5 @@
 import React from 'react'
-import { mcAssets } from '../utils/mc';
+// import { mcAssets } from '../utils/mc';
 import smallChest from "../images/smallChest.png";
 import largeChest from "../images/largeChest.png";
 import Canvas from "./Canvas";
@@ -21,11 +21,11 @@ const DrawChest = ({ chest }) => {
             const inventorySlot =
                 windowSlotsCoords[chestType][chest.slots[item].slot];
 
-            const itemInfo = chest.slots[item];
-            const texture = mcAssets.textureContent[itemInfo.name].texture;
+            // const itemInfo = chest.slots[item];
+            // const texture = mcAssets.textureContent[itemInfo.name].texture;
 
             const itemImage = new Image();
-            itemImage.src = texture;
+            itemImage.src = ''; //texture;
 
             itemImage.onload = function () {
                 // Draw item image
