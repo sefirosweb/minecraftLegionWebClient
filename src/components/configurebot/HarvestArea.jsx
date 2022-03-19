@@ -1,18 +1,26 @@
+import { Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import ItemsAviable from './ItemsAviable'
 
-const HarvestArea = (props) =>  {
+const HarvestArea = (props) => {
+  const {
+    id,
+    plantArea,
+    socket,
+    selectedSocketId
+  } = props
+
   const handleChange = (type, event) => {
-    const copyPlant = { ...props.plantArea }
+    const copyPlant = { ...plantArea }
     copyPlant[type] = event.target.value
 
-    props.socket.emit('sendAction', {
+    socket.emit('sendAction', {
       action: 'changeConfig',
-      socketId: props.selectedSocketId,
+      socketId: selectedSocketId,
       value: {
         configToChange: 'changePlantArea',
         value: {
-          id: props.id,
+          id: id,
           plantArea: copyPlant
         }
       }
@@ -20,62 +28,64 @@ const HarvestArea = (props) =>  {
   }
 
   const handleDeletePlantArea = (event) => {
-    props.socket.emit('sendAction', {
+    socket.emit('sendAction', {
       action: 'changeConfig',
-      socketId: props.selectedSocketId,
+      socketId: selectedSocketId,
       value: {
         configToChange: 'deletePlantArea',
-        value: props.id
+        value: id
       }
     })
   }
 
   return (
     <div className='p-3 mb-3 border rounded'>
-      <div className='row'>
-        <div className='col-6'>
+      <Row className='mb-3'>
+
+        <Col md={6}>
           <div className='form-group'>
             <label htmlFor='inputItem'>Select Plant</label>
-            <input className='form-control' type='text' list={props.id} value={props.plantArea.plant ? props.plantArea.plant : ''} onChange={handleChange.bind(props, 'plant')} />
-            <datalist id={props.id}>
-              <ItemsAviable item={props.plantArea.plant ? props.plantArea.plant : ''} type='plants' />
+            <input className='form-control' type='text' list={id} value={plantArea.plant ? plantArea.plant : ''} onChange={handleChange.bind(props, 'plant')} />
+            <datalist id={id}>
+              <ItemsAviable item={plantArea.plant ? plantArea.plant : ''} type='plants' />
             </datalist>
           </div>
-        </div>
-        <div className='offset-3 col-3'>
+        </Col>
+        <Col md={{ span: 3, offset: 3 }}>
           <button className='btn btn-danger form-control' onClick={handleDeletePlantArea}>Delete Area</button>
-        </div>
-      </div>
+        </Col>
+        
+      </Row>
 
       <div className='row'>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X Start</span></label>
-            <input className='form-control' type='text' value={props.plantArea.xStart} onChange={handleChange.bind(props, 'xStart')} />
+            <input className='form-control' type='text' value={plantArea.xStart} onChange={handleChange.bind(props, 'xStart')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-warning text-dark'>Y Layer</span></label>
-            <input className='form-control' type='text' value={props.plantArea.yLayer} onChange={handleChange.bind(props, 'yLayer')} />
+            <input className='form-control' type='text' value={plantArea.yLayer} onChange={handleChange.bind(props, 'yLayer')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z Start</span></label>
-            <input className='form-control' type='text' value={props.plantArea.zStart} onChange={handleChange.bind(props, 'zStart')} />
+            <input className='form-control' type='text' value={plantArea.zStart} onChange={handleChange.bind(props, 'zStart')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X End</span></label>
-            <input className='form-control' type='text' value={props.plantArea.xEnd} onChange={handleChange.bind(props, 'xEnd')} />
+            <input className='form-control' type='text' value={plantArea.xEnd} onChange={handleChange.bind(props, 'xEnd')} />
           </div>
         </div>
         <div className='col-2'>
           <div className='form-group'>
             <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z End</span></label>
-            <input className='form-control' type='text' value={props.plantArea.zEnd} onChange={handleChange.bind(props, 'zEnd')} />
+            <input className='form-control' type='text' value={plantArea.zEnd} onChange={handleChange.bind(props, 'zEnd')} />
           </div>
         </div>
       </div>

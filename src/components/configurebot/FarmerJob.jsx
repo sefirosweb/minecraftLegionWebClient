@@ -1,13 +1,21 @@
+import { Button, Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import HarvestArea from './HarvestArea'
 
 const FarmerJob = (props) => {
-  const botConfig = props.getBotBySocketId(props.selectedSocketId)
+
+  const {
+    socket,
+    botsOnline,
+    selectedSocketId
+  } = props
+
+  const botConfig = botsOnline.find((e) => { return e.socketId === selectedSocketId })
   if (botConfig === undefined) { return null }
 
   const handleInsertNewPlantArea = (event) => {
-    props.socket.emit('sendAction', {
+    socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
       value: {
@@ -26,27 +34,33 @@ const FarmerJob = (props) => {
 
   return (
     <>
-      <div className='row'>
-        <div className='col-12'>
+      <Row className='mb-3'>
+        <Col>
           <h4>Insert areas and type of plant for harvest</h4>
           {renderPlantAreas()}
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className='row mb-5'>
-        <div className='col-12'>
-          <button type='button' className='btn btn-success' onClick={handleInsertNewPlantArea}>Insert New Area</button>
-        </div>
-      </div>
+      <Row className='mb-5'>
+        <Col>
+          <Button
+            variant='success'
+            onClick={handleInsertNewPlantArea}
+          >
+            Insert New Area
+          </Button>
+        </Col>
+      </Row>
     </>
   )
 }
 
 const mapStateToProps = (reducers) => {
-  const { configurationReducer } = reducers
+  const { configurationReducer, botsReducer } = reducers
   const { socket, selectedSocketId } = configurationReducer
+  const { botsOnline } = botsReducer
 
-  return { socket, selectedSocketId }
+  return { socket, selectedSocketId, botsOnline }
 }
 
 const mapDispatchToProps = {
