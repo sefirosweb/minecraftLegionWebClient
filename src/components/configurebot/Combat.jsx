@@ -34,7 +34,7 @@ const Combat = (props) => {
 
   return (
     <>
-      <Row>
+      <Row className='mb-5'>
         <Col xs={6}>
           <form>
 
