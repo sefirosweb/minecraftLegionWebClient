@@ -42,7 +42,7 @@ const FarmArea = (props) => {
         onChange={handleChange}
       />
 
-      <Row>
+      <Row className='mt-3'>
         <Col>
           <Button variant='danger' onClick={handleDeleteFarmArea}>
             Delete Area

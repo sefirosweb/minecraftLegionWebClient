@@ -95,6 +95,7 @@ const BotActionButtons = (props) => {
 
   return (
     <>
+
       <div className="row">
         <div className="col-12">
           <div className="form-group">

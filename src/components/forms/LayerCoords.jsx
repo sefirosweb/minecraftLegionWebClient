@@ -9,7 +9,7 @@ const LayerCoords = (props) => {
     return (
         <Row>
 
-            <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Group as={Col} sm="4" md="3" lg="2">
                 <Form.Label><span className='badge bg-primary text-white'>X Start</span></Form.Label>
                 <Form.Control
                     type="text"
@@ -18,7 +18,7 @@ const LayerCoords = (props) => {
                 />
             </Form.Group>
 
-            <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Group as={Col} sm="4" md="3" lg="2">
                 <Form.Label><span className='badge bg-warning text-dark'>Y Layer</span></Form.Label>
                 <Form.Control
                     type="text"
@@ -27,7 +27,7 @@ const LayerCoords = (props) => {
                 />
             </Form.Group>
 
-            <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Group as={Col} sm="4" md="3" lg="2">
                 <Form.Label><span class='badge bg-secondary text-white'>Z Start</span></Form.Label>
                 <Form.Control
                     type="text"
@@ -36,7 +36,7 @@ const LayerCoords = (props) => {
                 />
             </Form.Group>
 
-            <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Group as={Col} sm="4" md="3" lg="2">
                 <Form.Label><span className='badge bg-primary text-white'>X End</span></Form.Label>
                 <Form.Control
                     type="text"
@@ -45,7 +45,7 @@ const LayerCoords = (props) => {
                 />
             </Form.Group>
 
-            <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Group as={Col} sm="4" md="3" lg="2">
                 <Form.Label><span class='badge bg-secondary text-white'>Z End</span></Form.Label>
                 <Form.Control
                     type="text"
