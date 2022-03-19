@@ -7,13 +7,17 @@ import FormCheck from '../forms/FormCheck';
 import Chest from './Chest.jsx'
 
 const Chests = (props) => {
-  const botConfig = props.getBotBySocketId(props.selectedSocketId);
-  if (botConfig === undefined) {
-    return null;
-  }
+  const {
+    socket,
+    botsOnline,
+    selectedSocketId
+  } = props
+
+  const botConfig = botsOnline.find((e) => { return e.socketId === selectedSocketId })
+  if (botConfig === undefined) { return null }
 
   const changeConfig = (configToChange, value) => {
-    props.socket.emit("sendAction", {
+    socket.emit("sendAction", {
       action: "changeConfig",
       socketId: botConfig.socketId,
       value: {
@@ -92,10 +96,12 @@ const Chests = (props) => {
 };
 
 const mapStateToProps = (reducers) => {
-  const { configurationReducer } = reducers;
+  const { configurationReducer, botsReducer } = reducers;
   const { socket, selectedSocketId } = configurationReducer;
+  const { botsOnline } = botsReducer
 
-  return { socket, selectedSocketId };
+
+  return { socket, selectedSocketId, botsOnline };
 };
 
 const mapDispatchToProps = {

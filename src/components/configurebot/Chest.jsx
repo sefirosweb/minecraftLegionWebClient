@@ -131,19 +131,21 @@ const Chest = (props) => {
     <div className={`p-3 mb-3 border rounded ${renderSwitch()}`}>
       <Row>
         <Col xs={6}>
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label font-weight-bold">
+
+          <Form.Group as={Row} controlId="formChestName">
+            <Form.Label column sm={4} className='col-form-label font-weight-bold'>
               Chest Nº{props.id}
-            </label>
-            <div className="col-sm-8">
-              <input
-                type="text"
+            </Form.Label>
+            <Col sm={8}>
+              <Form.Control
+                type="email"
                 className="form-control-plaintext font-weight-bold"
                 value={props.chest.name}
                 onChange={handleChangeChestName}
               />
-            </div>
-          </div>
+            </Col>
+          </Form.Group>
+
         </Col>
 
         <Col xs={4}>
