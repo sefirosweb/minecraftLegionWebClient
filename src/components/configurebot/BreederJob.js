@@ -76,7 +76,8 @@ const BreederJob = (
           <Form.Label>Cow</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.cow} onChange={(e) => handleUpdateAnimal('cow', e)}
+            value={botConfig.config.farmAnimal.cow}
+            onChange={(e) => handleUpdateAnimal('cow', e)}
           />
         </Form.Group>
 
@@ -84,7 +85,8 @@ const BreederJob = (
           <Form.Label>Sheep</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.sheep} onChange={(e) => handleUpdateAnimal('sheep', e)}
+            value={botConfig.config.farmAnimal.sheep}
+            onChange={(e) => handleUpdateAnimal('sheep', e)}
           />
         </Form.Group>
 
@@ -92,23 +94,28 @@ const BreederJob = (
           <Form.Label>Chicken</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.chicken} onChange={(e) => handleUpdateAnimal('chicken', e)}
+            value={botConfig.config.farmAnimal.chicken}
+            onChange={(e) => handleUpdateAnimal('chicken', e)}
           />
         </Form.Group>
 
-        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomHorse">
+        <Form.Group as={Col} sm="4" md="3" lg="2"
+          controlId="validationCustomHorse">
           <Form.Label>Horse</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.horse} onChange={(e) => handleUpdateAnimal('horse', e)}
+            value={botConfig.config.farmAnimal.horse}
+            onChange={(e) => handleUpdateAnimal('horse', e)}
           />
         </Form.Group>
 
-        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomDonkey">
+        <Form.Group as={Col} sm="4" md="3" lg="2"
+          controlId="validationCustomDonkey">
           <Form.Label>Donkey</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.donkey} onChange={(e) => handleUpdateAnimal('donkey', e)}
+            value={botConfig.config.farmAnimal.donkey}
+            onChange={(e) => handleUpdateAnimal('donkey', e)}
           />
         </Form.Group>
 
@@ -116,7 +123,8 @@ const BreederJob = (
           <Form.Label>Llama</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.llama} onChange={(e) => handleUpdateAnimal('llama', e)}
+            value={botConfig.config.farmAnimal.llama}
+            onChange={(e) => handleUpdateAnimal('llama', e)}
           />
         </Form.Group>
 
@@ -124,7 +132,8 @@ const BreederJob = (
           <Form.Label>Fox</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.fox} onChange={(e) => handleUpdateAnimal('fox', e)}
+            value={botConfig.config.farmAnimal.fox}
+            onChange={(e) => handleUpdateAnimal('fox', e)}
           />
         </Form.Group>
 
@@ -132,7 +141,8 @@ const BreederJob = (
           <Form.Label>Bee</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.bee} onChange={(e) => handleUpdateAnimal('bee', e)}
+            value={botConfig.config.farmAnimal.bee}
+            onChange={(e) => handleUpdateAnimal('bee', e)}
           />
         </Form.Group>
 
@@ -140,7 +150,8 @@ const BreederJob = (
           <Form.Label>Panda</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.panda} onChange={(e) => handleUpdateAnimal('panda', e)}
+            value={botConfig.config.farmAnimal.panda}
+            onChange={(e) => handleUpdateAnimal('panda', e)}
           />
         </Form.Group>
 
@@ -148,7 +159,8 @@ const BreederJob = (
           <Form.Label>Wolf</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.wolf} onChange={(e) => handleUpdateAnimal('wolf', e)}
+            value={botConfig.config.farmAnimal.wolf}
+            onChange={(e) => handleUpdateAnimal('wolf', e)}
           />
         </Form.Group>
 
@@ -156,7 +168,8 @@ const BreederJob = (
           <Form.Label>Cat</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.cat} onChange={(e) => handleUpdateAnimal('cat', e)}
+            value={botConfig.config.farmAnimal.cat}
+            onChange={(e) => handleUpdateAnimal('cat', e)}
           />
         </Form.Group>
 
@@ -164,7 +177,8 @@ const BreederJob = (
           <Form.Label>Rabbit</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.rabbit} onChange={(e) => handleUpdateAnimal('rabbit', e)}
+            value={botConfig.config.farmAnimal.rabbit}
+            onChange={(e) => handleUpdateAnimal('rabbit', e)}
           />
         </Form.Group>
 
@@ -172,7 +186,8 @@ const BreederJob = (
           <Form.Label>Pig</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.pig} onChange={(e) => handleUpdateAnimal('pig', e)}
+            value={botConfig.config.farmAnimal.pig}
+            onChange={(e) => handleUpdateAnimal('pig', e)}
           />
         </Form.Group>
 
@@ -180,7 +195,8 @@ const BreederJob = (
           <Form.Label>Turtles</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.turtles} onChange={(e) => handleUpdateAnimal('turtles', e)}
+            value={botConfig.config.farmAnimal.turtles}
+            onChange={(e) => handleUpdateAnimal('turtles', e)}
           />
         </Form.Group>
 
