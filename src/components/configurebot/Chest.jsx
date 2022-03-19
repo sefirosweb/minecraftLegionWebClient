@@ -66,14 +66,14 @@ const Chest = (props) => {
           <td>{item.item}</td>
           <td>{item.quantity}</td>
           <td>
-            <TrashIcon onClick={handleRemoveItemFromChest.bind(this, index)} />
+            <TrashIcon onClick={() => handleRemoveItemFromChest(index)} />
           </td>
         </tr>
       );
     });
   };
 
-  const handleRemoveItemFromChest = (index, event) => {
+  const handleRemoveItemFromChest = (index) => {
     changeConfig("removeItemFromChest", {
       chestId: id,
       itemIndex: index,
