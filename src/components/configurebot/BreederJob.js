@@ -1,14 +1,23 @@
-import { Col, Row } from 'react-bootstrap'
+import { Col, Form, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import FarmArea from './FarmArea'
 
-const BreederJob = (props) => {
-  const botConfig = props.getBotBySocketId(props.selectedSocketId)
+const BreederJob = (
+  {
+    id,
+    socket,
+    botsOnline,
+    selectedSocketId,
+    getBotBySocketId,
+  }
+) => {
+
+  const botConfig = botsOnline.find((e) => { return e.socketId === selectedSocketId })
   if (botConfig === undefined) { return null }
 
   const handleInsertNewFarmArea = (event) => {
-    props.socket.emit('sendAction', {
+    socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
       value: {
@@ -19,13 +28,14 @@ const BreederJob = (props) => {
 
   const handleUpdateAnimal = (animal, event) => {
     const value = event.target.value
-    props.socket.emit('sendAction', {
+    console.log(value)
+    socket.emit('sendAction', {
       action: 'changeConfig',
-      socketId: props.selectedSocketId,
+      socketId: selectedSocketId,
       value: {
         configToChange: 'changeAnimalValue',
         value: {
-          id: props.id,
+          id: id,
           animal,
           value
         }
@@ -43,102 +53,140 @@ const BreederJob = (props) => {
 
   return (
     <>
-      <Row>
+      <Row className="mb-3">
         <Col>
           <h4>Animal max by area</h4>
         </Col>
       </Row>
 
-      <Row>
-        <Col>
-          <form>
-            <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Feed every seconds</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.seconds} onChange={handleUpdateAnimal.bind(props, 'seconds')} />
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Cow</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.cow} onChange={handleUpdateAnimal.bind(props, 'cow')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Sheep</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.sheep} onChange={handleUpdateAnimal.bind(props, 'sheep')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Chicken</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.chicken} onChange={handleUpdateAnimal.bind(props, 'chicken')} />
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Horse</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.horse} onChange={handleUpdateAnimal.bind(props, 'horse')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Donkey</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.donkey} onChange={handleUpdateAnimal.bind(props, 'donkey')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Llama</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.llama} onChange={handleUpdateAnimal.bind(props, 'llama')} />
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Fox</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.fox} onChange={handleUpdateAnimal.bind(props, 'fox')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Bee</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.bee} onChange={handleUpdateAnimal.bind(props, 'bee')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Panda</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.panda} onChange={handleUpdateAnimal.bind(props, 'panda')} />
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Wolf</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.wolf} onChange={handleUpdateAnimal.bind(props, 'wolf')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Cat</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.cat} onChange={handleUpdateAnimal.bind(props, 'cat')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Rabbit</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.rabbit} onChange={handleUpdateAnimal.bind(props, 'rabbit')} />
-              </div>
-            </div>
-
-            <div className="form-group row">
-              <label className="col-sm-2 col-form-label">Pig</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.pig} onChange={handleUpdateAnimal.bind(props, 'pig')} />
-              </div>
-              <label className="col-sm-2 col-form-label">Turtles</label>
-              <div className="col-sm-2">
-                <input type="text" className="form-control" value={botConfig.config.farmAnimal.turtles} onChange={handleUpdateAnimal.bind(props, 'turtles')} />
-              </div>
-
-            </div>
-
-
-
-
-          </form>
-        </Col>
+      <Row className="mb-3">
+        <Form.Group as={Col} sm="12" md="6" lg="4" controlId="validationCustomFeed">
+          <Form.Label>Feed every seconds</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.seconds}
+            onChange={(e) => handleUpdateAnimal('seconds', e)}
+          />
+        </Form.Group>
       </Row>
 
-      <Row>
+      <Row className="mb-3">
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomCow">
+          <Form.Label>Cow</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.cow} onChange={(e) => handleUpdateAnimal('cow', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomSheep">
+          <Form.Label>Sheep</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.sheep} onChange={(e) => handleUpdateAnimal('sheep', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomChicken">
+          <Form.Label>Chicken</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.chicken} onChange={(e) => handleUpdateAnimal('chicken', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomHorse">
+          <Form.Label>Horse</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.horse} onChange={(e) => handleUpdateAnimal('horse', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomDonkey">
+          <Form.Label>Donkey</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.donkey} onChange={(e) => handleUpdateAnimal('donkey', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomLlama">
+          <Form.Label>Llama</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.llama} onChange={(e) => handleUpdateAnimal('llama', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFox">
+          <Form.Label>Fox</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.fox} onChange={(e) => handleUpdateAnimal('fox', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomBee">
+          <Form.Label>Bee</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.bee} onChange={(e) => handleUpdateAnimal('bee', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomPanda">
+          <Form.Label>Panda</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.panda} onChange={(e) => handleUpdateAnimal('panda', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomWolf">
+          <Form.Label>Wolf</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.wolf} onChange={(e) => handleUpdateAnimal('wolf', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomCat">
+          <Form.Label>Cat</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.cat} onChange={(e) => handleUpdateAnimal('cat', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomRabbit">
+          <Form.Label>Rabbit</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.rabbit} onChange={(e) => handleUpdateAnimal('rabbit', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomPig">
+          <Form.Label>Pig</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.pig} onChange={(e) => handleUpdateAnimal('pig', e)}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomTurtles">
+          <Form.Label>Turtles</Form.Label>
+          <Form.Control
+            type="text"
+            value={botConfig.config.farmAnimal.turtles} onChange={(e) => handleUpdateAnimal('turtles', e)}
+          />
+        </Form.Group>
+
+      </Row >
+
+      <Row className="mb-3">
         <Col>
           <h4>Insert new farm area</h4>
           {renderFarmArea()}
@@ -157,10 +205,11 @@ const BreederJob = (props) => {
 }
 
 const mapStateToProps = (reducers) => {
-  const { configurationReducer } = reducers
+  const { configurationReducer, botsReducer } = reducers
   const { socket, selectedSocketId } = configurationReducer
+  const { botsOnline } = botsReducer
 
-  return { socket, selectedSocketId }
+  return { socket, selectedSocketId, botsOnline }
 }
 
 const mapDispatchToProps = {
