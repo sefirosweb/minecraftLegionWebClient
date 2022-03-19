@@ -6,19 +6,28 @@ import ItemsAviable from "./ItemsAviable";
 import TrashIcon from "./Icons/Trash";
 import ArrowUp from "./Icons/ArrowUp";
 import ArrowDown from "./Icons/ArrowDown";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row, Table } from "react-bootstrap";
 
 const Chest = (props) => {
+
+  const {
+    id,
+    chest,
+    master,
+    socket,
+    socketId,
+  } = props
+
   const [item, setItem] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const chestId = `chest-${props.id}`;
-  const radioId = `radio-${props.id}`;
+  const chestId = `chest-${id}`;
+  const radioId = `radio-${id}`;
 
   const changeConfig = (configToChange, value) => {
-    props.socket.emit("sendAction", {
+    socket.emit("sendAction", {
       action: "changeConfig",
-      socketId: props.socketId,
+      socketId: socketId,
       value: {
         configToChange,
         value,
@@ -27,7 +36,7 @@ const Chest = (props) => {
   };
 
   const handleDeleteChest = (event) => {
-    changeConfig("deleteChest", props.id);
+    changeConfig("deleteChest", id);
   };
 
   const handleQuantityChange = (event) => {
@@ -43,14 +52,14 @@ const Chest = (props) => {
 
   const handleInsertItemInChest = (event) => {
     changeConfig("insertItemInChest", {
-      chestId: props.id,
+      chestId: id,
       item,
       quantity,
     });
   };
 
   const renderItemsTable = () => {
-    return props.chest.items.map((item, index) => {
+    return chest.items.map((item, index) => {
       return (
         <tr key={index}>
           <th scope="row">{index}</th>
@@ -66,7 +75,7 @@ const Chest = (props) => {
 
   const handleRemoveItemFromChest = (index, event) => {
     changeConfig("removeItemFromChest", {
-      chestId: props.id,
+      chestId: id,
       itemIndex: index,
     });
   };
@@ -74,14 +83,14 @@ const Chest = (props) => {
   const handleChangeChestType = (event) => {
     changeConfig("changeChestType", {
       value: event.target.value,
-      chestId: props.id,
+      chestId: id,
     });
   };
 
   const handleChangeChestName = (event) => {
     changeConfig("changeChestName", {
       value: event.target.value,
-      chestId: props.id,
+      chestId: id,
     });
   };
 
@@ -94,20 +103,20 @@ const Chest = (props) => {
 
     changeConfig("changeChestPos", {
       pos: event.target.value,
-      chestId: props.id,
+      chestId: id,
       coord: event.target.dataset.coord,
     });
   };
 
   const handleCopyPositionMaster = () => {
     changeConfig("changeChestPosMaster", {
-      chestId: props.id,
-      master: props.master,
+      chestId: id,
+      master: master,
     });
   };
 
   const renderSwitch = () => {
-    switch (props.chest.type) {
+    switch (chest.type) {
       case "deposit":
         return "border-warning";
       case "depositAll":
@@ -120,11 +129,11 @@ const Chest = (props) => {
   };
 
   const handleMovePosNext = (index, event) => {
-    changeConfig("moveChestNext", props.id);
+    changeConfig("moveChestNext", id);
   };
 
   const handleMovePosPrev = (index, event) => {
-    changeConfig("moveChestPrev", props.id);
+    changeConfig("moveChestPrev", id);
   };
 
   return (
@@ -134,13 +143,13 @@ const Chest = (props) => {
 
           <Form.Group as={Row} controlId="formChestName">
             <Form.Label column sm={4} className='col-form-label font-weight-bold'>
-              Chest Nº{props.id}
+              Chest Nº{id}
             </Form.Label>
             <Col sm={8}>
               <Form.Control
                 type="email"
                 className="form-control-plaintext font-weight-bold"
-                value={props.chest.name}
+                value={chest.name}
                 onChange={handleChangeChestName}
               />
             </Col>
@@ -200,7 +209,7 @@ const Chest = (props) => {
                 name={radioId}
                 value="withdraw"
                 onChange={handleChangeChestType}
-                checked={props.chest.type === "withdraw"}
+                checked={chest.type === "withdraw"}
               />
               <label className="form-check-label">Withdraw</label>
             </div>
@@ -211,7 +220,7 @@ const Chest = (props) => {
                 name={radioId}
                 value="deposit"
                 onChange={handleChangeChestType}
-                checked={props.chest.type === "deposit"}
+                checked={chest.type === "deposit"}
               />
               <label className="form-check-label">Deposit</label>
             </div>
@@ -222,7 +231,7 @@ const Chest = (props) => {
                 name={radioId}
                 value="depositAll"
                 onChange={handleChangeChestType}
-                checked={props.chest.type === "depositAll"}
+                checked={chest.type === "depositAll"}
               />
               <label className="form-check-label">Deposit All</label>
             </div>
@@ -248,7 +257,7 @@ const Chest = (props) => {
           <Form.Label>X</Form.Label>
           <Form.Control
             data-coord="x"
-            value={props.chest.position.x ? props.chest.position.x : ""}
+            value={chest.position.x ? chest.position.x : ""}
             onChange={handleChangeChestPos}
           />
         </Form.Group>
@@ -257,7 +266,7 @@ const Chest = (props) => {
           <Form.Label>Y</Form.Label>
           <Form.Control
             data-coord="y"
-            value={props.chest.position.y ? props.chest.position.y : ""}
+            value={chest.position.y ? chest.position.y : ""}
             onChange={handleChangeChestPos}
           />
         </Form.Group>
@@ -266,7 +275,7 @@ const Chest = (props) => {
           <Form.Label>Z</Form.Label>
           <Form.Control
             data-coord="z"
-            value={props.chest.position.z ? props.chest.position.z : ""}
+            value={chest.position.z ? chest.position.z : ""}
             onChange={handleChangeChestPos}
           />
         </Form.Group>
@@ -280,11 +289,10 @@ const Chest = (props) => {
         </Col>
       </Row>
 
-
-      <div className="row">
-        <div className="col-12">
-          <table className="table">
-            <thead className="thead-dark">
+      <Row>
+        <Col>
+          <Table>
+            <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Item</th>
@@ -293,21 +301,23 @@ const Chest = (props) => {
               </tr>
             </thead>
             <tbody>{renderItemsTable()}</tbody>
-          </table>
-        </div>
-      </div>
+          </Table>
+        </Col>
+      </Row>
 
-      <div className="row">
-        <div className="col-3 ml-auto">
+      <Row>
+        <Col>
           <button
             type="button"
             className="btn btn-danger float-right"
             onClick={handleDeleteChest}
           >
-            Delete chest "{props.chest.name}"
+            Delete chest "{chest.name}"
           </button>
-        </div>
-      </div>
+        </Col>
+      </Row>
+
+
     </div>
   );
 };
