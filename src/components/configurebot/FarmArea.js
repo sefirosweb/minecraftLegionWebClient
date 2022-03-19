@@ -1,6 +1,5 @@
+import { Button, Col, Form, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
-
-
 
 const FarmArea = (props) => {
   const handleChange = (type, event) => {
@@ -33,44 +32,64 @@ const FarmArea = (props) => {
 
   return (
     <div className='p-3 mb-3 border rounded'>
-      <div className='row'>
-        <div className='col-2'>
-          <div className='form-group'>
-            <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X Start</span></label>
-            <input className='form-control' type='text' value={props.farmArea.xStart} onChange={handleChange.bind(props, 'xStart')} />
-          </div>
-        </div>
-        <div className='col-2'>
-          <div className='form-group'>
-            <label htmlFor='inputItem'><span className='badge bg-warning text-dark'>Y Layer</span></label>
-            <input className='form-control' type='text' value={props.farmArea.yLayer} onChange={handleChange.bind(props, 'yLayer')} />
-          </div>
-        </div>
-        <div className='col-2'>
-          <div className='form-group'>
-            <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z Start</span></label>
-            <input className='form-control' type='text' value={props.farmArea.zStart} onChange={handleChange.bind(props, 'zStart')} />
-          </div>
-        </div>
-        <div className='col-2'>
-          <div className='form-group'>
-            <label htmlFor='inputItem'><span className='badge bg-primary text-white'>X End</span></label>
-            <input className='form-control' type='text' value={props.farmArea.xEnd} onChange={handleChange.bind(props, 'xEnd')} />
-          </div>
-        </div>
-        <div className='col-2'>
-          <div className='form-group'>
-            <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z End</span></label>
-            <input className='form-control' type='text' value={props.farmArea.zEnd} onChange={handleChange.bind(props, 'zEnd')} />
-          </div>
-        </div>
-      </div>
-      <div className='row mt-2'>
-        <div className='col-3'>
-          <button className='btn btn-danger form-control' onClick={handleDeleteFarmArea}>Delete Area</button>
-        </div>
-      </div>
-    </div>
+
+      <Row>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Label><span className='badge bg-primary text-white'>X Start</span></Form.Label>
+          <Form.Control
+            type="text"
+            value={props.farmArea.xStart}
+            onChange={handleChange.bind(props, 'xStart')}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Label><span className='badge bg-warning text-dark'>Y Layer</span></Form.Label>
+          <Form.Control
+            type="text"
+            value={props.farmArea.yLayer}
+            onChange={handleChange.bind(props, 'yLayer')}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Label><span class='badge bg-secondary text-white'>Z Start</span></Form.Label>
+          <Form.Control
+            type="text"
+            value={props.farmArea.zStart}
+            onChange={handleChange.bind(props, 'zStart')}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Label><span className='badge bg-primary text-white'>X End</span></Form.Label>
+          <Form.Control
+            type="text"
+            value={props.farmArea.xEnd}
+            onChange={handleChange.bind(props, 'xEnd')}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Label><span class='badge bg-secondary text-white'>Z End</span></Form.Label>
+          <Form.Control
+            type="text"
+            value={props.farmArea.zEnd}
+            onChange={handleChange.bind(props, 'zEnd')}
+          />
+        </Form.Group>
+
+      </Row >
+
+      <Row>
+        <Col>
+          <Button variant='danger' onClick={handleDeleteFarmArea}>
+            Delete Area
+          </Button>
+        </Col>
+      </Row>
+    </div >
 
   )
 }
