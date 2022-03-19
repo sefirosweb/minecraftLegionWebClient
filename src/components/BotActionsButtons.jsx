@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { Button, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import { updateBotStatus, getBotBySocketId } from "../actions/botsAction";
@@ -96,8 +97,8 @@ const BotActionButtons = (props) => {
   return (
     <>
 
-      <div className="row">
-        <div className="col-12">
+      <Row className="mb-3">
+        <Col>
           <div className="form-group">
             <input
               type="text"
@@ -108,48 +109,34 @@ const BotActionButtons = (props) => {
               value={chat}
             />
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className="row">
-        <div className="col-12">
-          <button
-            type="button"
-            className="btn btn-primary mr-3"
-            onClick={handleSendMessageButton}
-          >
+
+
+      <Row className="mb-3">
+        <Col>
+          <Button onClick={handleSendMessageButton}>
             Send Message
-          </button>
-          <button
-            type="button"
-            className="btn btn-success mr-3"
-            onClick={handleStartStateMachineButton}
-          >
+          </Button>
+          {' '}
+          <Button onClick={handleStartStateMachineButton}>
             Show State Machine
-          </button>
-          <button
-            type="button"
-            className="btn btn-success mr-3"
-            onClick={handleStartInventoryButton}
-          >
+          </Button>
+          {' '}
+          <Button onClick={handleStartInventoryButton} variant='success'>
             Show Item Inventory
-          </button>
-          <button
-            type="button"
-            className="btn btn-success mr-3"
-            onClick={handleStartViewerButton}
-          >
+          </Button>
+          {' '}
+          <Button onClick={handleStartViewerButton} variant='success'>
             Show Viewer
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger mr-3"
-            onClick={handleDisconnectButton}
-          >
+          </Button>
+          {' '}
+          <Button onClick={handleDisconnectButton} variant='danger'>
             Disconnect
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Col>
+      </Row>
 
       <div className="row mt-2">
         <div className="col-12">

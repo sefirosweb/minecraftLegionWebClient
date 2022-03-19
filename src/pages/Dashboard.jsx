@@ -43,7 +43,7 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, ma
             <Row>
                 <Col xs={10}>
 
-                    <Row>
+                    <Row className='mb-3'>
                         <Col xs={12}>
                             <div className='form-group'>
                                 <div className='textAreaStyle form-control'>
