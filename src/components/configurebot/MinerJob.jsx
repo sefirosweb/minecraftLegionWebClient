@@ -1,14 +1,22 @@
 import { Fragment } from 'react'
+import { Col, Form, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
 import HouseXYZ from '../../images/HouseXYZ.png'
 
 const MinerJob = (props) => {
-  const botConfig = props.getBotBySocketId(props.selectedSocketId)
+
+  const {
+    socket,
+    botsOnline,
+    selectedSocketId,
+  } = props
+
+  const botConfig = botsOnline.find((e) => { return e.socketId === selectedSocketId })
   if (botConfig === undefined) { return null }
 
   const handleChangeTunnel = (event) => {
-    props.socket.emit('sendAction', {
+    socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
       value: {
@@ -19,7 +27,7 @@ const MinerJob = (props) => {
   }
 
   const handleChangeOrientation = (event) => {
-    props.socket.emit('sendAction', {
+    socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
       value: {
@@ -37,7 +45,7 @@ const MinerJob = (props) => {
     }
 
     const coord = event.target.id
-    props.socket.emit('sendAction', {
+    socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
       value: {
@@ -53,127 +61,167 @@ const MinerJob = (props) => {
   return (
     <>
 
-      <div className='row'>
-        <div className='col-12'>
+      <Row className='mb-3'>
+        <Col>
           <label>
             Depending the tunnel type and orientation have a different behavior
           </label>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className='row mt-2'>
-        <div className='col-6'>
-          <form>
-            <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-3 float-sm-left pt-0'>Tunel type?</legend>
-              <div className='col-sm-9'>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='tunnelType' value='vertically' onChange={handleChangeTunnel} checked={botConfig.config.minerCords.tunel === 'vertically'} />
-                  <label className='form-check-label'>Make a Hole</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='tunnelType' value='horizontally' onChange={handleChangeTunnel} checked={botConfig.config.minerCords.tunel === 'horizontally'} />
-                  <label className='form-check-label'>Make a Tunel</label>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-        <div className='col-6'>
-          <form>
-            <fieldset className='form-group row'>
-              <legend className='col-form-label col-sm-3 float-sm-left pt-0'>Orientation?</legend>
-              <div className='col-sm-9'>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='onrientationType' value='x+' onChange={handleChangeOrientation} checked={botConfig.config.minerCords.orientation === 'x+'} />
-                  <label className='form-check-label'>X+</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='onrientationType' value='x-' onChange={handleChangeOrientation} checked={botConfig.config.minerCords.orientation === 'x-'} />
-                  <label className='form-check-label'>X-</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='onrientationType' value='z+' onChange={handleChangeOrientation} checked={botConfig.config.minerCords.orientation === 'z+'} />
-                  <label className='form-check-label'>Z+</label>
-                </div>
-                <div className='form-check'>
-                  <input className='form-check-input' type='radio' name='onrientationType' value='z-' onChange={handleChangeOrientation} checked={botConfig.config.minerCords.orientation === 'z-'} />
-                  <label className='form-check-label'>Z-</label>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
+      <Row className='mb-3'>
+        <Col md={6}>
+          <Form>
+            <Form.Group as={Row}>
+              <Col md={3}>
+                Tunel type?
+              </Col>
+              <Col md={9}>
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeTunnel`}
+                  label={`Make a Hole`}
+                  value='vertically'
+                  onChange={handleChangeTunnel}
+                  checked={botConfig.config.minerCords.tunel === 'vertically'}
+                />
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeTunnel`}
+                  label={`Make a Tunel`}
+                  value='horizontally'
+                  onChange={handleChangeTunnel}
+                  checked={botConfig.config.minerCords.tunel === 'horizontally'}
+                />
+              </Col>
+            </Form.Group>
+          </Form>
+        </Col>
+        <Col md={6}>
 
-      <div className='row'>
-        <div className='col-6'>
-          <fieldset className='form-group row'>
-            <legend className='col-form-label col-sm-3 float-sm-left pt-0'>Start Coords</legend>
-            <div className='col-sm-9'>
+          <Form>
+            <Form.Group as={Row}>
+              <Col md={3}>
+                Orientation?
+              </Col>
+              <Col md={9}>
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeOrientation`}
+                  label={`X+`}
+                  value='x+'
+                  onChange={handleChangeOrientation}
+                  checked={botConfig.config.minerCords.orientation === 'x+'}
+                />
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeOrientation`}
+                  label={`X-`}
+                  value='x-'
+                  onChange={handleChangeOrientation}
+                  checked={botConfig.config.minerCords.orientation === 'x-'}
+                />
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeOrientation`}
+                  label={`Z+`}
+                  value='z+'
+                  onChange={handleChangeOrientation}
+                  checked={botConfig.config.minerCords.orientation === 'z+'}
+                />
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeOrientation`}
+                  label={`Z-`}
+                  value='z-'
+                  onChange={handleChangeOrientation}
+                  checked={botConfig.config.minerCords.orientation === 'z-'}
+                />
+              </Col>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
 
-              <div className='form-group row'>
-                <label className='col-sm-1 col-form-label'>X</label>
-                <div className='col-sm-4'>
-                  <input type='text' className='form-control' id='xStart' onChange={handleChangePosMiner} value={botConfig.config.minerCords.xStart} />
-                </div>
-              </div>
+      <div className='p-3 mb-3 border rounded'>
+        <h5>Start Coords</h5>
+        <Row>
 
-              <div className='form-group row'>
-                <label className='col-sm-1 col-form-label'>Y</label>
-                <div className='col-sm-4'>
-                  <input type='text' className='form-control' id='yStart' onChange={handleChangePosMiner} value={botConfig.config.minerCords.yStart} />
-                </div>
-              </div>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Label><span className='badge bg-primary text-white'>X Start</span></Form.Label>
+            <Form.Control
+              id='xStart'
+              type="text"
+              value={botConfig.config.minerCords.xStart}
+              onChange={handleChangePosMiner}
+            />
+          </Form.Group>
 
-              <div className='form-group row'>
-                <label className='col-sm-1 col-form-label'>Z</label>
-                <div className='col-sm-4'>
-                  <input type='text' className='form-control' id='zStart' onChange={handleChangePosMiner} value={botConfig.config.minerCords.zStart} />
-                </div>
-              </div>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Label><span className='badge bg-warning text-dark'>Y Start</span></Form.Label>
+            <Form.Control
+              id='yStart'
+              type="text"
+              value={botConfig.config.minerCords.yStart}
+              onChange={handleChangePosMiner}
+            />
+          </Form.Group>
 
-            </div>
-          </fieldset>
-        </div>
-        <div className='col-6'>
-          <fieldset className='form-group row'>
-            <legend className='col-form-label col-sm-3 float-sm-left pt-0'>End Coords</legend>
-            <div className='col-sm-9'>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Label><span class='badge bg-secondary text-white'>Z Start</span></Form.Label>
+            <Form.Control
+              id='zStart'
+              type="text"
+              value={botConfig.config.minerCords.zStart}
+              onChange={handleChangePosMiner}
+            />
+          </Form.Group>
+        </Row >
+      </div >
 
-              <div className='form-group row'>
-                <label className='col-sm-1 col-form-label'>X</label>
-                <div className='col-sm-4'>
-                  <input type='text' className='form-control' id='xEnd' onChange={handleChangePosMiner} value={botConfig.config.minerCords.xEnd} />
-                </div>
-              </div>
+      <div className='p-3 mb-3 border rounded'>
+        <h5>End Coords</h5>
+        <Row>
 
-              <div className='form-group row'>
-                <label className='col-sm-1 col-form-label'>Y</label>
-                <div className='col-sm-4'>
-                  <input type='text' className='form-control' id='yEnd' onChange={handleChangePosMiner} value={botConfig.config.minerCords.yEnd} />
-                </div>
-              </div>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Label><span className='badge bg-primary text-white'>X End</span></Form.Label>
+            <Form.Control
+              id='xEnd'
+              type="text"
+              value={botConfig.config.minerCords.xEnd}
+              onChange={handleChangePosMiner}
+            />
+          </Form.Group>
 
-              <div className='form-group row'>
-                <label className='col-sm-1 col-form-label'>Z</label>
-                <div className='col-sm-4'>
-                  <input type='text' className='form-control' id='zEnd' onChange={handleChangePosMiner} value={botConfig.config.minerCords.zEnd} />
-                </div>
-              </div>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Label><span className='badge bg-warning text-dark'>Y End</span></Form.Label>
+            <Form.Control
+              id='yEnd'
+              type="text"
+              value={botConfig.config.minerCords.yEnd}
+              onChange={handleChangePosMiner}
+            />
+          </Form.Group>
 
-            </div>
-          </fieldset>
-        </div>
-      </div>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+            <Form.Label><span class='badge bg-secondary text-white'>Z End</span></Form.Label>
+            <Form.Control
+              id='zEnd'
+              type="text"
+              value={botConfig.config.minerCords.zEnd}
+              onChange={handleChangePosMiner}
+            />
+          </Form.Group>
+        </Row >
+      </div >
 
-      <div className='row mb-5'>
-        <div className='col-12'>
+      <Row className='mb-5'>
+        <Col>
           <label>
             <img src={HouseXYZ} width='100%' alt='House_XYZ' />
           </label>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </>
   )
 }
