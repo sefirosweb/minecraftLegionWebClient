@@ -243,7 +243,7 @@ const Chest = (props) => {
         </Col>
       </Row>
 
-      <Row>
+      <Row className="mb-3">
         <Form.Group as={Col}>
           <Form.Label>X</Form.Label>
           <Form.Control
@@ -272,11 +272,16 @@ const Chest = (props) => {
         </Form.Group>
       </Row>
 
-      <Button type="button" onClick={handleCopyPositionMaster}>
-        Copy position same has master
-      </Button>
+      <Row className="mb-3">
+        <Col>
+          <Button type="button" onClick={handleCopyPositionMaster}>
+            Copy position same has master
+          </Button>
+        </Col>
+      </Row>
 
-      <div className="row mt-3">
+
+      <div className="row">
         <div className="col-12">
           <table className="table">
             <thead className="thead-dark">
