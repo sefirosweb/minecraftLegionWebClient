@@ -112,126 +112,99 @@ const BotActionButtons = (props) => {
         </Col>
       </Row>
 
-
-
       <Row className="mb-3">
         <Col>
-          <Button onClick={handleSendMessageButton}>
+          <Button onClick={handleSendMessageButton} className='mb-1'>
             Send Message
           </Button>
           {' '}
-          <Button onClick={handleStartStateMachineButton}>
+          <Button onClick={handleStartStateMachineButton} className='mb-1'>
             Show State Machine
           </Button>
           {' '}
-          <Button onClick={handleStartInventoryButton} variant='success'>
+          <Button onClick={handleStartInventoryButton} variant='success' className='mb-1'>
             Show Item Inventory
           </Button>
           {' '}
-          <Button onClick={handleStartViewerButton} variant='success'>
+          <Button onClick={handleStartViewerButton} variant='success' className='mb-1'>
             Show Viewer
           </Button>
           {' '}
-          <Button onClick={handleDisconnectButton} variant='danger'>
+          <Button onClick={handleDisconnectButton} variant='danger' className='mb-1'>
             Disconnect
           </Button>
         </Col>
       </Row>
 
-      <div className="row mt-2">
-        <div className="col-12">
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "stay", "")}
-          >
+      <Row className="mb-3">
+        <Col>
+          <Button onClick={() => handleSendAction("stay", "")} variant='secondary'>
             Stay
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "follow", props.master)}
-          >
+          </Button>
+          {' '}
+          <Button onClick={() => handleSendAction("follow", props.master)} variant='secondary'>
             Follow Master
-          </button>
-          <button
-            type="button"
-            className="btn btn-warning mr-3"
-            onClick={handleSendAction.bind(props, "endCommands", "")}
-          >
+          </Button>
+          {' '}
+          <Button onClick={() => handleSendAction("endCommands", "")} variant='warning'>
             End commands
-          </button>
-        </div>
-      </div>
-      <div className="row mt-2">
-        <div className="col-1 offset-1">
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "moveOneByOne", "x+")}
-          >
-            X+
-          </button>
-        </div>
+          </Button>
+        </Col>
+      </Row>
 
-        <div className="col-2">
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "interactWithPlayer", "")}
-          >
+      <Row className="mb-3">
+        <Col md={4}>
+
+          <Row className="mb-3">
+
+            <Col xs={{ span: 4, offset: 4 }} className="d-grid">
+              <Button onClick={() => handleSendAction("moveOneByOne", "x+")} variant='secondary'>
+                X+
+              </Button>
+            </Col>
+
+          </Row>
+
+          <Row>
+
+            <Col xs={4} className="d-grid mb-3">
+              <Button onClick={() => handleSendAction("moveOneByOne", "z-")} variant='secondary'>
+                Z-
+              </Button>
+            </Col>
+
+            <Col xs={4} className="d-grid mb-3">
+              <Button onClick={() => handleSendAction("moveOneByOne", "x-")} variant='secondary'>
+                X-
+              </Button>
+            </Col>
+
+            <Col xs={4} className="d-grid mb-3">
+              <Button onClick={() => handleSendAction("moveOneByOne", "z+")} variant='secondary'>
+                Z+
+              </Button>
+            </Col>
+
+          </Row>
+        </Col>
+
+        <Col md={2} className='d-grid mb-3'>
+          <Button onClick={() => handleSendAction("interactWithPlayer", "")} variant='secondary'>
             Interact With Player
-          </button>
-        </div>
-        <div className="col-2">
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "interactWithBed", "")}
-          >
+          </Button>
+        </Col>
+        <Col md={2} className='d-grid mb-3'>
+          <Button onClick={() => handleSendAction("interactWithBed", "")} variant='secondary'>
             Interect With Bed
-          </button>
-        </div>
-        <div className="col-2">
-          <button
-            type="button"
-            className="btn btn-danger mr-3 form-control"
-            onClick={handleSendAction.bind(props, "tossAllItems", "")}
-          >
-            Toss all items
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Col>
+        <Col md={2} className='d-grid mb-3'>
+          <Button onClick={() => handleSendAction("tossAllItems", "")} variant='danger'>
+          Toss all items
+          </Button>
+        </Col>
+      </Row >
 
-      <div className="row mt-2">
-        <div className="col-1">
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "moveOneByOne", "z-")}
-          >
-            Z-
-          </button>
-        </div>
-        <div className="col-1">
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "moveOneByOne", "x-")}
-          >
-            X-
-          </button>
-        </div>
-        <div className="col-1">
-          <button
-            type="button"
-            className="btn btn-secondary mr-3"
-            onClick={handleSendAction.bind(props, "moveOneByOne", "z+")}
-          >
-            Z+
-          </button>
-        </div>
-      </div>
     </>
   );
 };
