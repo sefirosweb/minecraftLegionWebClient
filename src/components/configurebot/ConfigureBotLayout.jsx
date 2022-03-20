@@ -8,7 +8,7 @@ import { setSelectedSocketId } from '../../actions/configurationAction'
 
 const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId, setSelectedSocketId, getBotIndexBySocketId }) => {
   const [botName, setBotName] = useState('')
-  
+
   useEffect(() => {
     socket.emit("sendAction", {
       action: "getConfig",
@@ -32,24 +32,23 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
 
   return (
     <>
-      <Row className="mb-2">
-        <Col xs={6}>
+      <Row className="my-2">
+        <Col md={6} lg={7}>
           <h2>Bot Configuration - {botName ? botName : ''}</h2>
         </Col>
-        <Col xs={2}>
-          <Button as={Link} to='/dashboard'>
+        <Col md={3}>
+          <Button as={Link} to='/dashboard' className="mb-1">
             Dashboard
           </Button>
-        </Col>
-        <Col xs={2}>
-          <Button onClick={updateReloadButton} variant='danger'>
+          {' '}
+          <Button onClick={updateReloadButton} variant='danger' className="mb-1">
             Reload
           </Button>
         </Col>
       </Row>
 
       <Row>
-        <Col xs={10}>
+        <Col xs={{ span: 12, order: 2 }} md={{ span: 9, order: 1 }} lg={10}>
           <Row>
             <Col>
               <ul className='nav nav-tabs bg-dark'>
@@ -74,7 +73,7 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
             </Col>
           </Row>
         </Col>
-        <Col xs={2}>
+        <Col xs={{ span: 12, order: 1 }} md={{ span: 3, order: 2 }} lg={2} className='mb-3'>
           <RenderBotsOnlineList />
         </Col>
       </Row>
