@@ -2,17 +2,7 @@ body {
     background-color: darkgrey;
 }
 
-.container{
-    margin-top: 15px;
-}
 
-.fleft {
-    float: left;
-}
-
-.fright{
-    float: right;
-}
 
 .textAreaStyle {
     border: 1px inset #ccc;

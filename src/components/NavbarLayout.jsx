@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Modal from './Modal'
 
-import '../css/NavbarLayout.css'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Container, Nav, Navbar, Row } from 'react-bootstrap'
 
 const NavbarLayout = (props) => {
   const [show, setShow] = useState(false)
@@ -75,23 +74,30 @@ const NavbarLayout = (props) => {
   }
 
   return (
-    <div className='navBar'>
-      <NavLink className={({ isActive }) => (isActive ? "is-selected ml-3" : 'ml-3')} to='/configuration'>Configuration</NavLink>
+    <>
+      <Navbar collapseOnSelect={true} bg="dark" variant="dark" expand="md">
+        <Container>
+          <Navbar.Brand as={Link} to="/configuration" eventKey="configuration">Configuration</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
 
-      {!props.loged ? '' :
-        <>
-          <NavLink className='ml-3' to='/dashboard'>Dashboard</NavLink>
-          <span className='linkSpan ml-3' onClick={handleShow}>Load New Bot</span>
-          <NavLink className='ml-3' to='/masterlist'>Master List</NavLink>
-          <NavLink className='ml-3' to='/chests'>Chests</NavLink>
-        </>
-      }
+              {!props.loged ? '' :
+                <>
+                  <Nav.Link as={Link} to="/dashboard" eventKey="dashboard">Dashboard</Nav.Link>
+                  <Nav.Link onClick={handleShow}>Load New Bot</Nav.Link>
+                  <Nav.Link as={Link} to="/masterlist" eventKey="masterlist">Master List</Nav.Link>
+                  <Nav.Link as={Link} to="/chests" eventKey='chests'>Chests</Nav.Link>
+                </>
+              }
 
-      <a className='ml-5' href='https://github.com/sefirosweb/minecraftLegion' target='_blank' rel='noreferrer'>Git</a>
-
-      {/* Load Modal */}
+              <Nav.Link href="https://github.com/sefirosweb/minecraftLegion" rel='noreferrer' target='_blank'>Git</Nav.Link >
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       <Modal show={show} handleAccept={handleAccept} handleClose={handleClose} title='Fill the data' body={getModalFields()} />
-    </div>
+    </>
   )
 }
 
