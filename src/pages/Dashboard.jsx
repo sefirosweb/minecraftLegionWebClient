@@ -22,12 +22,12 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, ma
 
     return (
         <>
-            <Row>
-                <Col xs={8}>
+            <Row className='mt-3'>
+                <Col md={8} className='mb-3'>
                     <h1>Dashboard</h1>
                 </Col>
 
-                <Col xs={2}>
+                <Col md={2} className='mb-3'>
                     {!selectedSocketId ? '' :
                         <Button
                             as={Link}
@@ -41,7 +41,7 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, ma
             </Row>
 
             <Row>
-                <Col xs={10}>
+                <Col xs={{ span: 12, order: 2 }} md={{ span: 9, order: 1 }} lg={10}>
 
                     <Row className='mb-3'>
                         <Col xs={12}>
@@ -69,7 +69,7 @@ const Dashboard = ({ logs, selectedSocketId, socketId, getBotIndexBySocketId, ma
                     </Row>
 
                 </Col>
-                <Col xs={2}>
+                <Col xs={{ span: 12, order: 1 }} md={{ span: 3, order: 2 }} lg={2} className='mb-3'>
                     <RenderBotsOnlineList />
                 </Col>
             </Row>
