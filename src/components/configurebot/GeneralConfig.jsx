@@ -1,11 +1,12 @@
-import { Fragment, useState } from "react";
+import { Fragment, lazy, Suspense, useState } from "react";
 import { connect } from "react-redux";
 import { getBotBySocketId } from "../../actions/botsAction";
-import ItemsAviable from "./ItemsAviable";
 import TrashIcon from "./Icons/Trash";
 import ArrowUp from "./Icons/ArrowUp";
 import ArrowDown from "./Icons/ArrowDown";
 import FormCheck from "../forms/FormCheck";
+
+const ItemsAviable = lazy(() => import("./ItemsAviable"))
 
 const GeneralConfig = (props) => {
   const [item, setItem] = useState("");
@@ -219,7 +220,11 @@ const GeneralConfig = (props) => {
               onChange={handleItemChange}
             />
             <datalist id="itemsList">
-              <ItemsAviable item={item} type="foods" />
+              <Suspense fallback={
+                <option>Loading...</option>
+              }>
+                <ItemsAviable item={item} type="foods" />
+              </Suspense>
             </datalist>
           </div>
         </div>
