@@ -32,14 +32,22 @@ docker run --rm -it --name minecraftLegionWebClient -p 3000:3000 --network minec
 npm install
 ```
 
-6. Start the front end
+6. Prepare files to run in prod
 
 ```
-npm start
+npm build
+```
+7. Start the web server (nginx with react build files)
+
+```
+docker-compose up -d
 ```
 
-The frontend is ready to listen in port 3000
-Open url http://localhost:3000/
+The frontend is ready to listen in port 80 \
+Open url http://localhost/
+
+
+You can change the port of web server, modify docker-compose 80 to any you want
 
 Set "Web Socket Server Password" password of "server" \
 Set "Web Socket Server URL" the "server" ip \
