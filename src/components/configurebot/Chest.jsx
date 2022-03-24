@@ -254,6 +254,15 @@ const Chest = (props) => {
 
       <Row className="mb-3">
         <Form.Group as={Col}>
+          <Form.Label>Dimension:</Form.Label>
+          <Form.Control
+            data-coord="x"
+            value={chest.dimension ? chest.dimension : ""}
+            onChange={handleChangeChestPos}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col}>
           <Form.Label>X</Form.Label>
           <Form.Control
             data-coord="x"

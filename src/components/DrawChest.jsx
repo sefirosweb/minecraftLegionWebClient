@@ -53,6 +53,13 @@ const DrawChest = ({ chest }) => {
         }
     }
 
+    const drawChestText = () => {
+        return chest.slots.map((i, key) => {
+            if (!i) return '';
+            return <div key={key}>{i.name} x {i.count}</div>
+        })
+    }
+
     return (
         <div>
             <Card className='m-3'>
@@ -60,22 +67,30 @@ const DrawChest = ({ chest }) => {
                     <Card.Title>Chests</Card.Title>
                     <Card.Text>
                         <Row>
-                            <Col>
+                            <Col xs={6}>
+                                <span>
+                                    Dimension: {chest.dimension}
+                                </span>
+                            </Col>
+                            <Col xs={2}>
                                 <span className='badge bg-primary text-white'>
                                     X: {chest.position.x}
                                 </span>
                             </Col>
-                            <Col>
+                            <Col xs={2}>
                                 <span className='badge bg-warning text-dark'>
                                     Y: {chest.position.y}
                                 </span>
                             </Col>
-                            <Col>
+                            <Col xs={2}>
                                 <span className='badge bg-secondary text-white'>
                                     Z: {chest.position.z}
                                 </span>
                             </Col>
                         </Row>
+                    </Card.Text>
+                    <Card.Text>
+                        {drawChestText()}
                     </Card.Text>
                     <Canvas
                         draw={draw}
