@@ -20,24 +20,19 @@ git clone https://github.com/sefirosweb/minecraftLegionWebClient.git
 cd minecraftLegionWebClient
 ```
 
-4. Start docker with node
+4. Install dependencies
 
 ```
-docker run --rm -it --name minecraftLegionWebClient -p 3000:3000 --network minecraftLegionNetwork  -v $PWD:/home/app -w /home/app -u node node:16.13-bullseye /bin/bash
+ docker run --rm -v $PWD:/home/app -w /home/app -u node node:16.13-bullseye npm install
 ```
 
-5. Install dependencies
+5. Build & prepare the web
 
 ```
-npm install
+docker run --rm -v $PWD:/home/app -w /home/app -u node node:16.13-bullseye npm run build
 ```
 
-6. Prepare files to run in prod
-
-```
-npm build
-```
-7. Start the web server (nginx with react build files)
+6. Start the web server (nginx with react build files)
 
 ```
 docker-compose up -d
@@ -47,7 +42,7 @@ The frontend is ready to listen in port 80 \
 Open url http://localhost/
 
 
-You can change the port of web server, modify docker-compose 80 to any you want
+You can change the port of web server, modify docker-compose.yml 80 to any you want
 
 Set "Web Socket Server Password" password of "server" \
 Set "Web Socket Server URL" the "server" ip \
