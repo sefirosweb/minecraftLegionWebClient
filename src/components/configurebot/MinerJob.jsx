@@ -26,6 +26,17 @@ const MinerJob = (props) => {
     })
   }
 
+  const handleChangeWorld = (event) => {
+    socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'changeWorldMiner',
+        value: event.target.value
+      }
+    })
+  }
+
   const handleChangeOrientation = (event) => {
     socket.emit('sendAction', {
       action: 'changeConfig',
@@ -143,34 +154,69 @@ const MinerJob = (props) => {
         </Col>
       </Row>
 
+      <Row className='mb-3'>
+        <Col md={6}>
+          <Form>
+            <Form.Group as={Row}>
+              <Col md={3}>
+                World?
+              </Col>
+              <Col md={9}>
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeWorld`}
+                  label={`Overworld`}
+                  value='overworld'
+                  onChange={handleChangeWorld}
+                  checked={botConfig.config.minerCords.world === 'overworld'}
+                />
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeWorld`}
+                  label={`Nether`}
+                  value='nether'
+                  onChange={handleChangeWorld}
+                  checked={botConfig.config.minerCords.world === 'nether'}
+                />
+                <Form.Check
+                  type='radio'
+                  id={`handleChangeWorld`}
+                  label={`End`}
+                  value='end'
+                  onChange={handleChangeWorld}
+                  checked={botConfig.config.minerCords.world === 'end'}
+                />
+              </Col>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
+
       <div className='p-3 mb-3 border rounded'>
         <h5>Start Coords</h5>
         <Row>
 
-          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="xStart">
             <Form.Label><span className='badge bg-primary text-white'>X Start</span></Form.Label>
             <Form.Control
-              id='xStart'
               type="text"
               value={botConfig.config.minerCords.xStart}
               onChange={handleChangePosMiner}
             />
           </Form.Group>
 
-          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="yStart">
             <Form.Label><span className='badge bg-warning text-dark'>Y Start</span></Form.Label>
             <Form.Control
-              id='yStart'
               type="text"
               value={botConfig.config.minerCords.yStart}
               onChange={handleChangePosMiner}
             />
           </Form.Group>
 
-          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
-            <Form.Label><span class='badge bg-secondary text-white'>Z Start</span></Form.Label>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="zStart">
+            <Form.Label><span className='badge bg-secondary text-white'>Z Start</span></Form.Label>
             <Form.Control
-              id='zStart'
               type="text"
               value={botConfig.config.minerCords.zStart}
               onChange={handleChangePosMiner}
@@ -183,30 +229,27 @@ const MinerJob = (props) => {
         <h5>End Coords</h5>
         <Row>
 
-          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="xEnd">
             <Form.Label><span className='badge bg-primary text-white'>X End</span></Form.Label>
             <Form.Control
-              id='xEnd'
               type="text"
               value={botConfig.config.minerCords.xEnd}
               onChange={handleChangePosMiner}
             />
           </Form.Group>
 
-          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="yEnd">
             <Form.Label><span className='badge bg-warning text-dark'>Y End</span></Form.Label>
             <Form.Control
-              id='yEnd'
               type="text"
               value={botConfig.config.minerCords.yEnd}
               onChange={handleChangePosMiner}
             />
           </Form.Group>
 
-          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomFeed">
-            <Form.Label><span class='badge bg-secondary text-white'>Z End</span></Form.Label>
+          <Form.Group as={Col} sm="4" md="3" lg="2" controlId="zEnd">
+            <Form.Label><span className='badge bg-secondary text-white'>Z End</span></Form.Label>
             <Form.Control
-              id='zEnd'
               type="text"
               value={botConfig.config.minerCords.zEnd}
               onChange={handleChangePosMiner}
