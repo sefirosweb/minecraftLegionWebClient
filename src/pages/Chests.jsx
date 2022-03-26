@@ -11,7 +11,7 @@ const Chests = ({ chests }) => {
           <Card.Title>Chests</Card.Title>
           <Card.Text>Contain all chests in memory of server</Card.Text>
           <CardGroup>
-            {chests.map((chest, key) => {
+            {Object.values(chests).map((chest, key) => {
               return <DrawChest key={key} chest={chest} />;
             })}
           </CardGroup>
