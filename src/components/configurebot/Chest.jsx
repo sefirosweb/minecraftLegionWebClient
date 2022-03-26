@@ -97,7 +97,7 @@ const Chest = (props) => {
   const handleChangeChestPos = (event) => {
     const pos = Number(event.target.value);
 
-    if (!Number.isInteger(pos) && event.target.value !== "-") {
+    if (!Number.isInteger(pos) && event.target.value !== "-" && event.target.dataset.coord != 'dimension') {
       return null;
     }
 
@@ -256,8 +256,8 @@ const Chest = (props) => {
         <Form.Group as={Col}>
           <Form.Label>Dimension:</Form.Label>
           <Form.Control
-            data-coord="x"
-            value={chest.dimension ? chest.dimension : ""}
+            data-coord="dimension"
+            value={chest.position.dimension ? chest.position.dimension : ""}
             onChange={handleChangeChestPos}
           />
         </Form.Group>

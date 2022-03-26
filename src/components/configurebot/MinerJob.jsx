@@ -166,17 +166,17 @@ const MinerJob = (props) => {
                   type='radio'
                   id={`handleChangeWorld`}
                   label={`Overworld`}
-                  value='overworld'
+                  value='minecraft:overworld'
                   onChange={handleChangeWorld}
-                  checked={botConfig.config.minerCords.world === 'overworld'}
+                  checked={botConfig.config.minerCords.world === 'minecraft:overworld'}
                 />
                 <Form.Check
                   type='radio'
                   id={`handleChangeWorld`}
                   label={`Nether`}
-                  value='nether'
+                  value='minecraft:the_nether'
                   onChange={handleChangeWorld}
-                  checked={botConfig.config.minerCords.world === 'nether'}
+                  checked={botConfig.config.minerCords.world === 'minecraft:the_nether'}
                 />
                 <Form.Check
                   type='radio'

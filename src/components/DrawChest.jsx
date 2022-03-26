@@ -69,7 +69,7 @@ const DrawChest = ({ chest }) => {
                         <Row>
                             <Col xs={6}>
                                 <span>
-                                    Dimension: {chest.dimension}
+                                    Dimension: {chest.position.dimension}
                                 </span>
                             </Col>
                             <Col xs={2}>
