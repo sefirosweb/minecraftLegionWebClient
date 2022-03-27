@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   updateMasters,
   updateChests,
+  updatePortals,
   setBots,
   addLog,
   updateBotStatus,
@@ -22,7 +23,7 @@ const Layout = ({
   socket, setSocket,
   webServerSocketPort, webServerSocketURL, webServerSocketPassword,
   setOnlineServer, setLoged, master, setBots, addLog, setConfig, children,
-  updateMasters, updateChests, updateBotStatus }) => {
+  updateMasters, updateChests, updatePortals, updateBotStatus }) => {
 
   useEffect(() => {
     console.log("Conecting to server...");
@@ -64,6 +65,7 @@ const Layout = ({
         });
         socketConection.emit("getBotsOnline");
         socketConection.emit("sendAction", { action: "getChests" });
+        socketConection.emit("sendAction", { action: "getPortals" });
       } else {
         console.log('Login failed');
         setLoged(false);
@@ -93,6 +95,11 @@ const Layout = ({
         updateChests(value);
       }
     });
+    socketConection.on("action", ({ type, value }) => {
+      if (type === "getPortals") {
+        updatePortals(value);
+      }
+    });
 
     socketConection.on("botsOnline", (botsOnline) => {
       const botsConnected = botsOnline.sort(function (a, b) {
@@ -115,7 +122,7 @@ const Layout = ({
     return () => socketConection.disconnect();
   }, [
     socket, setSocket, webServerSocketURL, webServerSocketPort, webServerSocketPassword,
-    updateBotStatus, updateChests, updateMasters,
+    updateBotStatus, updateChests, updatePortals, updateMasters,
     setBots, setConfig, setLoged, setOnlineServer,
     addLog, master
   ])
@@ -154,6 +161,7 @@ const mapDispatchToProps = {
   setOnlineServer,
   updateMasters,
   updateChests,
+  updatePortals,
   setBots,
   addLog,
   updateBotStatus,

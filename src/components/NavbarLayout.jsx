@@ -88,6 +88,7 @@ const NavbarLayout = (props) => {
                   <Nav.Link onClick={handleShow}>Load New Bot</Nav.Link>
                   <Nav.Link as={Link} to="/masterlist" eventKey="masterlist">Master List</Nav.Link>
                   <Nav.Link as={Link} to="/chests" eventKey='chests'>Chests</Nav.Link>
+                  <Nav.Link as={Link} to="/portals" eventKey='portals'>Portals</Nav.Link>
                 </>
               }
 

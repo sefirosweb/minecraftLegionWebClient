@@ -182,9 +182,9 @@ const MinerJob = (props) => {
                   type='radio'
                   id={`handleChangeWorld`}
                   label={`End`}
-                  value='end'
+                  value='minecraft:the_end'
                   onChange={handleChangeWorld}
-                  checked={botConfig.config.minerCords.world === 'end'}
+                  checked={botConfig.config.minerCords.world === 'minecraft:the_end'}
                 />
               </Col>
             </Form.Group>

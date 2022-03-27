@@ -10,6 +10,7 @@ const NotFound = lazy(() => import("../pages/NotFound"))
 const Dashboard = lazy(() => import("../pages/Dashboard"))
 const Masterlist = lazy(() => import("../pages/Masterlist"))
 const Chests = lazy(() => import("../pages/Chests"))
+const Portals = lazy(() => import("../pages/Portals"))
 const GeneralConfig = lazy(() => import("../components/configurebot/GeneralConfig"))
 const ItemsToBeReady = lazy(() => import("../components/configurebot/ItemsToBeReady"))
 const ConfigurebotChests = lazy(() => import("../components/configurebot/Chests"))
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/masterlist" element={<Masterlist />} />
             <Route path="/chests" element={<Chests />} />
+            <Route path="/portals" element={<Portals />} />
 
             <Route exact path='/configurebot' element={<SelectedBot />}>
               <Route path="/configurebot" element={<ConfigureBotLayout />}>
