@@ -20,7 +20,7 @@ apt-get install docker-compose -y
 cd /root
 docker network create minecraftLegionNetwork
 git clone https://github.com/sefirosweb/minecraftLegionWebClient.git
-cd cd minecraftLegionWebClient/
+cd minecraftLegionWebClient/
 git checkout gh-pages
 
 echo '
