@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkminecraftlegionwebclient=self.webpackChunkminecraftlegionwebclient||[]).push([[6],{63006:function(e,n,t){t.r(n),t.d(n,{default:function(){return c}});t(72791);var i=t(80184),c=function(){return(0,i.jsx)("div",{className:"not-found",children:(0,i.jsx)("h1",{children:"Web Site Not Found!"})})}}}]);
+//# sourceMappingURL=6.ae523412.chunk.js.map

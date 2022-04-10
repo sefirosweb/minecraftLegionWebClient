@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkminecraftlegionwebclient=self.webpackChunkminecraftlegionwebclient||[]).push([[872],{77872:function(e,n,t){t.r(n);t(72791);var i=t(60364),c=t(16871),o=t(80184);n.default=(0,i.$j)((function(e){return{loged:e.configurationReducer.loged}}))((function(e){return e.loged?(0,o.jsx)(c.j3,{}):(0,o.jsx)(c.Fg,{to:"/configuration"})}))}}]);
+//# sourceMappingURL=872.99c3ba51.chunk.js.map
