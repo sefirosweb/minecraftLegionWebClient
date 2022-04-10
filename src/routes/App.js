@@ -21,6 +21,7 @@ const FarmerJob = lazy(() => import("../components/configurebot/FarmerJob"))
 const BreederJob = lazy(() => import("../components/configurebot/BreederJob"))
 const SorterJob = lazy(() => import("../components/configurebot/SorterJob"))
 const ProcessList = lazy(() => import("../components/configurebot/ProcessList"))
+const FullConfig = lazy(() => import("../components/configurebot/FullConfig"))
 const ConfigureBotLayout = lazy(() => import("../components/configurebot/ConfigureBotLayout"))
 const Authenticated = lazy(() => import("../hooks/Authenticated"))
 const SelectedBot = lazy(() => import("../hooks/SelectedBot"))
@@ -52,6 +53,7 @@ const App = () => {
                 <Route path="breederjob" element={<BreederJob />} />
                 <Route path="SorterJob" element={<SorterJob />} />
                 <Route path="processlist" element={<ProcessList />} />
+                <Route path="full_config" element={<FullConfig />} />
               </Route>
             </Route>
 

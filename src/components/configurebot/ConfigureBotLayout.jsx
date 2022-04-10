@@ -62,6 +62,7 @@ const ConfigureBotLayout = ({ match, socket, getBotBySocketId, selectedSocketId,
                 <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/breederjob'>Breeder Job</NavLink></li>
                 <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/sorterjob'>Sorter Job</NavLink></li>
                 <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/processlist'>Process list</NavLink></li>
+                <li className='nav-item'><NavLink className='nav-link linkSpan' to='/configurebot/full_config'>Full config</NavLink></li>
               </ul>
             </Col>
           </Row>
