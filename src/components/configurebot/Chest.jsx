@@ -97,7 +97,7 @@ const Chest = (props) => {
   const handleChangeChestPos = (event) => {
     const pos = Number(event.target.value);
 
-    if (!Number.isInteger(pos) && event.target.value !== "-" && event.target.dataset.coord != 'dimension') {
+    if (!Number.isInteger(pos) && event.target.value !== "-" && event.target.dataset.coord !== 'dimension') {
       return null;
     }
 
