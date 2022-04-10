@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Install docker
+sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get install docker-compose -y
+
+cd /root
+sudo docker network create minecraftLegionNetwork
+sudo git clone https://github.com/sefirosweb/minecraftLegionWebClient.git
+cd cd minecraftLegionWebClient/
+
+sudo docker run --rm -v $PWD:/home/app -w /home/app node:16.13-bullseye npm install
+sudo docker run --rm -v $PWD:/home/app -w /home/app node:16.13-bullseye npm run build
+sudo docker-compose up -d
