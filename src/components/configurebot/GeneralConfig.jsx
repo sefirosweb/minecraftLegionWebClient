@@ -197,6 +197,18 @@ const GeneralConfig = (props) => {
             }
             checked={botConfig.config.canDig}
           />
+
+          <FormCheck
+            id={"allowCanPlaceBlocks"}
+            onChange={() => changeConfig("canPlaceBlocks", !botConfig.config.canPlaceBlocks)}
+            label={
+              <>
+                Can place blosk? <br /> (!) Caution can stuck the bot
+              </>
+            }
+            checked={botConfig.config.canPlaceBlocks}
+          />
+
         </div>
       </div>
 
