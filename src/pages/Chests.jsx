@@ -3,7 +3,23 @@ import { Card, CardGroup } from "react-bootstrap";
 import { connect } from "react-redux";
 import DrawChest from "../components/DrawChest";
 
-const Chests = ({ chests }) => {
+const Chests = ({ chests, socket }) => {
+
+  const deleteChest = (key, chest) => {
+    console.log(chests)
+    if (window.confirm("Confirm delete chest?") === true) {
+      const newChests = { ...chests }
+      delete newChests[key]
+      console.log(newChests)
+
+      socket.emit('sendAction', {
+        action: 'setChests',
+        value: newChests
+      })
+    }
+
+  }
+
   return (
     <>
       <Card>
@@ -11,8 +27,10 @@ const Chests = ({ chests }) => {
           <Card.Title>Chests</Card.Title>
           <Card.Text>Contain all chests in memory of server</Card.Text>
           <CardGroup>
-            {Object.values(chests).map((chest, key) => {
-              return <DrawChest key={key} chest={chest} />;
+            {Object.entries(chests).map((entry) => {
+                 const key = entry[0]
+                 const chest = entry[1]
+              return <DrawChest key={key} chest={chest} deleteChest={() => deleteChest(key, chest)} />;
             })}
           </CardGroup>
         </Card.Body>
@@ -22,10 +40,10 @@ const Chests = ({ chests }) => {
 };
 
 const mapStateToProps = (reducers) => {
-  const { botsReducer } = reducers;
+  const { botsReducer, configurationReducer } = reducers;
+  const { socket } = configurationReducer
   const { chests } = botsReducer;
-
-  return { chests };
+  return { chests, socket };
 };
 
 export default connect(mapStateToProps)(Chests);

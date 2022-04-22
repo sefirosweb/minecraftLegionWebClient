@@ -4,10 +4,10 @@ import smallChest from "../images/smallChest.png";
 import largeChest from "../images/largeChest.png";
 import Canvas from "./Canvas";
 import windowSlotsCoords from '../utils/windowSlotsCoords';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row, Button } from 'react-bootstrap';
 
 
-const DrawChest = ({ chest }) => {
+const DrawChest = ({ chest, deleteChest }) => {
 
     const draw = (ctx) => {
         const chestType = chest.slots.length === 27 ? 'chest' : 'large-chest'
@@ -86,6 +86,16 @@ const DrawChest = ({ chest }) => {
                                 <span className='badge bg-secondary text-white'>
                                     Z: {chest.position.z}
                                 </span>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className='mt-2'>
+                                <Button
+                                    variant='danger'
+                                    onClick={deleteChest}
+                                >
+                                    Delete Chest
+                                </Button>
                             </Col>
                         </Row>
                     </Card.Text>
