@@ -175,6 +175,15 @@ const GeneralConfig = (props) => {
             label={`Random Farmer area?`}
             checked={botConfig.config.randomFarmArea}
           />
+
+          <FormCheck
+            id={"canSleep"}
+            onChange={() =>
+              changeConfig("canSleep", !botConfig.config.canSleep)
+            }
+            label={`Can sleep`}
+            checked={botConfig.config.canSleep}
+          />
         </div>
 
         <div className="col-5">
