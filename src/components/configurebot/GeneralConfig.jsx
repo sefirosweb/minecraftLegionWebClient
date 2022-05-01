@@ -5,10 +5,13 @@ import TrashIcon from "./Icons/Trash";
 import ArrowUp from "./Icons/ArrowUp";
 import ArrowDown from "./Icons/ArrowDown";
 import FormCheck from "../forms/FormCheck";
+import Coords from "../forms/Coords";
 
 const ItemsAviable = lazy(() => import("./ItemsAviable"))
 
 const GeneralConfig = (props) => {
+  const { socket } = props
+
   const [item, setItem] = useState("");
   const botConfig = props.getBotBySocketId(props.selectedSocketId);
 
@@ -17,7 +20,7 @@ const GeneralConfig = (props) => {
   }
 
   const changeConfig = (configToChange, value) => {
-    props.socket.emit("sendAction", {
+    socket.emit("sendAction", {
       action: "changeConfig",
       socketId: botConfig.socketId,
       value: {
@@ -66,6 +69,27 @@ const GeneralConfig = (props) => {
   const handleChangeJob = (event) => {
     changeConfig("job", event.target.value);
   };
+
+  const handleChangeSleepArea = (event, coord) => {
+    const pos = Number(event.target.value)
+
+    if (!Number.isInteger(pos) && event.target.value !== '-') {
+      return null
+    }
+
+    socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'sleepArea',
+        value: {
+          coord,
+          pos: event.target.value
+        }
+      }
+    })
+  }
+
 
   return (
     <>
@@ -183,6 +207,16 @@ const GeneralConfig = (props) => {
             }
             label={`Can sleep`}
             checked={botConfig.config.canSleep}
+          />
+
+          <Coords
+            label='Coords'
+            coords={{
+              x: botConfig.config.sleepArea.x,
+              y: botConfig.config.sleepArea.y,
+              z: botConfig.config.sleepArea.z
+            }}
+            onChange={handleChangeSleepArea}
           />
         </div>
 
