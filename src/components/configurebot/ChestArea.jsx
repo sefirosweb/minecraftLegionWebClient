@@ -50,7 +50,7 @@ const chestArea = (props) => {
 
         <Col xs={2}>
           <div className='form-group'>
-            <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z Start</span></label>
+            <label htmlFor='inputItem'><span className='badge bg-secondary text-white'>Z Start</span></label>
             <input className='form-control' type='text' value={props.chestArea.zStart} onChange={handleChange.bind(props, 'zStart')} />
           </div>
         </Col>
@@ -64,7 +64,7 @@ const chestArea = (props) => {
 
         <Col xs={2}>
           <div className='form-group'>
-            <label htmlFor='inputItem'><span class='badge bg-secondary text-white'>Z End</span></label>
+            <label htmlFor='inputItem'><span className='badge bg-secondary text-white'>Z End</span></label>
             <input className='form-control' type='text' value={props.chestArea.zEnd} onChange={handleChange.bind(props, 'zEnd')} />
           </div>
         </Col>

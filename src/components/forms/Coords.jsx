@@ -39,7 +39,7 @@ const Coords = (props) => {
                 </Form.Group>
 
                 <Form.Group as={Col} sm="4" md="3" lg="2">
-                    <Form.Label><span class='badge bg-secondary text-white'>Z</span></Form.Label>
+                    <Form.Label><span className='badge bg-secondary text-white'>Z</span></Form.Label>
                     <Form.Control
                         type="text"
                         value={coords.z}

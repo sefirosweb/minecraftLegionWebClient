@@ -28,7 +28,7 @@ const LayerCoords = (props) => {
             </Form.Group>
 
             <Form.Group as={Col} sm="4" md="3" lg="2">
-                <Form.Label><span class='badge bg-secondary text-white'>Z Start</span></Form.Label>
+                <Form.Label><span className='badge bg-secondary text-white'>Z Start</span></Form.Label>
                 <Form.Control
                     type="text"
                     value={area.zStart}
@@ -46,7 +46,7 @@ const LayerCoords = (props) => {
             </Form.Group>
 
             <Form.Group as={Col} sm="4" md="3" lg="2">
-                <Form.Label><span class='badge bg-secondary text-white'>Z End</span></Form.Label>
+                <Form.Label><span className='badge bg-secondary text-white'>Z End</span></Form.Label>
                 <Form.Control
                     type="text"
                     value={area.zEnd}
