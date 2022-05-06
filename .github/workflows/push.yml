@@ -33,5 +33,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "build/*"
+          source: "build/"
           target: "/root/minecraftLegionWebClient/"
+          strip_components: 1
