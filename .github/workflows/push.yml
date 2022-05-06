@@ -34,4 +34,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "build/"
-          target: "/root/minecraftLegionWebClient/"
+          target: "/root/minecraftLegionWebClient"
