@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp ./prod/default.conf ./build/ && cp ./docker-compose-prod.yml ./build/",
+    "build": "react-scripts build && cp ./prod/default.conf ./build/ && cp ./docker-compose-prod.yml ./build/ && cp .gitignore ./build/",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
