@@ -93,3 +93,24 @@ Start bot
 ```
 npm start
 ```
+
+# Easy method without building
+
+1. You need to have installed [docker](https://docs.docker.com/desktop/windows/wsl/), you can go to official docker site and follow the installation guide for you OS
+2. Create docker network if you have all services in same computer and if you not have already created
+
+```
+docker network create minecraftLegionNetwork
+```
+
+3. Clone the repository
+```
+git clone https://github.com/sefirosweb/minecraftLegionWebClient.git
+cd minecraftLegionWebClient
+```
+
+4. Change of branch already builded
+```
+git fetch
+git checkout gh-pages
+```
