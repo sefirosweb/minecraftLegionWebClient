@@ -1,6 +1,8 @@
 version: "3"
 services:
   web:
+    container_name: minecraftLegionWebClient
+    hostname: minecraftLegionWebClient
     image: nginx
     volumes:
       - ".:/usr/share/nginx/html"
