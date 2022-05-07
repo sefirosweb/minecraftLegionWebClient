@@ -113,4 +113,13 @@ cd minecraftLegionWebClient
 ```
 git fetch
 git checkout gh-pages
+git pull
+```
+5. Start docker
+```
+docker-compose -f docker-compose-prod.yml up
+```
+or:
+```
+docker run --rm --name minecraftLegionWebClient -p 80:3000 --network minecraftLegionNetwork -v $PWD:/usr/share/nginx/html -v $PWD/default.conf:/etc/nginx/conf.d/default.conf nginx
 ```
