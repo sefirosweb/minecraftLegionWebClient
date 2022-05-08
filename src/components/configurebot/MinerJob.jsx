@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Col, Form, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { getBotBySocketId } from '../../actions/botsAction'
+import FormCheck from "../forms/FormCheck";
 import HouseXYZ from '../../images/HouseXYZ.png'
 
 const MinerJob = (props) => {
@@ -44,6 +45,18 @@ const MinerJob = (props) => {
       value: {
         configToChange: 'changeOrientation',
         value: event.target.value
+      }
+    })
+  }
+
+  const handleReverseMode = (mode) => {
+    console.log(mode)
+    socket.emit('sendAction', {
+      action: 'changeConfig',
+      socketId: botConfig.socketId,
+      value: {
+        configToChange: 'changeReverseModeMiner',
+        value: mode
       }
     })
   }
@@ -155,6 +168,16 @@ const MinerJob = (props) => {
       </Row>
 
       <Row className='mb-3'>
+        <Col md={6}>
+          <FormCheck
+            id={"reverseMode"}
+            onChange={() =>
+              handleReverseMode(!botConfig.config.minerCords.reverse)
+            }
+            label={`Reverse Mode?`}
+            checked={botConfig.config.minerCords.reverse}
+          />
+        </Col>
         <Col md={6}>
           <Form>
             <Form.Group as={Row}>
