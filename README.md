@@ -117,7 +117,7 @@ git pull
 ```
 5. Start docker
 ```
-docker-compose -f docker-compose-prod.yml up
+docker-compose up -d
 ```
 or:
 ```
