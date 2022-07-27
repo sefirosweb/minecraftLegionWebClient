@@ -2,7 +2,7 @@
   "name": "minecraftlegionwebclient",
   "version": "1.2.0",
   "private": false,
-  "homepage": "https://sefirosweb.github.io",
+  "homepage": "https://sefirosweb.github.io/minecraftLegionWebClient",
   "dependencies": {
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.4",
