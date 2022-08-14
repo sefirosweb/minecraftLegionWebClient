@@ -12,7 +12,7 @@ const ItemsAviable = lazy(() => import("./ItemsAviable"))
 const GeneralConfig = (props) => {
   const { socket } = props
 
-  const [item, setItem] = useState("");
+  const [itemName, setItemName] = useState("");
   const botConfig = props.getBotBySocketId(props.selectedSocketId);
 
   if (botConfig === undefined) {
@@ -31,15 +31,15 @@ const GeneralConfig = (props) => {
   };
 
   const handleItemChange = (event) => {
-    setItem(event.target.value);
+    setItemName(event.target.value);
   };
 
   const handleInsertItem = (event) => {
-    if (item === "") {
+    if (itemName === "") {
       return null;
     }
 
-    changeConfig("InsertItemCanBeEat", { item });
+    changeConfig("InsertItemCanBeEat", { name: itemName });
   };
 
   const renderItemsTable = () => {
@@ -271,14 +271,14 @@ const GeneralConfig = (props) => {
               className="form-control"
               type="text"
               list="itemsList"
-              value={item}
+              value={itemName}
               onChange={handleItemChange}
             />
             <datalist id="itemsList">
               <Suspense fallback={
                 <option>Loading...</option>
               }>
-                <ItemsAviable item={item} type="foods" />
+                <ItemsAviable item={itemName} type="foods" />
               </Suspense>
             </datalist>
           </div>

@@ -5,7 +5,7 @@ import { getBotBySocketId } from '../../actions/botsAction'
 import TrashIcon from './Icons/Trash'
 
 const ItemsToBeReady = (props) => {
-  const [item, setItem] = useState('')
+  const [itemName, setItemName] = useState('')
   const [quantity, setQuantity] = useState(1)
 
   const botConfig = props.getBotBySocketId(props.selectedSocketId)
@@ -19,11 +19,11 @@ const ItemsToBeReady = (props) => {
   }
 
   const handleItemChange = (event) => {
-    setItem(event.target.value)
+    setItemName(event.target.value)
   }
 
   const handleInsertItem = (event) => {
-    if (item === '' || quantity === 0) {
+    if (itemName === '' || quantity === 0) {
       return null
     }
 
@@ -33,7 +33,7 @@ const ItemsToBeReady = (props) => {
       value: {
         configToChange: 'InsertItemToBeReady',
         value: {
-          item, quantity
+          name: itemName, quantity
         }
       }
     })
@@ -55,7 +55,7 @@ const ItemsToBeReady = (props) => {
       return (
         <tr key={index}>
           <th scope='row'>{index}</th>
-          <td>{item.item}</td>
+          <td>{item.name}</td>
           <td>{item.quantity}</td>
           <td><TrashIcon onClick={handleRemoveItem.bind(this, index)} /></td>
         </tr>
@@ -78,9 +78,9 @@ const ItemsToBeReady = (props) => {
         <div className='col-6'>
           <div className='form-group'>
             <label htmlFor='inputItem'>Select Item</label>
-            <input className='form-control' type='text' list='itemsList' value={item} onChange={handleItemChange} />
+            <input className='form-control' type='text' list='itemsList' value={itemName} onChange={handleItemChange} />
             <datalist id='itemsList'>
-              <ItemsAviable item={item} />
+              <ItemsAviable item={itemName} />
             </datalist>
           </div>
         </div>

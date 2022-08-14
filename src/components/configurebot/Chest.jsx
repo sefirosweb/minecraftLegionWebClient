@@ -18,7 +18,7 @@ const Chest = (props) => {
     socketId,
   } = props
 
-  const [item, setItem] = useState("");
+  const [itemName, setItemName] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   const chestId = `chest-${id}`;
@@ -47,13 +47,13 @@ const Chest = (props) => {
   };
 
   const handleItemChange = (event) => {
-    setItem(event.target.value);
+    setItemName(event.target.value);
   };
 
   const handleInsertItemInChest = (event) => {
     changeConfig("insertItemInChest", {
       chestId: id,
-      item,
+      name: itemName,
       quantity,
     });
   };
@@ -63,7 +63,7 @@ const Chest = (props) => {
       return (
         <tr key={index}>
           <th scope="row">{index}</th>
-          <td>{item.item}</td>
+          <td>{item.name}</td>
           <td>{item.quantity}</td>
           <td>
             <TrashIcon onClick={() => handleRemoveItemFromChest(index)} />
@@ -178,11 +178,11 @@ const Chest = (props) => {
               className="form-control"
               type="text"
               list={chestId}
-              value={item}
+              value={itemName}
               onChange={handleItemChange}
             />
             <datalist id={chestId}>
-              <ItemsAviable item={item} />
+              <ItemsAviable item={itemName} />
             </datalist>
           </div>
         </Col>
@@ -304,7 +304,7 @@ const Chest = (props) => {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Item</th>
+                <th scope="col">Item Name</th>
                 <th scope="col">Quantity</th>
                 <th scope="col" />
               </tr>
