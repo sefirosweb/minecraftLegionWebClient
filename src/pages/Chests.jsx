@@ -6,11 +6,9 @@ import DrawChest from "../components/DrawChest";
 const Chests = ({ chests, socket }) => {
 
   const deleteChest = (key, chest) => {
-    console.log(chests)
     if (window.confirm("Confirm delete chest?") === true) {
       const newChests = { ...chests }
       delete newChests[key]
-      console.log(newChests)
 
       socket.emit('sendAction', {
         action: 'setChests',

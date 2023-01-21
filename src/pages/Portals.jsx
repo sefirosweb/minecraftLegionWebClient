@@ -3,7 +3,6 @@ import { Card } from "react-bootstrap";
 import { connect } from "react-redux";
 import CoordsTable from "../components/CoordsTable";
 const Portals = ({ portals }) => {
-  console.log(portals)
   return (
     <>
       <Card>

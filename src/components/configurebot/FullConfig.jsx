@@ -47,7 +47,6 @@ const FullConfig = (props) => {
     try {
       const fullConfig = JSON.parse(jsonText);
       delete fullConfig.name;
-      console.log(fullConfig)
       socket.emit("sendAction", {
         action: 'changeConfig',
         socketId: selectedSocketId,

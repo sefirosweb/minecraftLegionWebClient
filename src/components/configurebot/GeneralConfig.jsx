@@ -90,7 +90,6 @@ const GeneralConfig = (props) => {
     })
   }
 
-
   return (
     <>
       <div className="row">
@@ -212,9 +211,9 @@ const GeneralConfig = (props) => {
           <Coords
             label='Coords'
             coords={{
-              x: botConfig.config.sleepArea.x,
-              y: botConfig.config.sleepArea.y,
-              z: botConfig.config.sleepArea.z
+              x: botConfig.config.sleepArea?.x ?? '',
+              y: botConfig.config.sleepArea?.y ?? '',
+              z: botConfig.config.sleepArea?.z ?? ''
             }}
             onChange={handleChangeSleepArea}
           />

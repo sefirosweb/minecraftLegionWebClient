@@ -50,7 +50,6 @@ const MinerJob = (props) => {
   }
 
   const handleReverseMode = (mode) => {
-    console.log(mode)
     socket.emit('sendAction', {
       action: 'changeConfig',
       socketId: botConfig.socketId,
