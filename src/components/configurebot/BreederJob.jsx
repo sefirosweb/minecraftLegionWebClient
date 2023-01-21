@@ -191,12 +191,12 @@ const BreederJob = (
           />
         </Form.Group>
 
-        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomTurtles">
-          <Form.Label>Turtles</Form.Label>
+        <Form.Group as={Col} sm="4" md="3" lg="2" controlId="validationCustomTurtle">
+          <Form.Label>Turtle</Form.Label>
           <Form.Control
             type="text"
-            value={botConfig.config.farmAnimal.turtles}
-            onChange={(e) => handleUpdateAnimal('turtles', e)}
+            value={botConfig.config.farmAnimal.turtle}
+            onChange={(e) => handleUpdateAnimal('turtle', e)}
           />
         </Form.Group>
 
