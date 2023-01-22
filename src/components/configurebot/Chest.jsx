@@ -100,7 +100,7 @@ const Chest = (props) => {
     if (!Number.isInteger(pos) && event.target.value !== "-" && event.target.dataset.coord !== 'dimension') {
       return null;
     }
-
+    
     changeConfig("changeChestPos", {
       pos: event.target.value,
       chestId: id,
@@ -255,11 +255,15 @@ const Chest = (props) => {
       <Row className="mb-3">
         <Form.Group as={Col}>
           <Form.Label>Dimension:</Form.Label>
-          <Form.Control
+          <Form.Select
             data-coord="dimension"
-            value={chest.position.dimension ? chest.position.dimension : ""}
+            value={chest.dimension ? chest.dimension : ""}
             onChange={handleChangeChestPos}
-          />
+          >
+            <option value='minecraft:overworld'>Overworld</option>
+            <option value='minecraft:the_nether'>The Nether</option>
+            <option value='minecraft:the_end'>The End</option>
+          </Form.Select>
         </Form.Group>
 
         <Form.Group as={Col}>
