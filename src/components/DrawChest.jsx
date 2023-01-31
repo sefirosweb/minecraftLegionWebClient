@@ -7,7 +7,7 @@ import windowSlotsCoords from '../utils/windowSlotsCoords';
 import { Card, Col, Row, Button } from 'react-bootstrap';
 
 
-const DrawChest = ({ chest, deleteChest }) => {
+const DrawChest = ({ chest, deleteChest, uuid }) => {
 
     const draw = (ctx) => {
         const chestType = chest.slots.length === 27 ? 'chest' : 'large-chest'
@@ -64,7 +64,7 @@ const DrawChest = ({ chest, deleteChest }) => {
         <div>
             <Card className='m-3'>
                 <Card.Body>
-                    <Card.Title>Chests</Card.Title>
+                    <Card.Title>Chests {uuid}</Card.Title>
                     <Card.Text>
                         <Row>
                             <Col xs={6}>

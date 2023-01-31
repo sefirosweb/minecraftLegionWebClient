@@ -28,7 +28,7 @@ const Chests = ({ chests, socket }) => {
             {Object.entries(chests).map((entry) => {
                  const key = entry[0]
                  const chest = entry[1]
-              return <DrawChest key={key} chest={chest} deleteChest={() => deleteChest(key, chest)} />;
+              return <DrawChest key={key} uuid={key} chest={chest} deleteChest={() => deleteChest(key, chest)} />;
             })}
           </CardGroup>
         </Card.Body>
