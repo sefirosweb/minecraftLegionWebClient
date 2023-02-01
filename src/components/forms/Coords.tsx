@@ -1,7 +1,12 @@
-import React from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
-const Coords = (props) => {
+type Props = {
+    label?: string
+    coords: Coords
+    onChange: (e: React.ChangeEvent<HTMLInputElement>, pos: keyof Coords) => React.ChangeEventHandler
+}
+
+const Coords = (props: Props) => {
     const {
         label = '',
         onChange,
@@ -25,7 +30,7 @@ const Coords = (props) => {
                     <Form.Control
                         type="text"
                         value={coords.x}
-                        onChange={(e) => { onChange(e, 'x') }}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'x') }}
                     />
                 </Form.Group>
 
@@ -34,7 +39,7 @@ const Coords = (props) => {
                     <Form.Control
                         type="text"
                         value={coords.y}
-                        onChange={(e) => { onChange(e, 'y') }}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'y') }}
                     />
                 </Form.Group>
 
@@ -43,7 +48,7 @@ const Coords = (props) => {
                     <Form.Control
                         type="text"
                         value={coords.z}
-                        onChange={(e) => { onChange(e, 'z') }}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'z') }}
                     />
                 </Form.Group>
             </Row>
@@ -51,4 +56,4 @@ const Coords = (props) => {
     )
 }
 
-export default Coords;
+export default Coords

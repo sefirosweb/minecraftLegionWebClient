@@ -1,4 +1,4 @@
-import React from 'react'
+
 // import { mcAssets } from '../utils/mc';
 import smallChest from "../images/smallChest.png";
 import largeChest from "../images/largeChest.png";
@@ -6,10 +6,16 @@ import Canvas from "./Canvas";
 import windowSlotsCoords from '../utils/windowSlotsCoords';
 import { Card, Col, Row, Button } from 'react-bootstrap';
 
+type Props = {
+    chest: ChestBlock,
+    deleteChest: () => void,
+    uuid: string
+}
 
-const DrawChest = ({ chest, deleteChest, uuid }) => {
+const DrawChest = (props: Props) => {
+    const { chest, deleteChest, uuid } = props
 
-    const draw = (ctx) => {
+    const draw = (ctx: CanvasRenderingContext2D) => {
         const chestType = chest.slots.length === 27 ? 'chest' : 'large-chest'
         const base_image = new Image();
         base_image.src = chest.slots.length === 27 ? smallChest : largeChest
@@ -18,8 +24,7 @@ const DrawChest = ({ chest, deleteChest, uuid }) => {
         for (const item in chest.slots) {
             if (!chest.slots[item]) continue;
 
-            const inventorySlot =
-                windowSlotsCoords[chestType][chest.slots[item].slot];
+            const inventorySlot = windowSlotsCoords[chestType][chest.slots[item].slot];
 
             // const itemInfo = chest.slots[item];
             // const texture = mcAssets.textureContent[itemInfo.name].texture;

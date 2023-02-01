@@ -1,11 +1,12 @@
-import React from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
-const LayerCoords = (props) => {
-    const {
-        onChange,
-        area,
-    } = props
+type Props = {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>, pos: keyof Layer) => void
+    area: Layer
+}
+
+const LayerCoords = (props: Props) => {
+    const { onChange, area, } = props
     return (
         <Row>
 
@@ -14,7 +15,7 @@ const LayerCoords = (props) => {
                 <Form.Control
                     type="text"
                     value={area.xStart}
-                    onChange={(e) => { onChange(e, 'xStart') }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'xStart') }}
                 />
             </Form.Group>
 
@@ -23,7 +24,7 @@ const LayerCoords = (props) => {
                 <Form.Control
                     type="text"
                     value={area.yLayer}
-                    onChange={(e) => { onChange(e, 'yLayer') }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'yLayer') }}
                 />
             </Form.Group>
 
@@ -32,7 +33,7 @@ const LayerCoords = (props) => {
                 <Form.Control
                     type="text"
                     value={area.zStart}
-                    onChange={(e) => { onChange(e, 'zStart') }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'zStart') }}
                 />
             </Form.Group>
 
@@ -41,7 +42,7 @@ const LayerCoords = (props) => {
                 <Form.Control
                     type="text"
                     value={area.xEnd}
-                    onChange={(e) => { onChange(e, 'xEnd') }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'xEnd') }}
                 />
             </Form.Group>
 
@@ -50,7 +51,7 @@ const LayerCoords = (props) => {
                 <Form.Control
                     type="text"
                     value={area.zEnd}
-                    onChange={(e) => { onChange(e, 'zEnd') }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { onChange(e, 'zEnd') }}
                 />
             </Form.Group>
 

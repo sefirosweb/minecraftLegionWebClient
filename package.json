@@ -34,8 +34,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PUBLIC_URL=/ react-scripts start",
-    "build": "PUBLIC_URL=/ react-scripts build && cp ./prod/default.conf ./build/ && cp ./docker-compose.yml ./build/docker-compose.yml && cp .gitignore ./build/ && cp ./README.md ./build/",
+    "start": "PUBLIC_URL=/ craco start",
+    "build": "PUBLIC_URL=/ craco build && cp ./prod/default.conf ./build/ && cp ./docker-compose.yml ./build/docker-compose.yml && cp .gitignore ./build/ && cp ./README.md ./build/",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -70,5 +70,8 @@
   },
   "bugs": {
     "url": "https://github.com/sefirosweb/minecraftLegionWebClient/issues"
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.0.0"
   }
 }

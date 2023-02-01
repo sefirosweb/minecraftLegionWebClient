@@ -1,4 +1,4 @@
-import { Fragment, lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { connect } from "react-redux";
 import { getBotBySocketId } from "../../actions/botsAction";
 import TrashIcon from "./Icons/Trash";

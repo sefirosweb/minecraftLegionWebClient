@@ -1,12 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './routes/App';
-import reportWebVitals from './reportWebVitals';
+import App from '@/routes/App';
+import reportWebVitals from '@/reportWebVitals';
 
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import reduxThunk from 'redux-thunk'
-import reducers from './reducers/reducers_index'
+import reducers from '@/reducers/reducers_index'
 import { BrowserRouter } from 'react-router-dom';
 
 

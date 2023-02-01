@@ -1,9 +1,14 @@
-import React from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
+type Props = {
+    id: string
+    checked: boolean
+    label: string
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-
-const FormCheck = ({ id, checked, label, onChange }) => {
+const FormCheck = (props: Props) => {
+    const { id, checked, label, onChange } = props
     return (
         <Form>
             <Form.Group
