@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { ONLINE_SERVER, SET_SOCKET, SET_SELECTED_SOCKETID, SET_MASTER, SET_SOCKET_SERVER, SET_SOCKET_SERVER_PORT, SET_SOCKET_SERVER_PASSWORD, SET_LOGED, SET_BOT_SERVER } from '../types/configurationType'
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie' // TODO poner en local storage en vez de js cookie
 
 const INITIAL_STATE = {
   connected: false,
