@@ -1,11 +1,14 @@
 {
   "name": "minecraftlegionwebclient",
+  "description": "Front end client for minecraft legion server",
+  "author": "Sefirosweb",
   "version": "1.2.0",
   "private": false,
+  "license": "ISC",
   "homepage": "https://sefirosweb.github.io/minecraftLegionWebClient",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.11.18",
@@ -60,14 +63,11 @@
       "last 1 safari version"
     ]
   },
-  "description": "Front end client for minecraft legion server",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sefirosweb/minecraftLegionWebClient.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/sefirosweb/minecraftLegionWebClient/issues"
   }
