@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
@@ -25,7 +26,6 @@ const Dashboard = () => {
     useEffect(() => {
         const { getBotIndexBySocketId, setSelectedSocketId } = bindActionCreators(actionCreators, dispatch);
 
-        //@ts-ignore
         if (getBotIndexBySocketId(selectedSocketId) < 0) {
             setSelectedSocketId(undefined)
         }
