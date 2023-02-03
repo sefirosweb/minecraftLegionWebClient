@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
@@ -17,7 +16,7 @@ const Dashboard = () => {
 
     const dispatch = useDispatch();
 
-    const messagesEndRef = useRef(null)
+    const messagesEndRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -26,10 +25,11 @@ const Dashboard = () => {
     useEffect(() => {
         const { getBotIndexBySocketId, setSelectedSocketId } = bindActionCreators(actionCreators, dispatch);
 
+        //@ts-ignore
         if (getBotIndexBySocketId(selectedSocketId) < 0) {
             setSelectedSocketId(undefined)
         }
-        
+
     }, [dispatch, selectedSocketId])
 
     return (
@@ -41,13 +41,11 @@ const Dashboard = () => {
 
                 <Col md={2} className='mb-3'>
                     {!selectedSocketId ? '' :
-                        <Button
-                            as={Link}
-                            to='/configurebot/generalconfig'
-                            variant='warning'
-                        >
-                            Configure Bot
-                        </Button>
+                        <Link to='/configurebot/generalconfig' style={{ textDecoration: "none", display: "grid" }}>
+                            <Button variant='warning'>
+                                Configure Bot
+                            </Button>
+                        </Link>
                     }
                 </Col>
             </Row>
@@ -60,10 +58,9 @@ const Dashboard = () => {
                             <div className='form-group'>
                                 <div className='textAreaStyle form-control'>
                                     {
-                                        logs.filter(log => {
-                                            if (!selectedSocketId) return true
-                                            return log.socketId === selectedSocketId
-                                        }).map((log, key) => <div key={key}>{log.time} {log.botName} {log.message}</div>)
+                                        logs
+                                            .filter(log => selectedSocketId === undefined || log.socketId === selectedSocketId)
+                                            .map((log, key) => <div key={key}>{log.time} {log.botName} {log.message}</div>)
                                     }
                                     <div ref={messagesEndRef} />
                                 </div>

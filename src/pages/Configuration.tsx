@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Form from 'react-bootstrap/Form'
@@ -30,23 +29,23 @@ const Configuration = () => {
 
 
 
-    const handleChangeMaster = (event) => {
+    const handleChangeMaster = (event: React.ChangeEvent<HTMLInputElement>) => {
         updateMaster(event.target.value)
     }
 
-    const handleChangeWebSocketServer = (event) => {
+    const handleChangeWebSocketServer = (event: React.ChangeEvent<HTMLInputElement>) => {
         updateServer(event.target.value)
     }
 
-    const handleChangeWebSocketServerPort = (event) => {
-        updateServerPort(event.target.value)
+    const handleChangeWebSocketServerPort = (event: React.ChangeEvent<HTMLInputElement>) => {
+        updateServerPort(parseInt(event.target.value))
     }
 
-    const handleChangeWebSocketServerPassword = (event) => {
+    const handleChangeWebSocketServerPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         updateServerPassword(event.target.value)
     }
 
-    const handleChangeBotServer = (event) => {
+    const handleChangeBotServer = (event: React.ChangeEvent<HTMLInputElement>) => {
         updateBotServer(event.target.value)
     }
 
@@ -110,17 +109,3 @@ const Configuration = () => {
 }
 
 export default Configuration
-
-// const mapStateToProps = (reducers) => {
-//     return reducers.configurationReducer
-// }
-
-// const mapDispatchToProps = {
-//     updateMaster,
-//     updateServer,
-//     updateServerPort,
-//     updateServerPassword,
-//     updateBotServer
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Configuration);

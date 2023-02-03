@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/general.css";
-import { Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import NotFound from "../pages/NotFound"
@@ -27,7 +26,6 @@ import Configuration from '../pages/Configuration'
 const App = () => {
   return (
     <Layout>
-      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/configuration" element={<Configuration />} />
 
@@ -59,7 +57,6 @@ const App = () => {
           </Route>
 
         </Routes>
-      </Suspense>
     </Layout>
   );
 }

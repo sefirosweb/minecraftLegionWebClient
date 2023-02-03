@@ -2,7 +2,12 @@ import { BotsType } from "../action-types";
 import { BotsAction } from "../actions/";
 
 export type InitialState = {
-  logs: Array<string>
+  logs: Array<{
+    botName: string
+    message: string
+    socketId: string
+    time: string
+  }>
   botsOnline: Array<any>,
   masters: Array<string>,
   chests: Record<string, any>,
