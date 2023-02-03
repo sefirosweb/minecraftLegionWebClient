@@ -72,6 +72,7 @@
     "url": "https://github.com/sefirosweb/minecraftLegionWebClient/issues"
   },
   "devDependencies": {
-    "@craco/craco": "^7.0.0"
+    "@craco/craco": "^7.0.0",
+    "@types/js-cookie": "^3.0.2"
   }
 }

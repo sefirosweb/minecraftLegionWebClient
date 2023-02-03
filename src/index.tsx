@@ -3,11 +3,9 @@ import { createRoot } from 'react-dom/client';
 import App from '@/routes/App';
 import reportWebVitals from '@/reportWebVitals';
 
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import reduxThunk from 'redux-thunk'
-import reducers from '@/reducers/reducers_index'
 import { BrowserRouter } from 'react-router-dom';
+import { store } from '@/state'
 
 
 const rootElement = document.getElementById("root");
@@ -15,11 +13,6 @@ if (!rootElement) throw new Error('Failed to find the root element');
 const root = createRoot(rootElement);
 
 
-const store = createStore(
-  reducers, // Todos los reducers
-  {}, // Estado inicial
-  applyMiddleware(reduxThunk)
-)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
