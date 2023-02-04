@@ -78,10 +78,6 @@ export const setConfig = (botConfig) => (dispatch: Dispatch<BotsAction>, getStat
 
 export const getBotBySocketId = (socketId: string) => (dispatch: Dispatch<BotsAction>, getState: () => State) => {
     const { botsOnline } = getState().botsReducer
-    return botsOnline.find((e) => { return e.socketId === socketId })
-}
-
-export const getBotIndexBySocketId = (socketId: string) => (dispatch: Dispatch<BotsAction>, getState: () => State) => {
-    const { botsOnline } = getState().botsReducer
-    return botsOnline.findIndex((e) => { return e.socketId === socketId })
+    const bot = botsOnline.find((e) => { return e.socketId === socketId })
+    return bot
 }

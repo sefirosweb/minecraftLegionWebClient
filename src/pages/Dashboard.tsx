@@ -1,12 +1,10 @@
-//@ts-nocheck
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import RenderBotsOnlineList from '../components/RenderBotsOnlineList'
 import BotActionsButtons from '../components/BotActionsButtons'
 import { Button, Col, Row } from 'react-bootstrap'
-import { useSelector, useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators, State } from "@/state";
+import { useSelector } from "react-redux";
+import { State } from "@/state";
 
 const Dashboard = () => {
     const botState = useSelector((state: State) => state.botsReducer);
@@ -15,22 +13,11 @@ const Dashboard = () => {
     const configurationState = useSelector((state: State) => state.configurationReducer);
     const { selectedSocketId } = configurationState
 
-    const dispatch = useDispatch();
-
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [logs]);
-
-    useEffect(() => {
-        const { getBotIndexBySocketId, setSelectedSocketId } = bindActionCreators(actionCreators, dispatch);
-
-        if (getBotIndexBySocketId(selectedSocketId) < 0) {
-            setSelectedSocketId(undefined)
-        }
-
-    }, [dispatch, selectedSocketId])
 
     return (
         <>
@@ -40,7 +27,7 @@ const Dashboard = () => {
                 </Col>
 
                 <Col md={2} className='mb-3'>
-                    {!selectedSocketId ? '' :
+                    {selectedSocketId &&
                         <Link to='/configurebot/generalconfig' style={{ textDecoration: "none", display: "grid" }}>
                             <Button variant='warning'>
                                 Configure Bot

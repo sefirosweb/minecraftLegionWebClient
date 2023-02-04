@@ -22,3 +22,13 @@ type ChestBlock = {
     lastTimeOpen?: number
     chestFound?: boolean
 }
+
+type Bot = {
+    socketId: string
+    name: string,
+    food: number,
+    health: number,
+    combat: false,
+    events: Array<string>
+    config: any
+}

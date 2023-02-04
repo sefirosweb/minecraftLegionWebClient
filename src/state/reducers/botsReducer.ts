@@ -8,7 +8,7 @@ export type InitialState = {
     socketId: string
     time: string
   }>
-  botsOnline: Array<any>,
+  botsOnline: Array<Bot>,
   masters: Array<string>,
   chests: Record<string, any>,
   portals: Record<string, any>,

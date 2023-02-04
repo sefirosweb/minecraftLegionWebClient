@@ -94,17 +94,3 @@ const ConfigureBotLayout = () => {
 }
 
 export default ConfigureBotLayout
-// const mapStateToProps = (reducers) => {
-//   const { botsReducer, configurationReducer } = reducers;
-//   const { logs } = botsReducer;
-//   const { socket, selectedSocketId } = configurationReducer;
-//   return { logs, socket, selectedSocketId };
-// };
-
-// const mapDispatchToProps = {
-//   getBotBySocketId,
-//   setSelectedSocketId,
-//   getBotIndexBySocketId
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(ConfigureBotLayout);
