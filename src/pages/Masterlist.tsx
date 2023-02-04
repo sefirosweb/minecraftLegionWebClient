@@ -33,17 +33,24 @@ const Masterlist = () => {
     setInputBox('')
   }
 
-  const handleRemoveMaster = (event: React.MouseEvent<HTMLElement>) => {
+  const handleRemoveMaster = (masterToDelete: string) => {
+    if (masterToDelete === master) return
     socket.emit('sendAction', {
       action: 'removeMaster',
-      value: event.currentTarget.dataset.master
+      value: masterToDelete
     })
   }
 
   const renderMasterList = () => {
     return masters.map((masterIndex, index) => {
       return (
-        <li onClick={handleRemoveMaster} data-master={masterIndex.name} key={index} className={`list-group-item list-group-item-action ${(masterIndex.name === master) ? 'active' : ''}`}>
+        <li
+          onClick={() => handleRemoveMaster(masterIndex.name)}
+          style={{ cursor: "pointer" }}
+          key={index}
+          className={`list-group-item list-group-item-action
+           ${(masterIndex.name === master) ? 'active' : ''}`}
+        >
           {masterIndex.name}
         </li>
       )
