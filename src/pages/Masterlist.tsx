@@ -1,24 +1,26 @@
-//@ts-nocheck
+import useGetSocket from '@/hooks/useGetSocket';
 import { State } from '@/state';
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Socket } from 'socket.io-client';
 
 const Masterlist = () => {
 
+  const socket = useGetSocket() as Socket
   const configurationState = useSelector((state: State) => state.configurationReducer);
-  const { master, socket } = configurationState
+  const { master } = configurationState
 
   const botState = useSelector((state: State) => state.botsReducer);
   const { masters } = botState
 
   const [inputBox, setInputBox] = useState('')
 
-  const handleInputBox = (event) => {
+  const handleInputBox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputBox(event.target.value.trim())
   }
 
-  const handleKeyPress = (event) => {
-    if (event.charCode === 13 && inputBox !== '') {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" && inputBox !== '') {
       handleSendMessageButton()
     }
   }
@@ -31,7 +33,7 @@ const Masterlist = () => {
     setInputBox('')
   }
 
-  const handleRemoveMaster = (event) => {
+  const handleRemoveMaster = (event: React.MouseEvent<HTMLElement>) => {
     socket.emit('sendAction', {
       action: 'removeMaster',
       value: event.currentTarget.dataset.master
@@ -56,7 +58,7 @@ const Masterlist = () => {
       <div className='row'>
         <div className='col-12'>
           <div className='form-group'>
-            <input type='text' placeholder='Add new master' className='form-control' onKeyPress={handleKeyPress} onChange={handleInputBox} value={inputBox} />
+            <input type='text' placeholder='Add new master' className='form-control' onKeyDown={handleKeyDown} onChange={handleInputBox} value={inputBox} />
           </div>
         </div>
       </div>
@@ -73,13 +75,3 @@ const Masterlist = () => {
 }
 
 export default Masterlist
-
-// const mapStateToProps = (reducers) => {
-//   const { botsReducer, configurationReducer } = reducers
-//   const { master, socket } = configurationReducer
-//   const { masters } = botsReducer
-
-//   return { master, masters, socket }
-// }
-
-// export default connect(mapStateToProps)(Masterlist)

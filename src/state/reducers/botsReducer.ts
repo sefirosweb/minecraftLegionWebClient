@@ -9,7 +9,7 @@ export type InitialState = {
     time: string
   }>
   botsOnline: Array<Bot>,
-  masters: Array<string>,
+  masters: Array<{ name: string }>,
   chests: Record<string, any>,
   portals: Record<string, any>,
 }
